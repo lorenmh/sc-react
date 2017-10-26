@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "jsx-a11y/href-no-hash": "off",
+    "consistent-return": "off",
+    "no-empty": "off",
+    "no-unused-vars": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "off",
+    "prefer-template": "off",
+    "react/prefer-stateless-function": "off",
+    "react/prop-types": "off",
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jasmine": true
+  },
+}
