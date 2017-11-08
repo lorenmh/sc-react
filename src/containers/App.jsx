@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Menu from './Menu';
-import Events from './Events';
+import Keypad from './Keypad';
 import Footer from './Footer';
 import Search from './Search';
 
@@ -12,7 +12,7 @@ export default class App extends Component {
       <div className="content">
         <Menu />
         <Search />
-        <Events />
+        <Keypad />
         <Footer />
       </div>
     );

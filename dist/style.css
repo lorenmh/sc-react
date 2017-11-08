@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+.keypad button {
+  font-family: inherit;
+  margin: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  width: 50px;
+  height: 50px;
+  color: white;
+  border-radius: 5px;
+}
+
+.x-grid, .y-grid {
+  width: 50%;
+}
+
+.kp-grid {
+  width: 180px;
+}
+
+.x-grid button {
+  background-color: rgb(255,105,75);
+}
+
+.y-grid button {
+  background-color: rgb(75,105,255);
+}
+
+.kp-grid button {
+  background-color: rgb(97,226,118);
+}
+
+.keypad {
+  font-family: Courier;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
