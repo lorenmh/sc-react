@@ -124,3 +124,50 @@ function bearingWorstCasePositions(p1, p2) {
     [p1.bottomLeft(), p2.topRight()]
   ];
 }
+
+function distanceWorstCasePositions(p1, p2) {
+  let dx = p2.x - p1.x,
+    dy = p2.y - p1.y
+  ;
+
+  if (dx === 0 && dy < 0) {
+    return [
+      [p1.topLeft(), p2.bottomLeft()],
+      [p1.bottomLeft(), p2.topRight()]
+    ];
+  } else if (dx > 0 && dy < 0) {
+    return [
+      [p1.topRight(), p2.bottomLeft()],
+      [p1.bottomLeft(), p2.topRight()]
+    ];
+  } else if (dx > 0 && dy === 0) {
+    return [
+      [p1.topRight(), p2.topLeft()],
+      [p1.bottomLeft(), p2.topRight()]
+    ];
+  } else if (dx > 0 && dy > 0) {
+    return [
+      [p1.bottomRight(), p2.topLeft()],
+      [p1.topLeft(), p2.bottomRight()]
+    ];
+  } else if (dx === 0 && dy > 0) {
+    return [
+      [p1.bottomLeft(), p2.topLeft()],
+      [p1.topLeft(), p2.bottomRight()]
+    ];
+  } else if (dx < 0 && dy > 0) {
+    return [
+      [p1.bottomLeft(), p2.topRight()],
+      [p1.topRight(), p2.bottomLeft()]
+    ];
+  } else if (dx < 0 && dy === 0) {
+    return [
+      [p1.topLeft(), p2.topRight()],
+      [p1.topRight(), p2.bottomLeft()]
+    ];
+  }
+  return [
+    [p1.topLeft(), p2.bottomRight()],
+    [p1.bottomRight(), p2.topLeft()]
+  ];
+}

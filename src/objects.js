@@ -6,6 +6,9 @@ import { interpolateElevation } from './calculator';
 
 window.interpolateElevation = interpolateElevation;
 
+const R2D = 180/Math.PI
+;
+
 /* Origin is top left!
  *
  */
@@ -75,6 +78,26 @@ export class Position {
     return Math.hypot(this.x - position.x, this.y - position.y);
   }
 
+  bearingTo(position) {
+    let dx = position.x - this.x,
+      dy = position.y - this.y,
+      magnitude = Math.hypot(dx, dy),
+      ux = dx / magnitude,
+      uy = dy / magnitude,
+      rad = Math.atan2(uy, ux),
+      deg = rad * R2D
+    ;
+
+    // no clue why it's this way, probably because origin is top left?
+    if (ux === 0 && uy === 1) return 180;
+
+    if (this.x >= position.x && this.y > position.y) {
+      return (180 - Math.abs(deg)) + 270;
+    }
+
+    return deg + 90;
+  }
+
   topLeft() {
     return new Position(this.x, this.y);
   }
@@ -132,6 +155,11 @@ export class Position {
 
 class Calculation {
   static fromPositions(mortarPosition, targetPosition) {
+    let distance = mortarPosition.distanceTo(targetPosition),
+      elevation = interpolateElevation(distance),
+      bearing = mortarPosition.bearingTo(targetPosition)
+    ;
+
     return new Calculation();
   }
 
