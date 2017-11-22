@@ -77,3 +77,23 @@ svg {
 .grid-view-mortar{
   fill: rgba(0,255,0,0.6);
 }
+
+.key-line {
+  stroke: #777;
+  stroke-width: 1px;
+}
+
+.key-text-wrap {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+
+.key-text {
+  display: inline-block;
+  padding: 0 1px;
+  background-color: white;
+  font-family: monospace;
+}
