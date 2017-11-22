@@ -97,3 +97,43 @@ svg {
   background-color: white;
   font-family: monospace;
 }
+
+.title-text {
+  top: 0;
+  width: 100%;
+  position: absolute;
+  font-family: monospace;
+  text-align: center;
+  font-size: 12px;
+}
+
+.grid {
+  position: relative;
+}
+
+.grid-view {
+  position: relative;
+  padding-top: 14px;
+  margin: 5px;
+}
+
+.title-text-x {
+  color: rgb(255,105,75);
+}
+
+.title-text-y {
+  color: rgb(75,105,255);
+}
+
+.title-text-kp-major {
+  color: rgb(36, 181, 36);
+}
+
+.title-text-kp-minor {
+  color: rgb(226,97,198);
+}
+
+.title-text-dash {
+  color: #666;
+}
+  

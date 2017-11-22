@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const SIZE = 60,
+const SIZE = 80,
   STROKE = 1,
   GRID_SIZE = SIZE + 2*STROKE,
   LARGE_GRID = 300,
@@ -133,6 +133,49 @@ export default class GridView extends Component {
     }
 
     function titleTextHtml() {
+      let kpa = position.kpa,
+        kpMinor
+      ;
+
+      let kpMajor = (
+        kpa
+          .slice(0,2)
+          .map(kp => (
+            <span>
+              <span className="title-text-item title-text-dash">-</span>
+              <span className="title-text-item title-text-kp-major">{kp}</span>
+            </span>
+          ))
+      );
+
+      if (kpa.length > 2) {
+        kpMinor = (
+          kpa
+            .slice(2)
+            .map(kp => (
+              <span className="title-text-item title-text-kp-minor">{kp}</span>
+            ))
+        );
+        kpMinor = (
+          [
+            <span className="title-text-item title-text-dash">{' '}</span>
+          ].concat(kpMinor)
+        );
+      }
+
+
+      return (
+        <div className="title-text">
+          <span className="title-text-item title-text-x">
+            {position.xString()}
+          </span>
+          <span className="title-text-item title-text-y">
+            {position.yString()}
+          </span>
+          {kpMajor}
+          {kpMinor}
+        </div>
+      );
     }
 
     function keyTextHtml() {
@@ -257,31 +300,30 @@ export default class GridView extends Component {
     }
 
     let style = {
-      position: 'relative',
       width: GRID_SIZE
     };
 
     return (
-      <div style={style}>
-        <div className="title-text">
-          {(() => titleTextHtml())()}
+      <div className="grid-view" style={style}>
+        {(() => titleTextHtml())()}
+        <div className="grid">
+          {(() => keyTextHtml())()}
+          <svg width={SVG_WIDTH} height={SVG_HEIGHT}>
+            <g transform={`translate(${STROKE}, ${STROKE})`}>
+              <rect
+                x="0"
+                y="0"
+                width={SIZE}
+                height={SIZE}
+                className="grid-view-bg"
+              />
+              {(() => isZoomed ? zoomedIn() : zoomedOut())()}
+            </g>
+            <g transform={`translate(${STROKE}, ${GRID_SIZE + KEY_PADDING})`}>
+              {(() => keyLines())()}
+            </g>
+          </svg>
         </div>
-        {(() => keyTextHtml())()}
-        <svg width={SVG_WIDTH} height={SVG_HEIGHT}>
-          <g transform={`translate(${STROKE}, ${STROKE})`}>
-            <rect
-              x="0"
-              y="0"
-              width={SIZE}
-              height={SIZE}
-              className="grid-view-bg"
-            />
-            {(() => isZoomed ? zoomedIn() : zoomedOut())()}
-          </g>
-          <g transform={`translate(${STROKE}, ${GRID_SIZE + KEY_PADDING})`}>
-            {(() => keyLines())()}
-          </g>
-        </svg>
       </div>
     );
   }
