@@ -1,15 +1,31 @@
+import { GRID_SIZE } from './const';
+
 import { prettyXString, prettyYString, prettyKpsString } from './prettifiers';
-import { parseX, parseY, parseKps, parseError } from './parsers';
+import { parseX, parseY, parseKpa, kpaDelta, kpaToError } from './parsers';
 
-class Position {
-  constructor(xString, yString, kpsString) {
-    this.xString = prettyXString(xString);
-    this.yString = prettyYString(yString);
-    this.kpsString = prettyKpsString(kpsString);
+export class Position {
+  static fromString(positionString) {
+  }
 
-    this.x = parseX(xString);
-    this.y = parseY(yString);
-    this.kps = parseKps(kpsString);
-    this.error = parseError(kpsString);
+  static fromStrings(xString, yString, kpString) {
+    let x = parseX(xString);
+    let y = parseY(yString);
+    let kpa = parseKpa(kpString);
+
+    return new Position(x, y, kpa);
+  }
+
+  // x = absolute X position in m (top-left)
+  // y = absolute Y position in m (top-left)
+  // kps = array of integer kps, max-len == 5
+  constructor(x, y, kpa) {
+    let delta = kpaDelta(kpa);
+
+    this.x = (x + delta[0]) * GRID_SIZE;
+    this.y = (y + delta[1]) * GRID_SIZE;
+
+    this.kpa = kpa;
+
+    this.error = kpaToError(kpa) * GRID_SIZE;
   }
 }

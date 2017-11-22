@@ -6,20 +6,22 @@ const SIZE = 60,
   LARGE_GRID = 300,
   SMALL_GRID = 300/9,
   KEY_PADDING = 4,
-  TEXT_SIZE = 7,
+  TEXT_SIZE = 8,
   KEY_HEIGHT = 11,
   SVG_WIDTH = GRID_SIZE,
   SVG_HEIGHT = GRID_SIZE + KEY_PADDING + KEY_HEIGHT,
   EPSILON = 0.001
 ;
 
+const epsilonEquals = (a,b) => Math.abs(a-b) < EPSILON;
+const cludgeLt = (a,b) => parseFloat(a.toFixed(4)) < parseFloat(b.toFixed(4));
+
 export default class GridView extends Component {
   render() {
     const { position, xLabel, yLabel, isTarget } = this.props;
 
-
     let counter = 0,
-      isZoomed = position[2] < SMALL_GRID,
+      isZoomed = cludgeLt(position.error,SMALL_GRID),
       X,
       Y,
       GS,
@@ -28,22 +30,22 @@ export default class GridView extends Component {
 
 
     if (isZoomed) {
-      X = (position[0] % SMALL_GRID) / SMALL_GRID;
-      Y = (position[1] % SMALL_GRID) / SMALL_GRID;
+      X = (position.x % SMALL_GRID) / SMALL_GRID;
+      Y = (position.y % SMALL_GRID) / SMALL_GRID;
 
       GS = SMALL_GRID;
 
-      S = position[2] / SMALL_GRID;
+      S = position.error / SMALL_GRID;
 
       X = X > 1-EPSILON ? 0 : X;
       Y = Y > 1-EPSILON ? 0 : Y;
     } else {
-      X = (position[0] % LARGE_GRID) / LARGE_GRID;
-      Y = (position[1] % LARGE_GRID) / LARGE_GRID;
+      X = (position.x % LARGE_GRID) / LARGE_GRID;
+      Y = (position.y % LARGE_GRID) / LARGE_GRID;
 
       GS = LARGE_GRID;
 
-      S = position[2] / LARGE_GRID;
+      S = position.error / LARGE_GRID;
     }
 
     function zoomedOut() {
@@ -135,12 +137,12 @@ export default class GridView extends Component {
 
     function keyTextHtml() {
       let styleTop = {
-        transform: `translate(0, ${GRID_SIZE + 1}px)`,
+        transform: `translate(0, ${GRID_SIZE}px)`,
         fontSize: TEXT_SIZE,
       };
 
       let styleBottom = {
-        transform: `translate(0, ${GRID_SIZE + TEXT_SIZE + 1}px)`,
+        transform: `translate(0, ${GRID_SIZE + TEXT_SIZE}px)`,
         fontSize: TEXT_SIZE,
       };
 
