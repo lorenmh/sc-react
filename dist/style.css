@@ -66,8 +66,8 @@ svg {
 }
 
 .grid-view-target, .grid-view-mortar {
-  /*stroke-width: 1px;
-  stroke: black;*/
+  stroke-width: 2px;
+  stroke: black;
 }
 
 .grid-view-target {

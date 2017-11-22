@@ -11,8 +11,8 @@ window.Position = Position;
 
 export default class App extends Component {
   render() {
-    let mortarPosition = Position.fromStrings('a','12','45678');
-    let testPosition = Position.fromStrings('a','1','621');
+    let mortarPosition = Position.fromStrings('a','12','4');
+    let testPosition = Position.fromStrings('a','1','61421');
 
     return (
       <div className="content">
