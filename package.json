@@ -26,7 +26,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "static-server": "^2.0.6",
-    "webpack": "^3.3.0"
+    "webpack": "^3.3.0",
+    "webpack-livereload-plugin": "^1.0.0"
   },
   "dependencies": {
     "react": "^15.6.1",

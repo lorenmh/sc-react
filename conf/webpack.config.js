@@ -1,3 +1,5 @@
+const LiveReloadPlugin = require('webpack-livereload-plugin');
+
 const CWD = process.cwd();
 
 module.exports = {
@@ -7,6 +9,7 @@ module.exports = {
     path: CWD + '/dist',
     filename: 'app.js',
   },
+  plugins: [new LiveReloadPlugin({})],
   devtool: 'inline-source-map',
   module: {
     loaders: [
