@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const SIZE = 50,
+const SIZE = 60,
   STROKE = 1,
   GRID_SIZE = SIZE + 2*STROKE,
   LARGE_GRID = 300,
@@ -24,7 +24,7 @@ export default class GridView extends Component {
     function zoomedOut() {
       const X = (position[0] % LARGE_GRID) / LARGE_GRID,
         Y = (position[1] % LARGE_GRID) / LARGE_GRID,
-        S = (position[2] % LARGE_GRID) / LARGE_GRID
+        S = position[2] / LARGE_GRID
       ;
 
       return (
@@ -144,7 +144,7 @@ export default class GridView extends Component {
     function zoomedIn() {
       let X = (position[0] % SMALL_GRID) / SMALL_GRID,
         Y = (position[1] % SMALL_GRID) / SMALL_GRID,
-        S = (position[2] % SMALL_GRID) / SMALL_GRID
+        S = position[2] / SMALL_GRID
       ;
 
       X = X > 1-EPSILON ? 0 : X;

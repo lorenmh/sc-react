@@ -13,7 +13,7 @@ export default class App extends Component {
       <div className="content">
         <Menu />
         <Search />
-        <GridView isTarget position={[100, 0, 300/3**1]} />
+        <GridView isTarget position={[0, 0, 100]} />
         <Keypad />
         <Footer />
       </div>
