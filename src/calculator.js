@@ -24,16 +24,13 @@ const MORTAR_TABLE = [
     [1150, 988],
     [1200, 918],
     [1250, 800]
-  ],
-
-  MIN_DISTANCE = MORTAR_TABLE[0][0],
-  MAX_DISTANCE = MORTAR_TABLE[MORTAR_TABLE.length-1][0],
-
-  TOO_FAR = 'TOO_FAR',
-  TOO_CLOSE = 'TOO_CLOSE',
-
-  R2D = 180/Math.PI
+  ]
 ;
+
+export const MIN_DISTANCE = MORTAR_TABLE[0][0];
+export const MAX_DISTANCE = MORTAR_TABLE[MORTAR_TABLE.length-1][0];
+export const TOO_FAR = 'TOO_FAR';
+export const TOO_CLOSE = 'TOO_CLOSE';
 
 export function interpolateElevation(distance) {
   if (distance < MIN_DISTANCE) return TOO_CLOSE;
@@ -62,23 +59,7 @@ export function interpolateElevation(distance) {
   }
 }
 
-export function heading(p1, p2) {
-  let dx = p2.x - p1.x,
-    dy = p2.y - p1.y,
-    magnitude = Math.hypot(dx, dy),
-    ux = dx / magnitude,
-    uy = dy / magnitude,
-    rad = Math.atan2(uy, ux),
-    deg = rad * R2D
-  ;
-
-  // no clue why it's this way, probably because origin is top left?
-  if (ux === 0 && uy === 1) return 180;
-  if (p1.x >= p2.x && p1.y > p2.y) return (180 - Math.abs(deg)) + 270;
-  return deg + 90;
-}
-
-function bearingWorstCasePositions(p1, p2) {
+export function bearingWorstCasePositions(p1, p2) {
   let dx = p2.x - p1.x,
     dy = p2.y - p1.y
   ;
@@ -125,7 +106,7 @@ function bearingWorstCasePositions(p1, p2) {
   ];
 }
 
-function distanceWorstCasePositions(p1, p2) {
+export function distanceWorstCasePositions(p1, p2) {
   let dx = p2.x - p1.x,
     dy = p2.y - p1.y
   ;

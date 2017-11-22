@@ -93,7 +93,7 @@ svg {
 
 .key-text {
   display: inline-block;
-  padding: 0 1px;
+  /*padding: 0 1px;*/
   background-color: white;
   font-family: monospace;
 }

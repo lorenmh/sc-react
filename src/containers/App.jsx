@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Position } from '../objects';
+import { Position, Calculation } from '../objects';
 import GridView from '../components/GridView';
 import Menu from './Menu';
 import Keypad from './Keypad';
@@ -11,14 +11,17 @@ window.Position = Position;
 
 export default class App extends Component {
   render() {
-    let mortarPosition = Position.fromStrings('a','12','4');
-    let testPosition = Position.fromStrings('a','1','61421');
+    let mortarPosition = Position.fromStrings('a','2','4'),
+      targetPosition = Position.fromStrings('a','1','')
+    ;
+
+    console.log(Calculation.fromPositions(mortarPosition, targetPosition));
 
     return (
       <div className="content">
         <Menu />
         <GridView position={mortarPosition} />
-        <GridView isTarget position={testPosition} />
+        <GridView isTarget position={targetPosition} />
         <Keypad />
         <Footer />
       </div>

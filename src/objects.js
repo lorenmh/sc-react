@@ -2,9 +2,11 @@ import { GRID_SIZE } from './const';
 
 import { prettyXString, prettyYString, prettyKpsString } from './prettifiers';
 import { parseX, parseY, parseKpa, kpaDelta, kpaToError } from './parsers';
-import { interpolateElevation } from './calculator';
-
-window.interpolateElevation = interpolateElevation;
+import {
+  interpolateElevation,
+  distanceWorstCasePositions,
+  bearingWorstCasePositions
+} from './calculator';
 
 const R2D = 180/Math.PI
 ;
@@ -75,7 +77,11 @@ export class Position {
   }
 
   distanceTo(position) {
-    return Math.hypot(this.x - position.x, this.y - position.y);
+    let dx = this.x + (this.error / 2) - (position.x + (position.error / 2)),
+      dy = this.y + (this.error / 2) - (position.y + (position.error / 2))
+    ;
+
+    return Math.hypot(dx, dy);
   }
 
   bearingTo(position) {
@@ -153,14 +159,33 @@ export class Position {
   }
 }
 
-class Calculation {
+export class Calculation {
   static fromPositions(mortarPosition, targetPosition) {
     let distance = mortarPosition.distanceTo(targetPosition),
       elevation = interpolateElevation(distance),
-      bearing = mortarPosition.bearingTo(targetPosition)
+      bearing = mortarPosition.bearingTo(targetPosition),
+
+      distanceWCP = distanceWorstCasePositions(mortarPosition, targetPosition),
+      bearingWCP = bearingWorstCasePositions(mortarPosition, targetPosition),
+
+      distanceRange = [
+        distanceWCP[0][0].distanceTo(distanceWCP[0][1]),
+        distanceWCP[1][0].distanceTo(distanceWCP[1][1])
+      ],
+      elevationRange = [
+        interpolateElevation(distanceRange[0]),
+        interpolateElevation(distanceRange[1])
+      ],
+      bearingRange = [
+        bearingWCP[0][0].bearingTo(bearingWCP[0][1]),
+        bearingWCP[1][0].bearingTo(bearingWCP[1][1])
+      ]
     ;
 
-    return new Calculation();
+    return new Calculation(
+      distance, elevation, bearing,
+      distanceRange, elevationRange, bearingRange
+    );
   }
 
   constructor(distance, elevation, bearing,
