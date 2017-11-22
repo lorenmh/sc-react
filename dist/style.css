@@ -15,7 +15,7 @@
 }
 
 .x-grid, .y-grid {
-  width: 50%;
+  width: 100%;
 }
 
 .kp-grid {
@@ -66,8 +66,8 @@ svg {
 }
 
 .grid-view-target, .grid-view-mortar {
-  stroke-width: 1px;
-  stroke: black;
+  /*stroke-width: 1px;
+  stroke: black;*/
 }
 
 .grid-view-target {
@@ -75,7 +75,7 @@ svg {
 }
 
 .grid-view-mortar{
-  fill: rgba(0,255,0,0.6);
+  fill: rgba(0,190,210,0.6);
 }
 
 .key-line {
@@ -111,10 +111,16 @@ svg {
   position: relative;
 }
 
+.grid-view-wrap {
+  display: inline-block;
+  position: relative;
+  width: 50%;
+}
+
 .grid-view {
   position: relative;
   padding-top: 14px;
-  margin: 5px;
+  margin: auto;
 }
 
 .title-text-x {

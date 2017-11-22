@@ -11,13 +11,12 @@ window.Position = Position;
 
 export default class App extends Component {
   render() {
-    let mortarPosition = Position.fromStrings('a','12','54457');
-    let testPosition = Position.fromStrings('a','1','6');
+    let mortarPosition = Position.fromStrings('a','12','45678');
+    let testPosition = Position.fromStrings('a','1','621');
 
     return (
       <div className="content">
         <Menu />
-        <Search />
         <GridView position={mortarPosition} />
         <GridView isTarget position={testPosition} />
         <Keypad />

@@ -73,8 +73,8 @@ export default class Keypad extends Component {
     return (
       <div className="keypad">
         {this.xGrid()}
-        {this.yGrid()}
-        {this.kpGrid()}
+        {/*{this.yGrid()}
+        {this.kpGrid()}*/}
       </div>
     );
   }

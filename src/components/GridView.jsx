@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const SIZE = 80,
+const SIZE = 60,
   STROKE = 1,
   GRID_SIZE = SIZE + 2*STROKE,
   LARGE_GRID = 300,
@@ -304,25 +304,27 @@ export default class GridView extends Component {
     };
 
     return (
-      <div className="grid-view" style={style}>
+      <div className="grid-view-wrap">
         {(() => titleTextHtml())()}
-        <div className="grid">
-          {(() => keyTextHtml())()}
-          <svg width={SVG_WIDTH} height={SVG_HEIGHT}>
-            <g transform={`translate(${STROKE}, ${STROKE})`}>
-              <rect
-                x="0"
-                y="0"
-                width={SIZE}
-                height={SIZE}
-                className="grid-view-bg"
-              />
-              {(() => isZoomed ? zoomedIn() : zoomedOut())()}
-            </g>
-            <g transform={`translate(${STROKE}, ${GRID_SIZE + KEY_PADDING})`}>
-              {(() => keyLines())()}
-            </g>
-          </svg>
+        <div className="grid-view" style={style}>
+          <div className="grid">
+            {(() => keyTextHtml())()}
+            <svg width={SVG_WIDTH} height={SVG_HEIGHT}>
+              <g transform={`translate(${STROKE}, ${STROKE})`}>
+                <rect
+                  x="0"
+                  y="0"
+                  width={SIZE}
+                  height={SIZE}
+                  className="grid-view-bg"
+                />
+                {(() => isZoomed ? zoomedIn() : zoomedOut())()}
+              </g>
+              <g transform={`translate(${STROKE}, ${GRID_SIZE + KEY_PADDING})`}>
+                {(() => keyLines())()}
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
     );
