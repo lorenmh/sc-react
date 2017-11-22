@@ -40,3 +40,37 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+svg {
+  shape-rendering: crispEdges
+}
+
+.grid-view-bg {
+  fill: white;
+}
+
+.grid-view-bg {
+  stroke: #222;
+  stroke-width: 1px;
+}
+
+.grid-view-lm {
+  stroke: #666;
+  stroke-width: 1px;
+}
+
+.grid-view-ls {
+  stroke-dasharray: 2 1;
+  stroke: #999;
+  stroke-width: 1px;
+}
+
+.grid-view-target {
+  fill: rgba(255,0,0,0.6);
+}
+
+.grid-view-mortar{
+  fill: rgba(0,255,0,0.6);
+  stroke-width: 1px;
+  stroke: rgb(0,255,0);
+}

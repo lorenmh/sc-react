@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import GridView from '../components/GridView';
 import Menu from './Menu';
 import Keypad from './Keypad';
 import Footer from './Footer';
@@ -12,6 +13,7 @@ export default class App extends Component {
       <div className="content">
         <Menu />
         <Search />
+        <GridView isTarget={false} position={[100, 0, 300/3**3]} />
         <Keypad />
         <Footer />
       </div>
