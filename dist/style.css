@@ -65,12 +65,15 @@ svg {
   stroke-width: 1px;
 }
 
+.grid-view-target, .grid-view-mortar {
+  stroke-width: 1px;
+  stroke: black;
+}
+
 .grid-view-target {
   fill: rgba(255,0,0,0.6);
 }
 
 .grid-view-mortar{
   fill: rgba(0,255,0,0.6);
-  stroke-width: 1px;
-  stroke: rgb(0,255,0);
 }

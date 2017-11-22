@@ -114,6 +114,31 @@ export default class GridView extends Component {
     }
 
     function keySvg() {
+      return (
+        <g>
+          <line
+            className="key-line"
+            x1="0"
+            y1="2"
+            x2={SIZE}
+            y2="2"
+          />
+          <line
+            className="key-line"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="4"
+          />
+          <line
+            className="key-line"
+            x1={SIZE}
+            y1="0"
+            x2={SIZE}
+            y2="4"
+          />
+        </g>
+      );
     }
 
     function zoomedIn() {
