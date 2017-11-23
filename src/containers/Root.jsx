@@ -6,13 +6,15 @@ import App from './App';
 import configureStore from '../store';
 import { initialAction } from '../actions';
 
-const store = configureStore({ message: 'initial' });
+// const store = configureStore({ message: 'initial' });
+
+const store = configureStore();
 window.store = store;
 
 export class Root extends Component {
   componentDidMount() {
-    const { dispatch } = store;
-    dispatch(initialAction());
+    // const { dispatch } = store;
+    // dispatch(initialAction());
   }
 
   render() {
