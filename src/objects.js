@@ -1,7 +1,16 @@
 import { GRID_SIZE } from './const';
 
 import { prettyXString, prettyYString, prettyKpsString } from './prettifiers';
-import { parseX, parseY, parseKpa, kpaDelta, kpaToError } from './parsers';
+
+import {
+  parsePositionString,
+  parseX,
+  parseY,
+  parseKpa,
+  kpaDelta,
+  kpaToError
+} from './parsers';
+
 import {
   interpolateElevation,
   distanceWorstCasePositions,
@@ -16,6 +25,8 @@ const R2D = 180/Math.PI
  */
 export class Position {
   static fromString(positionString) {
+    let [xString, yString, kpString] = parsePositionString(positionString);
+    return Position.fromStrings(xString, yString, kpString);
   }
 
   static fromStrings(xString, yString, kpString) {

@@ -2,9 +2,18 @@ import { httpGet } from './http';
 
 const DEFAULT_EVENTS_URI = '/api/events/';
 
+export const UPDATE_POSITION_STRING = 'UPDATE_POSITION_STRING';
 export const REQUEST_EVENTS = 'REQUEST_EVENTS';
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
 export const HTTP_ERROR = 'HTTP_ERROR';
+
+export function updatePositionFromString(positionId, positionString) {
+  return {
+    type: UPDATE_POSITION_STRING,
+    positionId,
+    positionString
+  };
+}
 
 export function receiveEvents(events) {
   return { type: RECEIVE_EVENTS, events };

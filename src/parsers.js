@@ -6,8 +6,19 @@ const KP_MAP = [
     [0,0],[1,0],[2,0],
   ],
 
+  POSITION_STRING_RE = new RegExp(
+    '^([a-z])([12][0-9](?=(?:[k\\s-]))|[1-9])((?:(?:\\s+|-)?(?:kp?)?[1-9])*)' +
+    '(?:\\s|-)?(?:kp?)?$',
+    'i'
+  ),
+
   REPLACE_RE = /[^1-9]/g
 ;
+
+export function parsePositionString(positionString) {
+  return positionString.match(POSITION_STRING_RE).slice(1);
+}
+window.p = parsePositionString;
 
 export function parseX(xString) {
   return (parseInt(xString, 36) - 10);

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Position, Calculation } from '../objects';
 import GridView from '../components/GridView';
 import Menu from './Menu';
+import PositionInputs from './PositionInputs';
 import Keypad from './Keypad';
 import Footer from './Footer';
 import Search from './Search';
@@ -20,6 +21,7 @@ export default class App extends Component {
     return (
       <div className="content">
         <Menu />
+        <PositionInputs />
         <GridView position={mortarPosition} />
         <GridView isTarget position={targetPosition} />
         <Keypad />
