@@ -1,4 +1,10 @@
-import { GRID_SIZE } from './const';
+import {
+  GRID_SIZE,
+  TOO_CLOSE,
+  TOO_FAR,
+  MIN_ELEVATION,
+  MAX_ELEVATION
+} from './const';
 
 import { prettyXString, prettyYString, prettyKpsString } from './prettifiers';
 
@@ -184,8 +190,8 @@ export class Calculation {
         distanceWCP[1][0].distanceTo(distanceWCP[1][1])
       ],
       elevationRange = [
-        interpolateElevation(distanceRange[0]),
-        interpolateElevation(distanceRange[1])
+        interpolateElevation(distanceRange[1]),
+        interpolateElevation(distanceRange[0])
       ],
       bearingRange = [
         bearingWCP[0][0].bearingTo(bearingWCP[0][1]),
@@ -193,7 +199,14 @@ export class Calculation {
       ]
     ;
 
-    console.log(distanceWCP, bearingWCP);
+    elevationRange = (
+      elevationRange
+        .map((e) => {
+          if (e === TOO_CLOSE) return MIN_ELEVATION;
+          if (e === TOO_FAR) return MAX_ELEVATION;
+          return e;
+        })
+    );
 
     return new Calculation(
       distance, elevation, bearing,

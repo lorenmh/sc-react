@@ -15,9 +15,9 @@ export default class App extends Component {
     return (
       <div className="content">
         <Menu />
+        <h1>Squad Game Calculator</h1>
         <PositionInputs />
         <Output />
-        <Keypad />
         <Footer />
       </div>
     );

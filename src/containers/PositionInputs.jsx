@@ -40,12 +40,12 @@ class PositionInputs extends Component {
       <div>
         <PositionInput
           subClass="mortar"
-          placeholder="mortar"
+          placeholder="Mortar: (ex: A11 11)"
           inputHandler={inputHandler(MORTAR_ID)}
         />
         <PositionInput
           subClass="mortar"
-          placeholder="target"
+          placeholder="Target: (ex: B11 11)"
           inputHandler={inputHandler(TARGET_ID)}
           isTarget
         />

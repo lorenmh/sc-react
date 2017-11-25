@@ -3,3 +3,42 @@ export const MAX_LEN_KPA = 5;
 
 export const MORTAR_ID = 'mortar';
 export const TARGET_ID = 'target';
+
+export const MORTAR_TABLE = [
+    [50, 1579],
+    [100, 1558],
+    [150, 1538],
+    [200, 1517],
+    [250, 1496],
+    [300, 1475],
+    [350, 1453],
+    [400, 1431],
+    [450, 1409],
+    [500, 1387],
+    [550, 1364],
+    [600, 1341],
+    [650, 1317],
+    [700, 1292],
+    [750, 1267],
+    [800, 1240],
+    [850, 1212],
+    [900, 1183],
+    [950, 1152],
+    [1000, 1118],
+    [1050, 1081],
+    [1100, 1039],
+    [1150, 988],
+    [1200, 918],
+    [1250, 800]
+  ]
+;
+
+export const MIN_DISTANCE = MORTAR_TABLE[0][0];
+export const MAX_DISTANCE = MORTAR_TABLE[MORTAR_TABLE.length-1][0];
+
+export const MIN_ELEVATION = MORTAR_TABLE[0][1];
+export const MAX_ELEVATION = MORTAR_TABLE[MORTAR_TABLE.length-1][1];
+
+export const TOO_FAR = 'TOO_FAR';
+export const TOO_CLOSE = 'TOO_CLOSE';
+

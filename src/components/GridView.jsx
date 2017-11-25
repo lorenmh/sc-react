@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-const SIZE = 90,
+const SIZE = 120,
   STROKE = 1,
   GRID_SIZE = SIZE + 2*STROKE,
+  CIRCLE_RADIUS = SIZE/50,
   LARGE_GRID = 300,
   SMALL_GRID = 300/9,
   KEY_PADDING = 4,
@@ -126,6 +127,14 @@ export default class GridView extends Component {
             height={S * SIZE}
             className={(() => {
               return isTarget ? 'grid-view-target' : 'grid-view-mortar';
+            })()}
+          />
+          <circle
+            cx={(X + S/2) * SIZE}
+            cy={(Y + S/2) * SIZE}
+            r={CIRCLE_RADIUS}
+            className={(() => {
+              return isTarget ? 'grid-target-circle' : 'grid-mortar-circle';
             })()}
           />
         </g>
@@ -284,15 +293,27 @@ export default class GridView extends Component {
     }
 
     function zoomedIn() {
+      let rect = SIZE > 300/243 ? (
+        <rect
+          x={X * SIZE}
+          y={Y * SIZE}
+          width={S * SIZE}
+          height={S * SIZE}
+          className={(() => {
+            return isTarget ? 'grid-view-target' : 'grid-view-mortar';
+          })()}
+        />
+      ) : null;
+
       return (
         <g>
-          <rect
-            x={X * SIZE}
-            y={Y * SIZE}
-            width={S * SIZE}
-            height={S * SIZE}
+          {rect}
+          <circle
+            cx={(X + S/2) * SIZE}
+            cy={(Y + S/2) * SIZE}
+            r={CIRCLE_RADIUS}
             className={(() => {
-              return isTarget ? 'grid-view-target' : 'grid-view-mortar';
+              return isTarget ? 'grid-target-circle' : 'grid-mortar-circle';
             })()}
           />
         </g>

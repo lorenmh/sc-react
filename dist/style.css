@@ -2,6 +2,13 @@
   box-sizing: border-box;
 }
 
+html {
+}
+
+body {
+  font-family: Helvetica, Verdana, sans-serif;
+}
+
 .keypad button {
   font-family: inherit;
   margin: 5px;
@@ -42,7 +49,7 @@
 }
 
 svg {
-  shape-rendering: crispEdges
+  /*shape-rendering: crispEdges;*/
 }
 
 .grid-view-bg {
@@ -68,6 +75,14 @@ svg {
 .grid-view-target, .grid-view-mortar {
   /*stroke-width: 2px;
   stroke: black;*/
+}
+
+.grid-target-circle {
+  fill: rgb(181, 78, 48);
+}
+
+.grid-mortar-circle {
+  fill: rgb(53, 121, 130);
 }
 
 .grid-view-target {
