@@ -11,6 +11,7 @@ export default class Keypad extends Component {
           .map(n => String.fromCharCode(n + 65))
           .map(letter => (
             <button
+              tabIndex="-1"
               onClick={() => handler(letter, 1)}
             >
               {letter}
@@ -33,6 +34,7 @@ export default class Keypad extends Component {
           .map(n => n + 1)
           .map(number => (
             <button
+              tabIndex="-1"
               onClick={() => handler(number, 1)}
             >
               {number}
@@ -54,6 +56,7 @@ export default class Keypad extends Component {
       [7,8,9,4,5,6,1,2,3]
           .map(number => (
             <button
+              tabIndex="-1"
               onClick={() => handler(number, 1)}
             >
               {number}

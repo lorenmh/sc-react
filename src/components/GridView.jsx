@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const SIZE = 70,
+const SIZE = 90,
   STROKE = 1,
   GRID_SIZE = SIZE + 2*STROKE,
   LARGE_GRID = 300,

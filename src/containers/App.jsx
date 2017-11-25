@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Position, Calculation } from '../objects';
-import GridViews from './GridViews';
+import Output from './Output';
 import Menu from './Menu';
 import PositionInputs from './PositionInputs';
 import Keypad from './Keypad';
@@ -16,7 +16,7 @@ export default class App extends Component {
       <div className="content">
         <Menu />
         <PositionInputs />
-        <GridViews />
+        <Output />
         <Keypad />
         <Footer />
       </div>

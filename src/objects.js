@@ -109,26 +109,26 @@ export class Position {
     if (ux === 0 && uy === 1) return 180;
 
     if (this.x >= position.x && this.y > position.y) {
-      return (180 - Math.abs(deg)) + 270;
+      return ((180 - Math.abs(deg)) + 270) % 360;
     }
 
-    return deg + 90;
+    return deg + 90 % 360;
   }
 
   topLeft() {
-    return new Position(this.x, this.y);
+    return new Position(this.x, this.y, 0);
   }
 
   topRight() {
-    return new Position(this.x + this.error, this.y);
+    return new Position(this.x + this.error, this.y, 0);
   }
 
   bottomRight() {
-    return new Position(this.x + this.error, this.y + this.error);
+    return new Position(this.x + this.error, this.y + this.error, 0);
   }
 
   bottomLeft() {
-    return new Position(this.x, this.position + this.error);
+    return new Position(this.x, this.y + this.error, 0);
   }
 
   // returns true if position is within this position's bounds
@@ -192,6 +192,8 @@ export class Calculation {
         bearingWCP[1][0].bearingTo(bearingWCP[1][1])
       ]
     ;
+
+    console.log(distanceWCP, bearingWCP);
 
     return new Calculation(
       distance, elevation, bearing,
