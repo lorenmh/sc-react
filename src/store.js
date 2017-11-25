@@ -35,11 +35,12 @@ export function initialStateFromStorage() {
   let initialState = {
     isEditMortar: true,
     isLocked: false,
+    positions: {},
     useKeyboard,
     savedPositions
   };
 
-  return storedState;
+  return initialState;
 }
 
 export default function configureStore() {
