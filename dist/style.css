@@ -122,7 +122,7 @@ svg {
   font-size: 12px;
 }
 
-.grid {
+.grid-render {
   position: relative;
 }
 
@@ -133,7 +133,7 @@ svg {
   margin: 6px 0;
 }
 
-.grid {
+.grid{
   position: relative;
   padding-top: 14px;
   margin: auto;
