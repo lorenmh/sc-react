@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const SIZE = 80,
+const SIZE = 50,
   STROKE = 1,
   GRID_SIZE = SIZE + 2*STROKE,
   CIRCLE_RADIUS = SIZE/50,
@@ -85,7 +85,7 @@ function keyTextHtml(S,GS) {
 
   let secondaryKeyText;
 
-  if (S !== 1) {
+  if (!epsilonEquals(S,1)) {
     secondaryKeyText = (
       <div className="key-text-wrap" style={styleBottom}>
         <div className="key-text">
@@ -107,10 +107,10 @@ function keyTextHtml(S,GS) {
   );
 }
 
-function keyLines(S) {
+function keyLines(S, isZoomed) {
   let secondaryKeyLine;
 
-  if (S !== 1) {
+  if (!epsilonEquals(S,1)) {
     //let start = SIZE - (S * SIZE),
     //  end = SIZE
     //;
@@ -239,7 +239,7 @@ export class GridZoomed extends Component {
                 { body }
               </g>
               <g transform={`translate(${STROKE}, ${GRID_SIZE + KEY_PADDING})`}>
-                {(() => keyLines(S))()}
+                {(() => keyLines(S, true))()}
               </g>
             </svg>
           </div>
@@ -386,9 +386,11 @@ export class GridView extends Component {
     let { position, isTarget } = this.props;
 
     return (
-      <div>
-        <Grid position={position} isTarget={isTarget} />
-        <GridZoomed position={position} isTarget={isTarget} />
+      <div className="grid-view-wrap">
+        <div className="grid-view">
+          <Grid position={position} isTarget={isTarget} />
+          <GridZoomed position={position} isTarget={isTarget} />
+        </div>
       </div>
     );
   }

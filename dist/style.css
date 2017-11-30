@@ -129,7 +129,6 @@ svg {
 .grid-wrap {
   display: inline-block;
   position: relative;
-  width: 50%;
   margin: 6px 0;
 }
 
@@ -137,6 +136,16 @@ svg {
   position: relative;
   padding-top: 14px;
   margin: auto;
+}
+
+.grid-view-wrap {
+  display: inline-block;
+  width: 50%;
+}
+
+.grid-view {
+  display: flex;
+  justify-content: center;
 }
 
 .title-text-x {
