@@ -52,27 +52,27 @@ svg {
   /*shape-rendering: crispEdges;*/
 }
 
-.grid-view-bg {
+.grid-bg {
   fill: white;
 }
 
-.grid-view-bg {
+.grid-bg {
   stroke: #222;
   stroke-width: 1px;
 }
 
-.grid-view-lm {
+.grid-lm {
   stroke: #666;
   stroke-width: 1px;
 }
 
-.grid-view-ls {
+.grid-ls {
   stroke-dasharray: 2 1;
   stroke: #999;
   stroke-width: 1px;
 }
 
-.grid-view-target, .grid-view-mortar {
+.grid-target, .grid-mortar {
   /*stroke-width: 2px;
   stroke: black;*/
 }
@@ -85,11 +85,11 @@ svg {
   fill: rgb(53, 121, 130);
 }
 
-.grid-view-target {
+.grid-target {
   fill: rgba(255,105,75,0.6);
 }
 
-.grid-view-mortar{
+.grid-mortar{
   fill: rgba(0,190,210,0.6);
 }
 
@@ -126,14 +126,14 @@ svg {
   position: relative;
 }
 
-.grid-view-wrap {
+.grid-wrap {
   display: inline-block;
   position: relative;
   width: 50%;
   margin: 6px 0;
 }
 
-.grid-view {
+.grid {
   position: relative;
   padding-top: 14px;
   margin: auto;
