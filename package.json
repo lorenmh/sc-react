@@ -7,7 +7,7 @@
     "compile": "webpack --config conf/webpack.config.js",
     "watch": "webpack --config conf/webpack.config.js --watch",
     "dev-compile": "webpack --config conf/webpack.config.js --watch",
-    "serve": "static-server"
+    "serve": "static-server -z"
   },
   "author": "",
   "license": "ISC",
@@ -25,7 +25,7 @@
     "react-router": "^4.1.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "static-server": "^2.0.6",
+    "static-server": "^3.0.0",
     "webpack": "^3.3.0",
     "webpack-livereload-plugin": "^1.0.0"
   },

@@ -9,9 +9,12 @@ export default class Menu extends Component {
     return (
       <div className="menu-wrap">
         <ul className="menu">
-          <li><a href="/events">events</a></li>
-          <li><a href="/venues">venues</a></li>
+          {/*
+          <li><a href="/tutorial">tutorials</a></li>
+          <li><a href="/settings">settings</a></li>
+          <li><a href="/feedback">feedback</a></li>
           <li><a href="/about">about</a></li>
+          */}
         </ul>
       </div>
     );

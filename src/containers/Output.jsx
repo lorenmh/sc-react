@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import GridView from '../components/GridView';
+import { GridView, GridViewZoomed } from '../components/GridView';
 import CalculationView from '../components/CalculationView';
 
 import { MORTAR_ID, TARGET_ID } from '../const';
@@ -14,9 +14,12 @@ class Output extends Component {
     const mortarPosition = positions[MORTAR_ID];
     const targetPosition = positions[TARGET_ID];
 
-    let mortarView = mortarPosition ?
-      <GridView position={mortarPosition} /> : null
-    ;
+    let mortarView = mortarPosition ? (
+      <div>
+        <GridView position={mortarPosition} />
+        <GridViewZoomed position={mortarPosition} />
+      </div>
+    ) : null;
 
     let targetView = targetPosition ?
       <GridView isTarget position={targetPosition} /> : null

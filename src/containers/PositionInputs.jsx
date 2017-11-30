@@ -37,7 +37,7 @@ class PositionInputs extends Component {
     };
 
     return (
-      <div>
+      <div className="position-inputs">
         <PositionInput
           subClass="mortar"
           placeholder="Mortar: (ex: A11 11)"

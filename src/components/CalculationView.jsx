@@ -13,7 +13,7 @@ export default class CalculationView extends Component {
     const { calculation } = this.props;
 
     return (
-      <div>
+      <div className="calculation">
         <div className="bearing">
           <span className="bearing-title">Bearing: </span>
           <span className="bearing-major">

@@ -7,7 +7,8 @@ export default class Footer extends Component {
     window.dispatch = dispatch;
 
     return (
-      <footer>© venyou.io 2017</footer>
+      null
+      //<footer>© venyou.io 2017</footer>
     );
   }
 }

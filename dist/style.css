@@ -130,6 +130,7 @@ svg {
   display: inline-block;
   position: relative;
   width: 50%;
+  margin: 6px 0;
 }
 
 .grid-view {
@@ -157,4 +158,42 @@ svg {
 .title-text-dash {
   color: #666;
 }
-  
+
+.position-inputs {
+  display: flex;
+  justify-content: space-around;
+}
+
+.position-input {
+  background-color: rgb(245,245,245);
+  border: 1px solid rgb(230,230,230);
+  padding: 10px;
+  width: 48%;
+}
+
+.calculation {
+  font-family: monospace;
+}
+
+.bearing-major, .elevation-major, .distance-major {
+  font-weight: bold;
+}
+
+.bearing-minor, .elevation-minor, .distance-minor {
+  margin-left: 5px;
+  font-size: 0.8em;
+}
+
+.app-title {
+  font-size: 14px;
+}
+
+.calculation {
+  text-align: center;
+  border: 1px dashed rgb(180,50,50);
+  padding: 10px;
+  background-color: rgba(0,0,0,.05);
+  margin-top: 0;
+  font-size: 12px;
+  line-height: 18px;
+}
