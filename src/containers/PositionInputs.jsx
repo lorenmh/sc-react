@@ -5,17 +5,35 @@ import { MORTAR_ID, TARGET_ID } from '../const';
 import { updatePositionFromString } from '../actions';
 
 class PositionInput extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+  }
+
   render() {
     const { placeholder, isTarget, inputHandler } = this.props;
 
     const subClass = isTarget ? 'target' : 'mortar';
 
+    let inputEventHandler = (e) => {
+      inputHandler(e.target.value);
+    };
+
+    let clearHandler = (_) => {
+      this.inputEl.value = '';
+      inputHandler('');
+    };
+
     return (
-      <input
-        className={`position-input position-input-${subClass}`}
-        placeholder={placeholder}
-        onInput={inputHandler}
-      />
+      <div className="position-input-wrap">
+        <input
+          className={`position-input position-input-${subClass}`}
+          ref={e => this.inputEl = e}
+          placeholder={placeholder}
+          onInput={inputEventHandler}
+        />
+        <button onClick={clearHandler}>clear</button>
+      </div>
     );
   }
 }
@@ -27,13 +45,16 @@ class PositionInputs extends Component {
       dispatch
     } = this.props;
 
-    let inputHandler = positionId => (e) => {
+    let inputHandler = positionId => (value) => {
       dispatch(
         updatePositionFromString(
           positionId,
-          e.target.value
+          value
         )
       );
+    };
+
+    let saveHandler = positionId => (e) => {
     };
 
     return (

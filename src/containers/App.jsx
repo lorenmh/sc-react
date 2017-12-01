@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { Position, Calculation } from '../objects';
+import { Position, Calculation } from '../models';
+import GridView from './GridView';
 import Output from './Output';
 import Menu from './Menu';
 import PositionInputs from './PositionInputs';
@@ -28,8 +29,9 @@ export default class App extends Component {
       <div className="content">
         <Menu />
         <h1 className="app-title">Squad Game Calculator</h1>
-        <PositionInputs />
         <Output />
+        <PositionInputs />
+        <GridView />
         <LoadView savedItems={testSavedItems} />
         <Footer />
       </div>

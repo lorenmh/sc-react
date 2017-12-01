@@ -1,5 +1,18 @@
-export const GRID_SIZE = 300;
 export const MAX_LEN_KPA = 5;
+
+// Const values for the GridView
+export const SIZE = 60;
+export const STROKE = 1;
+export const GRID_SIZE = SIZE + 2*STROKE;
+export const CIRCLE_RADIUS = SIZE/50;
+export const LARGE_GRID = 300;
+export const SMALL_GRID = 300/9;
+export const KEY_PADDING = 4;
+export const TEXT_SIZE = 8;
+export const KEY_HEIGHT = 11;
+export const SVG_WIDTH = GRID_SIZE;
+export const SVG_HEIGHT = GRID_SIZE + KEY_PADDING + KEY_HEIGHT;
+export const EPSILON = 0.001;
 
 export const MORTAR_ID = 'mortar';
 export const TARGET_ID = 'target';

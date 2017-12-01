@@ -3,7 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import rootReducer from './reducers';
 
-import { Position } from './objects';
+import { Position } from './models';
 
 export const STORAGE_KEY = 'APP_STATE';
 

@@ -9,6 +9,11 @@ body {
   font-family: Helvetica, Verdana, sans-serif;
 }
 
+#app {
+  max-width: 800px;
+  margin: auto;
+}
+
 .keypad button {
   font-family: inherit;
   margin: 5px;
@@ -139,13 +144,13 @@ svg {
 }
 
 .grid-view-wrap {
-  display: inline-block;
-  width: 50%;
+  display: flex;
 }
 
 .grid-view {
   display: flex;
   justify-content: center;
+  width: 50%;
 }
 
 .title-text-x {

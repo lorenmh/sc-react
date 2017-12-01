@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const SIZE = 60,
-  STROKE = 1,
-  GRID_SIZE = SIZE + 2*STROKE,
-  CIRCLE_RADIUS = SIZE/50,
-  LARGE_GRID = 300,
-  SMALL_GRID = 300/9,
-  KEY_PADDING = 4,
-  TEXT_SIZE = 8,
-  KEY_HEIGHT = 11,
-  SVG_WIDTH = GRID_SIZE,
-  SVG_HEIGHT = GRID_SIZE + KEY_PADDING + KEY_HEIGHT,
-  EPSILON = 0.001
-;
+import {
+  SIZE,
+  STROKE,
+  GRID_SIZE,
+  CIRCLE_RADIUS,
+  LARGE_GRID,
+  SMALL_GRID,
+  KEY_PADDING,
+  TEXT_SIZE,
+  KEY_HEIGHT,
+  SVG_WIDTH,
+  SVG_HEIGHT,
+  EPSILON,
+  MORTAR_ID,
+  TARGET_ID
+} from '../const';
 
 const epsilonEquals = (a,b) => Math.abs(a-b) < EPSILON;
 const cludgeLt = (a,b) => parseFloat(a.toFixed(4)) < parseFloat(b.toFixed(4));
@@ -173,7 +177,7 @@ function keyLines(S, isZoomed) {
   );
 }
 
-export class GridZoomed extends Component {
+class GridZoomed extends Component {
   render() {
     const { position, isTarget } = this.props;
 
@@ -245,7 +249,7 @@ export class GridZoomed extends Component {
   }
 }
 
-export class Grid extends Component {
+class Grid extends Component {
   render() {
     const { position, xLabel, yLabel, isTarget } = this.props;
 
@@ -377,17 +381,27 @@ export class Grid extends Component {
   }
 }
 
-export class GridView extends Component {
+class GridView extends Component {
   render() {
-    let { position, isTarget } = this.props;
+    let { positions } = this.props;
+
+    const mortarPosition = positions[MORTAR_ID];
+    const targetPosition = positions[TARGET_ID];
 
     return (
       <div className="grid-view-wrap">
         <div className="grid-view">
-          <Grid position={position} isTarget={isTarget} />
-          <GridZoomed position={position} isTarget={isTarget} />
+          <Grid position={mortarPosition} />
+          <GridZoomed position={mortarPosition} />
+        </div>
+        <div className="grid-view">
+          <Grid position={targetPosition} isTarget />
+          <GridZoomed position={targetPosition} isTarget />
         </div>
       </div>
     );
   }
 }
+
+
+export default connect(s => s)(GridView);

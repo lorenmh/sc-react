@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { GridView } from '../components/GridView';
+import { GridView } from './GridView';
 import CalculationView from '../components/CalculationView';
 
-import { MORTAR_ID, TARGET_ID } from '../const';
-import { Calculation } from '../objects';
+import { Calculation } from '../models';
+
+import {  MORTAR_ID,
+  TARGET_ID
+} from '../const';
 
 class Output extends Component {
   render() {
@@ -28,8 +31,6 @@ class Output extends Component {
 
     return (
       <div>
-        <GridView position={mortarPosition} />
-        <GridView position={targetPosition} isTarget />
         {calculationView}
       </div>
     );

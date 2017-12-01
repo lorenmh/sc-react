@@ -1,4 +1,4 @@
-import { Position } from './objects';
+import { Position } from './models';
 
 import {
   RECEIVE_EVENTS,

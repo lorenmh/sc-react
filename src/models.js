@@ -1,5 +1,5 @@
 import {
-  GRID_SIZE,
+  LARGE_GRID,
   TOO_CLOSE,
   TOO_FAR,
   MIN_ELEVATION,
@@ -45,9 +45,9 @@ export class Position {
 
   static fromGrid(gridX, gridY, kpa) {
     let delta = kpaDelta(kpa),
-      x = (gridX + delta[0]) * GRID_SIZE,
-      y = (gridY + delta[1]) * GRID_SIZE,
-      error = kpaToError(kpa) * GRID_SIZE
+      x = (gridX + delta[0]) * LARGE_GRID,
+      y = (gridY + delta[1]) * LARGE_GRID,
+      error = kpaToError(kpa) * LARGE_GRID
     ;
 
     return new Position(x, y, error, kpa, gridX, gridY);
