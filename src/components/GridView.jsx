@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const SIZE = 50,
+const SIZE = 60,
   STROKE = 1,
   GRID_SIZE = SIZE + 2*STROKE,
   CIRCLE_RADIUS = SIZE/50,
@@ -57,16 +57,12 @@ function titleTextHtml(position, isSubKey) {
           <span className="title-text-item title-text-kp-minor">{kp}</span>
         ))
     );
-    kpMinor = (
-      [
-        <span className="title-text-item title-text-dash">{' '}</span>
-      ].concat(kpMinor)
-    );
   }
 
 
   return (
     <div className="title-text">
+      {/*<span className="title-text-item title-text-subkey">sub:</span>*/}
       {kpMinor}
     </div>
   );

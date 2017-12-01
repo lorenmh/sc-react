@@ -8,7 +8,11 @@ import {
 function updatePositionStringState(positionId, positionString) {
   let obj = {};
 
-  obj[positionId] = Position.fromString(positionString);
+  try {
+    obj[positionId] = Position.fromString(positionString);
+  } catch (e) {
+    obj[positionId] = null;
+  }
 
   return obj;
 }

@@ -206,3 +206,7 @@ svg {
   font-size: 12px;
   line-height: 18px;
 }
+
+.grid-wrap:first-child {
+  margin-right: 10px;
+}

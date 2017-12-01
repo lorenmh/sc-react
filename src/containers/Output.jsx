@@ -14,15 +14,8 @@ class Output extends Component {
     const mortarPosition = positions[MORTAR_ID];
     const targetPosition = positions[TARGET_ID];
 
-    let mortarView = mortarPosition ?
-      <GridView position={mortarPosition} /> : null
-    ;
-
-    let targetView = targetPosition ?
-      <GridView position={targetPosition} isTarget /> : null
-    ;
-
     let calculation;
+
     if (mortarPosition && targetPosition) {
       calculation = Calculation.fromPositions(mortarPosition, targetPosition);
     }
@@ -35,8 +28,8 @@ class Output extends Component {
 
     return (
       <div>
-        {mortarView}
-        {targetView}
+        <GridView position={mortarPosition} />
+        <GridView position={targetPosition} isTarget />
         {calculationView}
       </div>
     );
