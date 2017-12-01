@@ -29,12 +29,14 @@ export default class LoadView extends Component {
 
     return (
       <table className="saved-items">
-        <tr>
-          <th>position</th>
-          <th>name</th>
-          <th>cntrl</th>
-        </tr>
-        {savedItemComponents}
+        <tbody>
+          <tr>
+            <th>position</th>
+            <th>name</th>
+            <th>cntrl</th>
+          </tr>
+          {savedItemComponents}
+        </tbody>
       </table>
     );
   }

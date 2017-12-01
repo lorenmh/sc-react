@@ -6,7 +6,8 @@ import CalculationView from '../components/CalculationView';
 
 import { Calculation } from '../models';
 
-import {  MORTAR_ID,
+import {
+  MORTAR_ID,
   TARGET_ID
 } from '../const';
 

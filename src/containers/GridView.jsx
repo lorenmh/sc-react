@@ -20,6 +20,10 @@ import {
 
 const epsilonEquals = (a,b) => Math.abs(a-b) < EPSILON;
 const cludgeLt = (a,b) => parseFloat(a.toFixed(4)) < parseFloat(b.toFixed(4));
+const style = {
+  width: GRID_SIZE
+};
+
 
 function titleTextHtml(position, isSubKey) {
   isSubKey = !!isSubKey;
@@ -348,10 +352,6 @@ class Grid extends Component {
         />
       </g>
     );
-
-    let style = {
-      width: GRID_SIZE
-    };
 
     return (
       <div className="grid-wrap">

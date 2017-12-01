@@ -58,16 +58,16 @@ svg {
 }
 
 .grid-bg {
-  fill: white;
+  fill: #f7f7f7;
 }
 
 .grid-bg {
-  stroke: #222;
+  stroke: #cac8c8;
   stroke-width: 1px;
 }
 
 .grid-lm {
-  stroke: #666;
+  stroke: #8a8a8a;
   stroke-width: 1px;
 }
 
@@ -148,8 +148,8 @@ svg {
 }
 
 .grid-view {
-  display: flex;
-  justify-content: center;
+  /*display: flex;
+  justify-content: center;*/
   width: 50%;
 }
 
@@ -180,17 +180,27 @@ svg {
 
 .position-input {
   background-color: rgb(245,245,245);
-  border: 1px solid rgb(230,230,230);
+  border: 1px solid #a5a5a5;
   padding: 10px;
   width: 48%;
+  box-shadow: inset 0 1px 6px 0px rgb(171, 171, 171);
 }
 
 .calculation {
   font-family: monospace;
 }
 
-.bearing-major, .elevation-major, .distance-major {
+.bearing-major, .elevation-major {
   font-weight: bold;
+  font-size: 16px;
+}
+
+.bearing-major {
+  color: #cc0000;
+}
+
+.elevation-major {
+  color: #006ecc;
 }
 
 .bearing-minor, .elevation-minor, .distance-minor {
@@ -204,14 +214,20 @@ svg {
 
 .calculation {
   text-align: center;
-  border: 1px dashed rgb(180,50,50);
+  /*border: 1px dashed rgb(180,50,50);*/
   padding: 10px;
-  background-color: rgba(0,0,0,.05);
+  /*background-color: rgba(0,0,0,.05);*/
+  background-color: #f7f7f7;
   margin-top: 0;
+  margin-bottom: 15px;
   font-size: 12px;
   line-height: 18px;
 }
 
 .grid-wrap:first-child {
   margin-right: 10px;
+}
+
+.position-input-wrap {
+  width: 50%;
 }

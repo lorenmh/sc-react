@@ -11,7 +11,13 @@ class PositionInput extends Component {
   }
 
   render() {
-    const { placeholder, isTarget, inputHandler } = this.props;
+    const {
+      placeholder,
+      isTarget,
+      isFocus,
+      inputHandler,
+      saveHandler
+    } = this.props;
 
     const subClass = isTarget ? 'target' : 'mortar';
 
@@ -24,15 +30,20 @@ class PositionInput extends Component {
       inputHandler('');
     };
 
+    let saveEventHandler = (_) => {
+      saveHandler(this.inputEl.value);
+    }
+
     return (
       <div className="position-input-wrap">
         <input
           className={`position-input position-input-${subClass}`}
-          ref={e => this.inputEl = e}
+          ref={(e) => {this.inputEl = e; isFocus && e && e.focus();}}
           placeholder={placeholder}
           onInput={inputEventHandler}
         />
         <button onClick={clearHandler}>clear</button>
+        <button onClick={clearHandler}>save</button>
       </div>
     );
   }
@@ -63,6 +74,7 @@ class PositionInputs extends Component {
           subClass="mortar"
           placeholder="Mortar: (ex: A11 11)"
           inputHandler={inputHandler(MORTAR_ID)}
+          isFocus
         />
         <PositionInput
           subClass="mortar"
