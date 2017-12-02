@@ -489,9 +489,25 @@ else {s=40;}
 
 @media (max-width: 360px) {
   .bearing-minor, .elevation-minor, .distance-minor {
-    display: none !important;
+    font-size: .6em;
+  }
+
+  .bearing-major, .elevation-major, .distance-major {
+    width: auto;
+    padding: 0 8px;
   }
 }
+
+@media (max-width: 319px) {
+  .bearing-minor, .elevation-minor, .distance-minor {
+    display: none !important;
+  }
+
+  .bearing-major, .elevation-major, .distance-major {
+    padding: 0 3px;
+  }
+}
+
 
 @media (max-width: 500px) {
   .position-input {
