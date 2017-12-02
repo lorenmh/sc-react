@@ -8,8 +8,8 @@ let w = window.innerWidth,
 if (w>1000) {s = 90;}
 else if (w>800) { s=80;}
 else if (w>600) { s=70;}
-else if (w>400) { s=60;}
-else if (w>320) {s=50;}
+else if (w>330) { s=60;}
+else if (w>280) {s=50;}
 else {s=40;}
 
 export const SIZE = s;
