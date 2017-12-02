@@ -24163,7 +24163,7 @@ function titleTextHtml(position, isSubKey) {
     var kpMajor = kpa.slice(0, 2).map(function (kp, i) {
       return _react2.default.createElement(
         'span',
-        { key: kp + i },
+        { key: kp.toString() + i.toString() },
         _react2.default.createElement(
           'span',
           { className: 'title-text-item title-text-dash' },
@@ -24199,7 +24199,7 @@ function titleTextHtml(position, isSubKey) {
       return _react2.default.createElement(
         'span',
         {
-          key: kp + i + 'm',
+          key: kp.toString() + i.toString() + 'm',
           className: 'title-text-item title-text-kp-minor' },
         kp
       );
