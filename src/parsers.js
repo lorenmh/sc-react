@@ -45,7 +45,7 @@ export function kpaDelta(kpa) {
     kpa
       .map(k => KP_MAP[k-1])
       .map((k,i) => {
-        let e = (1/3)**(i+1);
+        let e = Math.pow(1/3,i+1);
         return [k[0]*e, k[1]*e];
       })
       .reduce((a,k) => {
@@ -57,7 +57,7 @@ export function kpaDelta(kpa) {
 }
 
 export function kpaToError(kpa) {
-  return (1/3)**kpa.length;
+  return Math.pow((1/3),kpa.length);
 }
 
 export function parseKps(kpsString) {

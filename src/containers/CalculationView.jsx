@@ -36,7 +36,14 @@ class CalculationView extends Component {
 
     if (!calculation) {
       return (
-        <div className="calculation-wrap" />
+        <div className="calculation-wrap">
+          <div className="calculation-empty-msg-wrap">
+            <div className="calculation-empty-msg">
+              No calculation!<br/>
+              To input a calculation, use the two inputs below.<br/>
+            </div>
+          </div>
+        </div>
       )
     }
 
@@ -80,7 +87,7 @@ class CalculationView extends Component {
           <div className="bearing">
             <span className="bearing-title">Bearing: </span>
             <span className="bearing-major">
-              { valueString(calculation.bearing) + '\u00B0' }
+              { valueString(calculation.bearing) + '°' }
             </span>
             <span className="bearing-minor">
               { rangeString(calculation, calculation.bearingRange) }

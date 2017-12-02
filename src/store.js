@@ -5,6 +5,8 @@ import rootReducer from './reducers';
 
 import { Position } from './models';
 
+import mnemonic from './mnemonic';
+
 export const STORAGE_KEY = 'APP_STATE';
 
 const DEFAULT_USE_KEYBOARD = true,
@@ -38,8 +40,12 @@ export function initialStateFromStorage() {
     isEditMortar: true,
     isLocked: false,
     positions: {
-      mortar: Position.fromStrings('a','1','123'),
-      target: Position.fromStrings('b','1','456')
+      mortar: null,
+      target: null,
+      newPositions: {
+        mortar: null,
+        target: null
+      }
     },
     useKeyboard,
     savedPositions
@@ -54,7 +60,7 @@ export default function configureStore() {
     initialStateFromStorage(),
     applyMiddleware(
       thunkMiddleware,
-      loggerMiddleware,
+      //loggerMiddleware,
     ),
   );
 }

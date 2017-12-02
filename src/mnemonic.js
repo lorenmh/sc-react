@@ -8,7 +8,7 @@ const ADJECTIVES = [
   NOUNS = [
     'cow','dog','cat','fish','turtle','bird','snake','snail','spider','mouse',
     'rat','bat','ferret','zebra','hippo','hyena','beetle','lion','antelope',
-    'parrot','worm','man','monkey','ant','slug','boy','girl','woman'
+    'parrot','worm','man','monkey','ant','slug','boy',
   ],
 
   LEN_A = ADJECTIVES.length,

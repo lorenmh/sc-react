@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   LARGE_GRID,
   TOO_CLOSE,
@@ -78,11 +80,19 @@ export class Position {
   }
 
   toString() {
-    let kpaString = this.kpaString();
+    let kpaMajor = this.kpa.slice(0,2).join(''),
+      kpaMinor = this.kpa.slice(2).join('')
+    ;
 
-    kpaString = kpaString ? '-' + kpaString : '';
+    kpaMajor = kpaMajor !== '' ? ' ' + kpaMajor : '';
+    kpaMinor = kpaMinor !== '' ? ' ' + kpaMinor : '';
 
-    return this.xString() + this.yString() + kpaString;
+    return this.xString() + this.yString() + kpaMajor + kpaMinor;
+  }
+
+  toStringShort() {
+    let space = this.gridY >= 9 ? ' ' : '';
+    return this.xString() + this.yString() + space + this.kpa.join('');
   }
 
   toStringKpaLen(len) {
@@ -175,6 +185,57 @@ export class Position {
       p.contains(this.topRight()) ||
       p.contains(this.bottomRight()) ||
       p.contains(this.bottomLeft())
+    );
+  }
+
+  toElement() {
+    let kpa = this.kpa,
+      kpMajor,
+      kpMinor
+    ;
+
+    if (kpa.length) {
+      kpMajor = (
+        kpa
+          .slice(0,2)
+          .map((kp,i) => (
+            <span key={i+kp}>
+              <span className="position-text-item position-text-dash">-</span>
+              <span className="position-text-item position-text-kp-major">{kp}</span>
+            </span>
+          ))
+      );
+    }
+
+    if (kpa.length > 2) {
+      kpMinor = (
+        kpa
+          .slice(2)
+          .map((kp,i) => (
+            <span
+              key={i+kp+'m'}
+              className="position-text-item position-text-kp-minor">{kp}</span>
+          ))
+      );
+    }
+
+    return (
+      <div className="position-text">
+        <span className="position-text-1">
+          <span className="position-text-item position-text-x">
+            {this.xString()}
+          </span>
+          <span className="position-text-item position-text-y">
+            {this.yString()}
+          </span>
+        </span>
+        <span className="position-text-2">
+          {kpMajor}
+        </span>
+        <span className="position-text-3">
+          {kpMinor}
+        </span>
+      </div>
     );
   }
 }

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "webpack --config conf/webpack.config.js",
-    "watch": "webpack --config conf/webpack.config.js --watch",
+    "compile": "webpack --config conf/webpack.prod.config.js",
+    "watch": "webpack --config conf/webpack.dev.config.js --watch",
     "dev-compile": "webpack --config conf/webpack.config.js --watch",
     "serve": "static-server -z"
   },

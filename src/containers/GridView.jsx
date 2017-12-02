@@ -37,8 +37,8 @@ function titleTextHtml(position, isSubKey) {
     let kpMajor = (
       kpa
         .slice(0,2)
-        .map(kp => (
-          <span>
+        .map((kp,i) => (
+          <span key={kp+i}>
             <span className="title-text-item title-text-dash">-</span>
             <span className="title-text-item title-text-kp-major">{kp}</span>
           </span>
@@ -62,8 +62,10 @@ function titleTextHtml(position, isSubKey) {
     kpMinor = (
       kpa
         .slice(2)
-        .map(kp => (
-          <span className="title-text-item title-text-kp-minor">{kp}</span>
+        .map((kp,i) => (
+          <span 
+            key={kp+i+'m'}
+            className="title-text-item title-text-kp-minor">{kp}</span>
         ))
     );
   }

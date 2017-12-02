@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { MORTAR_ID, TARGET_ID } from '../const';
-import { updatePositionFromString } from '../actions';
+import {
+  updatePositionFromString,
+  clearNewPosition,
+  savePosition
+} from '../actions';
 
 class PositionInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
-  }
-
   render() {
     const {
+      newPosition,
+      clearPosition,
       placeholder,
       isTarget,
       isFocus,
@@ -34,6 +35,11 @@ class PositionInput extends Component {
       saveHandler(this.inputEl.value);
     }
 
+    if (this.inputEl && newPosition) {
+      this.inputEl.value = newPosition.toStringShort();
+      clearPosition();
+    }
+
     return (
       <div className="position-input-wrap">
         <input
@@ -50,7 +56,7 @@ class PositionInput extends Component {
         </button>
         <button
           className="position-save"
-          onClick={clearHandler}
+          onClick={saveEventHandler}
         >
           Save
         </button>
@@ -62,7 +68,7 @@ class PositionInput extends Component {
 class PositionInputs extends Component {
   render() {
     const {
-      placeholder,
+      positions,
       dispatch
     } = this.props;
 
@@ -75,21 +81,36 @@ class PositionInputs extends Component {
       );
     };
 
-    let saveHandler = positionId => (e) => {
+    let clearPosition = positionId => () => {
+      dispatch(clearNewPosition(positionId));
     };
+
+    let saveHandler = (positionString) => {
+      dispatch(savePosition(positionString));
+    }
+
+    let newMortarPosition = positions.newPositions[MORTAR_ID],
+      newTargetPosition = positions.newPositions[TARGET_ID]
+    ;
 
     return (
       <div className="position-inputs">
         <PositionInput
           subClass="mortar"
           placeholder="Mortar: (ex: A11 11)"
+          newPosition={newMortarPosition}
+          clearPosition={clearPosition(MORTAR_ID)}
           inputHandler={inputHandler(MORTAR_ID)}
+          saveHandler={saveHandler}
           isFocus
         />
         <PositionInput
           subClass="mortar"
           placeholder="Target: (ex: B11 11)"
+          newPosition={newTargetPosition}
+          clearPosition={clearPosition(TARGET_ID)}
           inputHandler={inputHandler(TARGET_ID)}
+          saveHandler={saveHandler}
           isTarget
         />
       </div>

@@ -9,21 +9,10 @@ import Keypad from './Keypad';
 import Footer from './Footer';
 import Search from './Search';
 
-import LoadView from '../components/LoadView';
-
-import mnemonic from '../mnemonic';
-
-window.m = mnemonic;
+import LoadView from './LoadView';
 
 export default class App extends Component {
   render() {
-    let testSavedItems = [
-      {position: 'A11-2-3 456', mnemonic: mnemonic()},
-      {position: 'A2-5-1 456', mnemonic: mnemonic()},
-      {position: 'F4-2-2 456', mnemonic: mnemonic()},
-      {position: 'G11-9-7 456', mnemonic: mnemonic()},
-    ];
-
 
     return (
       <div className="content">
@@ -32,7 +21,7 @@ export default class App extends Component {
         <CalculationView />
         <PositionInputs />
         <GridView />
-        <LoadView savedItems={testSavedItems} />
+        <LoadView />
         <Footer />
       </div>
     );
