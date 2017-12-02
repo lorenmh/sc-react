@@ -1,7 +1,18 @@
 export const MAX_LEN_KPA = 5;
 
 // Const values for the GridView
-export const SIZE = 60;
+let w = window.innerWidth,
+  s
+;
+
+if (w>1000) {s = 90;}
+else if (w>800) { s=80;}
+else if (w>600) { s=70;}
+else if (w>400) { s=60;}
+else if (w>320) {s=50;}
+else {s=40;}
+
+export const SIZE = s;
 export const STROKE = 1;
 export const GRID_SIZE = SIZE + 2*STROKE;
 export const CIRCLE_RADIUS = SIZE/50;
@@ -14,7 +25,7 @@ export const SVG_WIDTH = GRID_SIZE;
 export const SVG_HEIGHT = GRID_SIZE + KEY_PADDING + KEY_HEIGHT;
 export const EPSILON = 0.001;
 export const TITLE_SIZE = 12;
-export const GRID_VIEW_HEIGHT = 100;
+export const GRID_VIEW_HEIGHT = SIZE+40;
 
 export const MORTAR_ID = 'mortar';
 export const TARGET_ID = 'target';

@@ -1327,12 +1327,29 @@ module.exports = PooledClass;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 var MAX_LEN_KPA = exports.MAX_LEN_KPA = 5;
 
 // Const values for the GridView
-var SIZE = exports.SIZE = 60;
+var w = window.innerWidth,
+    s = void 0;
+
+if (w > 1000) {
+  s = 90;
+} else if (w > 800) {
+  s = 80;
+} else if (w > 600) {
+  s = 70;
+} else if (w > 400) {
+  s = 60;
+} else if (w > 320) {
+  s = 50;
+} else {
+  s = 40;
+}
+
+var SIZE = exports.SIZE = s;
 var STROKE = exports.STROKE = 1;
 var GRID_SIZE = exports.GRID_SIZE = SIZE + 2 * STROKE;
 var CIRCLE_RADIUS = exports.CIRCLE_RADIUS = SIZE / 50;
@@ -1345,7 +1362,7 @@ var SVG_WIDTH = exports.SVG_WIDTH = GRID_SIZE;
 var SVG_HEIGHT = exports.SVG_HEIGHT = GRID_SIZE + KEY_PADDING + KEY_HEIGHT;
 var EPSILON = exports.EPSILON = 0.001;
 var TITLE_SIZE = exports.TITLE_SIZE = 12;
-var GRID_VIEW_HEIGHT = exports.GRID_VIEW_HEIGHT = 100;
+var GRID_VIEW_HEIGHT = exports.GRID_VIEW_HEIGHT = SIZE + 40;
 
 var MORTAR_ID = exports.MORTAR_ID = 'mortar';
 var TARGET_ID = exports.TARGET_ID = 'target';
@@ -4047,7 +4064,7 @@ var Position = exports.Position = function () {
         kpMajor = kpa.slice(0, 2).map(function (kp, i) {
           return _react2.default.createElement(
             'span',
-            { key: i + kp },
+            { key: i.toString() + kp.toString() },
             _react2.default.createElement(
               'span',
               { className: 'position-text-item position-text-dash' },
@@ -4067,7 +4084,7 @@ var Position = exports.Position = function () {
           return _react2.default.createElement(
             'span',
             {
-              key: i + kp + 'm',
+              key: i.toString() + kp.toString() + 'm',
               className: 'position-text-item position-text-kp-minor' },
             kp
           );
@@ -24611,13 +24628,13 @@ var GridView = function (_Component3) {
         { className: 'grid-view-wrap' },
         _react2.default.createElement(
           'div',
-          { className: 'grid-view', height: _const.GRID_VIEW_HEIGHT },
+          { className: 'grid-view' },
           mortarGrid,
           mortarGridZoomed
         ),
         _react2.default.createElement(
           'div',
-          { className: 'grid-view', height: _const.GRID_VIEW_HEIGHT },
+          { className: 'grid-view' },
           targetGrid,
           targetGridZoomed
         )

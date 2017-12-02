@@ -413,11 +413,11 @@ class GridView extends Component {
 
     return (
       <div className="grid-view-wrap">
-        <div className="grid-view" height={GRID_VIEW_HEIGHT}>
+        <div className="grid-view">
           { mortarGrid }
           { mortarGridZoomed }
         </div>
-        <div className="grid-view" height={GRID_VIEW_HEIGHT}>
+        <div className="grid-view">
           { targetGrid }
           { targetGridZoomed }
         </div>

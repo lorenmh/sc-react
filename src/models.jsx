@@ -199,7 +199,7 @@ export class Position {
         kpa
           .slice(0,2)
           .map((kp,i) => (
-            <span key={i+kp}>
+            <span key={i.toString()+kp.toString()}>
               <span className="position-text-item position-text-dash">-</span>
               <span className="position-text-item position-text-kp-major">{kp}</span>
             </span>
@@ -213,7 +213,7 @@ export class Position {
           .slice(2)
           .map((kp,i) => (
             <span
-              key={i+kp+'m'}
+              key={i.toString()+kp.toString()+'m'}
               className="position-text-item position-text-kp-minor">{kp}</span>
           ))
       );
