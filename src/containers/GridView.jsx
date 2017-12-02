@@ -15,7 +15,8 @@ import {
   SVG_HEIGHT,
   EPSILON,
   MORTAR_ID,
-  TARGET_ID
+  TARGET_ID,
+  GRID_VIEW_HEIGHT
 } from '../const';
 
 const epsilonEquals = (a,b) => Math.abs(a-b) < EPSILON;
@@ -388,15 +389,35 @@ class GridView extends Component {
     const mortarPosition = positions[MORTAR_ID];
     const targetPosition = positions[TARGET_ID];
 
+    let mortarGrid,
+      mortarGridZoomed,
+      targetGrid,
+      targetGridZoomed
+    ;
+
+    if (mortarPosition) {
+      mortarGrid = <Grid position={mortarPosition} />;
+      if (mortarPosition.kpa.length >= 2) {
+        mortarGridZoomed = <GridZoomed position={mortarPosition} />;
+      }
+    }
+
+    if (targetPosition) {
+      targetGrid = <Grid position={targetPosition} isTarget />;
+      if (targetPosition.kpa.length >= 2) {
+        targetGridZoomed = <GridZoomed position={targetPosition} isTarget />;
+      }
+    }
+
     return (
       <div className="grid-view-wrap">
-        <div className="grid-view">
-          <Grid position={mortarPosition} />
-          <GridZoomed position={mortarPosition} />
+        <div className="grid-view" height={GRID_VIEW_HEIGHT}>
+          { mortarGrid }
+          { mortarGridZoomed }
         </div>
-        <div className="grid-view">
-          <Grid position={targetPosition} isTarget />
-          <GridZoomed position={targetPosition} isTarget />
+        <div className="grid-view" height={GRID_VIEW_HEIGHT}>
+          { targetGrid }
+          { targetGridZoomed }
         </div>
       </div>
     );

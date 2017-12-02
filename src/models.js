@@ -102,14 +102,16 @@ export class Position {
   }
 
   bearingTo(position) {
-    let dx = position.x - this.x,
-      dy = position.y - this.y,
+    let dx = (position.x + position.error/2) - (this.x + this.error/2),
+      dy = (position.y + position.error/2) - (this.y + this.error/2),
       magnitude = Math.hypot(dx, dy),
       ux = dx / magnitude,
       uy = dy / magnitude,
       rad = Math.atan2(uy, ux),
       deg = rad * R2D
     ;
+
+    if (magnitude === 0) return 0;
 
     // no clue why it's this way, probably because origin is top left?
     if (ux === 0 && uy === 1) return 180;
@@ -148,7 +150,6 @@ export class Position {
     let tl = this.topLeft(),
       br = this.bottomRight()
     ;
-
     if (tl.x < p.x && tl.y < p.y && br.x > p.x && br.y > p.y) return true;
     return false;
   }
@@ -163,6 +164,8 @@ export class Position {
   //    +----+
   collides(p) {
     return (
+      (this.x === p.x && this.y === p.y) ||
+
       this.contains(p.topLeft()) ||
       this.contains(p.topRight()) ||
       this.contains(p.bottomRight()) ||
@@ -196,7 +199,8 @@ export class Calculation {
       bearingRange = [
         bearingWCP[0][0].bearingTo(bearingWCP[0][1]),
         bearingWCP[1][0].bearingTo(bearingWCP[1][1])
-      ]
+      ],
+      isCollision = mortarPosition.collides(targetPosition)
     ;
 
     elevationRange = (
@@ -210,12 +214,14 @@ export class Calculation {
 
     return new Calculation(
       distance, elevation, bearing,
-      distanceRange, elevationRange, bearingRange
+      distanceRange, elevationRange, bearingRange,
+      isCollision
     );
   }
 
   constructor(distance, elevation, bearing,
-              distanceRange, elevationRange, bearingRange) {
+              distanceRange, elevationRange, bearingRange,
+              isCollision) {
     this.distance = distance;
     this.elevation = elevation;
     this.bearing = bearing;
@@ -223,5 +229,7 @@ export class Calculation {
     this.distanceRange = distanceRange;
     this.elevationRange = elevationRange;
     this.bearingRange = bearingRange;
+
+    this.isCollision = !!isCollision;
   }
 }

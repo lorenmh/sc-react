@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { GridView } from './GridView';
-import CalculationView from '../components/CalculationView';
-
-import { Calculation } from '../models';
 
 import {
-  MORTAR_ID,
-  TARGET_ID
 } from '../const';
 
 class Output extends Component {
@@ -27,8 +21,6 @@ class Output extends Component {
     let calculationView = calculation ?
       <CalculationView calculation={calculation} /> : null
     ;
-
-    console.log(calculation);
 
     return (
       <div>

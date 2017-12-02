@@ -13,6 +13,8 @@ export const KEY_HEIGHT = 11;
 export const SVG_WIDTH = GRID_SIZE;
 export const SVG_HEIGHT = GRID_SIZE + KEY_PADDING + KEY_HEIGHT;
 export const EPSILON = 0.001;
+export const TITLE_SIZE = 12;
+export const GRID_VIEW_HEIGHT = 100;
 
 export const MORTAR_ID = 'mortar';
 export const TARGET_ID = 'target';

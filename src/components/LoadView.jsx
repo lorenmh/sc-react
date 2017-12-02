@@ -32,7 +32,7 @@ export default class LoadView extends Component {
         <tbody>
           <tr>
             <th>position</th>
-            <th>name</th>
+            <th>mnemonic</th>
             <th>cntrl</th>
           </tr>
           {savedItemComponents}

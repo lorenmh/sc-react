@@ -38,12 +38,22 @@ class PositionInput extends Component {
       <div className="position-input-wrap">
         <input
           className={`position-input position-input-${subClass}`}
-          ref={(e) => {this.inputEl = e; isFocus && e && e.focus();}}
+          ref={(e) => {this.inputEl = e; /*isFocus && e && e.focus();*/}}
           placeholder={placeholder}
           onInput={inputEventHandler}
         />
-        <button onClick={clearHandler}>clear</button>
-        <button onClick={clearHandler}>save</button>
+        <button
+          className="position-clear"
+          onClick={clearHandler}
+        >
+          Clear
+        </button>
+        <button
+          className="position-save"
+          onClick={clearHandler}
+        >
+          Save
+        </button>
       </div>
     );
   }
