@@ -376,6 +376,7 @@ svg {
 }
 
 .correction-inputs, .correction-buttons {
+  flex-flow: wrap;
   display: flex;
   justify-content: center;
 }
@@ -394,20 +395,12 @@ svg {
   background-color: #ffa392;
 }
 
-.correction-buttons>button:first-child {
-  margin-left: 0;
-}
-
 .correction-buttons>button {
-  margin-left: 10px;
-}
-
-.correction-input-wrap:first-child {
-  margin-left: 0;
+  margin: 5px;
 }
 
 .correction-input-wrap {
-  margin-left:10px;
+  margin: 5px;
 }
 
 .correction-input {
