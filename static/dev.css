@@ -370,12 +370,62 @@ svg {
   color: darkgrey;
 }
 
-if (w>1000) {s = 90;}
-else if (w>800) { s=80;}
-else if (w>600) { s=70;}
-else if (w>400) { s=60;}
-else if (w>300) {s=50;}
-else {s=40;}
+.correction-wrap {
+  padding: 10px;
+  background-color: #f7f7f7;
+}
+
+.correction-inputs, .correction-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.correction-buttons button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 2px;
+}
+
+.correction-mortar {
+  background-color: #82d6e1;
+}
+
+.correction-target {
+  background-color: #ffa392;
+}
+
+.correction-buttons>button:first-child {
+  margin-left: 0;
+}
+
+.correction-buttons>button {
+  margin-left: 10px;
+}
+
+.correction-input-wrap:first-child {
+  margin-left: 0;
+}
+
+.correction-input-wrap {
+  margin-left:10px;
+}
+
+.correction-input {
+  width: 60px;
+  text-align: right;
+  padding: 4px 5px;
+}
+
+.correction-buttons {
+  padding-top: 16px;
+}
+
+.correction-title {
+    margin: 0 0 8px 0;
+    color: #848484;
+    text-align: center;
+}
+
 @media (min-width: 1000px) {
   .grid-wrap {
     width: 102px;
@@ -557,3 +607,4 @@ else {s=40;}
     height: 80px;
   }
 }
+

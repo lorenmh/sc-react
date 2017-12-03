@@ -7,7 +7,7 @@ module.exports = {
   entry: CWD + '/src/index.jsx',
   output: {
     path: CWD + '/dist',
-    filename: 'app.js',
+    filename: 'dist.min.js',
   },
   plugins: [new LiveReloadPlugin({})],
   devtool: 'inline-source-map',

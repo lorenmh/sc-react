@@ -13,6 +13,34 @@ export const REQUEST_EVENTS = 'REQUEST_EVENTS';
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
 export const HTTP_ERROR = 'HTTP_ERROR';
 
+export const CLEAR_CORRECTION = 'CLEAR_CORRECTION';
+export const UNSET_CLEAR_CORRECTION = 'UNSET_CLEAR_CORRECTION';
+export const SET_CORRECTION = 'SET_CORRECTION';
+export const APPLY_CORRECTION = 'APPLY_CORRECTION';
+
+export const clearCorrection = {
+  type: CLEAR_CORRECTION
+};
+
+export const unsetClearCorrection = {
+  type: UNSET_CLEAR_CORRECTION
+};
+
+export function applyCorrection(positionId) {
+  return {
+    type: APPLY_CORRECTION,
+    positionId
+  };
+}
+
+export function setCorrection(id, displacement) {
+  return {
+    type: SET_CORRECTION,
+    id,
+    displacement
+  };
+}
+
 export function deleteSavedPosition(index) {
   return {
     type: DELETE_SAVED_POSITION,

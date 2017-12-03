@@ -47,6 +47,15 @@ export function initialStateFromStorage() {
         target: null
       }
     },
+    corrections: {
+      displacement: {
+        N: 0,
+        S: 0,
+        E: 0,
+        W: 0
+      },
+      clearCorrections: false
+    },
     useKeyboard,
     savedPositions
   };
@@ -60,7 +69,7 @@ export default function configureStore() {
     initialStateFromStorage(),
     applyMiddleware(
       thunkMiddleware,
-      //loggerMiddleware,
+ //     loggerMiddleware,
     ),
   );
 }
