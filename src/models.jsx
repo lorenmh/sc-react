@@ -312,9 +312,12 @@ export class Position {
 window.p = Position;
 
 export class Calculation {
-  static fromPositions(mortarPosition, targetPosition) {
+  static fromPositions(mortarPosition, targetPosition, delta) {
+    delta = delta !== undefined ? delta : 0;
+
     let distance = mortarPosition.distanceTo(targetPosition),
-      elevation = interpolateElevation(distance),
+      correctedDistance = distance + delta,
+      elevation = interpolateElevation(correctedDistance),
       bearing = mortarPosition.bearingTo(targetPosition),
 
       distanceWCP = distanceWorstCasePositions(mortarPosition, targetPosition),
@@ -325,8 +328,8 @@ export class Calculation {
         distanceWCP[1][0].distanceTo(distanceWCP[1][1])
       ],
       elevationRange = [
-        interpolateElevation(distanceRange[1]),
-        interpolateElevation(distanceRange[0])
+        interpolateElevation(distanceRange[1] + delta),
+        interpolateElevation(distanceRange[0] + delta)
       ],
       bearingRange = [
         bearingWCP[0][0].bearingTo(bearingWCP[0][1]),

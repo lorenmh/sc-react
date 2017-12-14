@@ -45,7 +45,7 @@ class CorrectionInputs extends Component {
 
     if (!hasMortar && !hasTarget) return null;
 
-    const { n, s, e, w } = values;
+    const { add, sub, n, s, e, w } = values;
 
     const isLocked = true,
       lockHandler = ev => ev
@@ -66,6 +66,18 @@ class CorrectionInputs extends Component {
     return (
       <div className="correction-wrap">
         <h3 className="correction-title">Correction</h3>
+        <div className="add-sub">
+          <CorrectionInput
+            directionString="Add"
+            value={add}
+            inputHandler={inputHandler('add')}
+          />
+          <CorrectionInput
+            directionString="Sub"
+            value={sub}
+            inputHandler={inputHandler('sub')}
+          />
+        </div>
         <div className="correction-inputs">
           <CorrectionInput
             directionString="N"

@@ -10,5 +10,8 @@ clean:
 install:
 	npm install
 
+prod:
+	npm run compile && make compress
+
 compress:
 	uglifyjs -c -m -b beautify=false -b ascii_only -o dist/dist.min.js -- dist/dist.js

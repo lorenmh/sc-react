@@ -85,7 +85,7 @@ class LoadView extends Component {
         <tbody>
           <tr>
             <th>Position</th>
-            <th>Mnemonic</th>
+            <th>Name</th>
             <th>Load</th>
             <th></th>
           </tr>

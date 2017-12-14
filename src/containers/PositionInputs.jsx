@@ -5,6 +5,8 @@ import { MORTAR_ID, TARGET_ID } from '../const';
 
 import {
   updatePositionValue,
+  setPendingSave,
+  updateSaveName,
   savePosition
 } from '../actions';
 
@@ -17,7 +19,9 @@ class PositionInput extends Component {
       isValid,
       clearHandler,
       inputHandler,
-      saveHandler
+      saveHandler,
+      keyUpHandler,
+      isPendingSave
     } = this.props;
 
     let mult = 0;
@@ -31,30 +35,37 @@ class PositionInput extends Component {
       style = {paddingRight: 50*mult};
     }
 
+    const refocus = fn => (e) => {
+      fn(e);
+      this.el && this.el.focus();
+    };
+
     return (
       <div className="position-input-wrap" style={style}>
         <input
           className={`position-input position-input-${subClass}`}
+          ref={el => this.el = el}
           value={value}
-          placeholder={placeholder}
+          placeholder={isPendingSave ? 'Enter Name' : placeholder}
+          onKeyUp={keyUpHandler}
           onInput={inputHandler}
         />
-        {(() => isValid ?
+        {(() => isValid || isPendingSave ?
           <button
             className="position-save"
-            onClick={saveHandler}
+            onClick={refocus(saveHandler)}
           >
-            Save
+            {(() => isPendingSave ? '✓' : 'Save')()}
           </button>
           :
           null
         )()}
-        {(() => value.length ?
+        {(() => value.length || isPendingSave ?
           <button
             className="position-clear"
-            onClick={clearHandler}
+            onClick={refocus(clearHandler)}
           >
-            Clear
+            {(() => isPendingSave ? 'Cancel' : 'Clear')()}
           </button>
           :
           null
@@ -68,41 +79,92 @@ class PositionInputs extends Component {
   render() {
     const {
       positions,
+      pendingSave,
       values,
       dispatch
     } = this.props;
 
     const inputHandler = positionId => (e) => {
-      dispatch(updatePositionValue(positionId, e.target.value));
+      if (!!pendingSave[positionId]) {
+        dispatch(updateSaveName(positionId, e.target.value));
+      } else {
+        dispatch(updatePositionValue(positionId, e.target.value));
+      }
     };
 
     const clearHandler = positionId => (e) => {
-      dispatch(updatePositionValue(positionId, ''));
+      if (!!pendingSave[positionId]) {
+        dispatch(setPendingSave(positionId, false));
+      } else {
+        dispatch(updatePositionValue(positionId, ''));
+      }
     };
 
     const saveHandler = positionId => (e) => {
-      dispatch(savePosition(positionId));
+      if (!!pendingSave[positionId]) {
+        dispatch(savePosition(positionId));
+      } else {
+        dispatch(setPendingSave(positionId, true));
+      }
     };
+
+    const keyUpHandler = positionId => (e) => {
+      const isEscape = e.keyCode === 27,
+        isEnter = e.keyCode === 13
+      ;
+
+      if (!isEscape && !isEnter) return;
+
+      e.preventDefault();
+
+      if (pendingSave[positionId]) {
+        if (isEscape) {
+          dispatch(setPendingSave(positionId, false));
+        } else {
+          dispatch(savePosition(positionId));
+        }
+      } else {
+        if (isEscape) {
+          dispatch(updatePositionValue(positionId, ''));
+        } else {
+          if (positions[positionId]) {
+            dispatch(setPendingSave(positionId, true));
+          }
+        }
+      }
+    };
+
+    const mortarValue = pendingSave[MORTAR_ID] ?
+      values[`${MORTAR_ID}SaveName`] : values[MORTAR_ID]
+    ;
+
+    const targetValue = pendingSave[TARGET_ID] ?
+      values[`${TARGET_ID}SaveName`] : values[TARGET_ID]
+    ;
 
     return (
       <div className="position-inputs">
         <PositionInput
           subClass="mortar"
-          value={values[MORTAR_ID]}
+          value={mortarValue}
           isValid={!!positions[MORTAR_ID]}
+          isPendingSave={pendingSave[MORTAR_ID]}
           placeholder="🚀 Mortar: (ex: A11 11)"
           clearHandler={clearHandler(MORTAR_ID)}
           inputHandler={inputHandler(MORTAR_ID)}
           saveHandler={saveHandler(MORTAR_ID)}
+          keyUpHandler={keyUpHandler(MORTAR_ID)}
         />
         <PositionInput
           subClass="target"
-          value={values[TARGET_ID]}
+          value={targetValue}
           isValid={!!positions[TARGET_ID]}
+          isPendingSave={pendingSave[TARGET_ID]}
           placeholder="🎯 Target: (ex: B11 11)"
           clearHandler={clearHandler(TARGET_ID)}
           inputHandler={inputHandler(TARGET_ID)}
           saveHandler={saveHandler(TARGET_ID)}
+          keyUpHandler={keyUpHandler(MORTAR_ID)}
           isTarget
         />
       </div>

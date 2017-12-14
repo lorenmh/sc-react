@@ -9,7 +9,8 @@ import {
   SAVE_POSITION,
   DELETE_SAVED_POSITION,
   APPLY_HOVER_POSITION,
-
+  UPDATE_SAVE_NAME,
+  SET_PENDING_SAVE,
   UPDATE_CORRECTION_VALUES,
   APPLY_CORRECTION
 } from './actions';
@@ -31,6 +32,28 @@ import {
 // }
 const rootReducer = (state = {}, action) => {
   switch (action.type) {
+
+    case SET_PENDING_SAVE:
+      return {
+        ...state,
+        pendingSave: {
+          ...state.pendingSave,
+          [action.positionId]: action.pending
+        },
+        values: {
+          ...state.values,
+          [`${action.positionId}SaveName`]: ''
+        }
+      };
+
+    case UPDATE_SAVE_NAME:
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          [`${action.positionId}SaveName`]: action.saveName
+        }
+      };
 
     case UPDATE_POSITION_VALUE:
       return {
@@ -87,11 +110,20 @@ const rootReducer = (state = {}, action) => {
       };
 
     case SAVE_POSITION:
+      let saveName = state.values[`${action.positionId}SaveName`];
       return {
         ...state,
+        pendingSave: {
+          ...state.pendingSave,
+          [action.positionId]: false
+        },
+        values: {
+          ...state.values,
+          [`${action.positionId}SaveName`]: '',
+        },
         saved: [
           {
-            name: action.name !== undefined ? action.name : mnemonic(),
+            name: saveName !== '' ? saveName : mnemonic(),
             position: state.positions[action.positionId]
           },
           ...state.saved

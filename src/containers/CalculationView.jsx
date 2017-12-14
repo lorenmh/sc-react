@@ -23,7 +23,7 @@ function rangeString(calculation, range) {
 
 class CalculationView extends Component {
   render() {
-    const { positions } = this.props;
+    const { values, positions } = this.props;
 
     const mortarPosition = positions[MORTAR_ID];
     const targetPosition = positions[TARGET_ID];
@@ -41,7 +41,10 @@ class CalculationView extends Component {
       );
     }
 
-    let calculation = Calculation.fromPositions(mortarPosition, targetPosition),
+    let delta = (+values.add) - (+values.sub),
+      calculation = Calculation.fromPositions(
+        mortarPosition, targetPosition, delta
+      ),
       elevation
     ;
 

@@ -19,17 +19,21 @@ export default function configureStore() {
         target: null
       },
 
-      pending: {
-        mortarSave: false,
-        targetSave: false
+      pendingSave: {
+        mortar: false,
+        target: false
       },
 
       // input / form values
       values: {
         mortar: '',
         target: '',
-        mortarSaveName: '',
-        targetSaveName: '',
+        save: {
+          mortar: '',
+          target: ''
+        },
+        add: '',
+        sub: '',
         n: '',
         s: '',
         e: '',

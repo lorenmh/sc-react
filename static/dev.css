@@ -375,7 +375,7 @@ svg {
   background-color: #f7f7f7;
 }
 
-.correction-inputs, .correction-buttons {
+.add-sub, .correction-inputs, .correction-buttons {
   flex-flow: wrap;
   display: flex;
   justify-content: center;
