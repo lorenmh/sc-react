@@ -39,22 +39,22 @@ class PositionInput extends Component {
           placeholder={placeholder}
           onInput={inputHandler}
         />
-        {(() => value.length ?
-          <button
-            className="position-clear"
-            onClick={clearHandler}
-          >
-            Clear
-          </button>
-          :
-          null
-        )()}
         {(() => isValid ?
           <button
             className="position-save"
             onClick={saveHandler}
           >
             Save
+          </button>
+          :
+          null
+        )()}
+        {(() => value.length ?
+          <button
+            className="position-clear"
+            onClick={clearHandler}
+          >
+            Clear
           </button>
           :
           null

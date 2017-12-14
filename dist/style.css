@@ -318,6 +318,7 @@ svg {
 }
 
 .saved-items {
+  width: 100%;
   margin: auto;
   margin-top: 10px;
   background-color: #f7f7f7;
@@ -554,14 +555,10 @@ svg {
 @media (max-width: 500px) {
   .position-input {
      width: 100%;
-     border-bottom: none;
-     border-right: 1px solid #909090;
-     border-bottom-left-radius: 0;
-     border-top-right-radius: 3px;
   }
   
   .position-input-wrap {
-    padding-right: 0;
+    padding-right: 0 !important;
   }
 
   .position-clear, .position-save {
@@ -572,13 +569,13 @@ svg {
   }
 
   .position-clear {
-    border-bottom-left-radius: 3px;
-    border-left: 1px solid #909090;
+    float: right;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 0;
   }
 
   .position-save {
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
   }
 }
 

@@ -93,9 +93,9 @@ export class Position {
 
     prec = prec === undefined ? 5 : Math.max(0, Math.min(5, prec));
 
-    const error = prec === 0 ? LARGE_GRID : PRECOMPUTE[prec - 1][1],
-      x = Math.floor($x / error),
-      y = Math.floor($y / error),
+    const error = prec !== 5 ? PRECOMPUTE[prec][0] : PRECOMPUTE[4][1],
+      x = Math.max(0, $x - $x % error),
+      y = Math.max(0, $y - $y % error),
       kpa = (
         PRECOMPUTE
           .slice(0, prec)
@@ -248,10 +248,10 @@ export class Position {
     );
   }
 
-  translate(vector) {
+  translate(vector, precision) {
     const [dx, dy] = vector;
 
-    return Position.fromExactPosition(this.$x + dx, this.$y + dy);
+    return Position.fromExactPosition(this.$x + dx, this.$y + dy, precision);
   }
 
   toElement() {

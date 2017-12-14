@@ -1,5 +1,6 @@
 export const UPDATE_POSITION_VALUE = 'UPDATE_POSITION_VALUE';
 export const UPDATE_HOVER = 'UPDATE_HOVER';
+export const APPLY_HOVER_POSITION = 'APPLY_HOVER_POSITION';
 export const LOAD_POSITION = 'LOAD_POSITION';
 export const SAVE_POSITION = 'SAVE_POSITION';
 export const DELETE_SAVED_POSITION = 'DELETE_SAVED_POSITION';
@@ -46,6 +47,14 @@ export function updatePositionValue(positionId, positionValue) {
 export function updateHover(positionId, position) {
   return {
     type: UPDATE_HOVER,
+    positionId,
+    position
+  };
+}
+
+export function applyHoverPosition(positionId, position) {
+  return {
+    type: APPLY_HOVER_POSITION,
     positionId,
     position
   };

@@ -8,6 +8,7 @@ import {
   LOAD_POSITION,
   SAVE_POSITION,
   DELETE_SAVED_POSITION,
+  APPLY_HOVER_POSITION,
 
   UPDATE_CORRECTION_VALUES,
   APPLY_CORRECTION
@@ -30,47 +31,82 @@ import {
 // }
 const rootReducer = (state = {}, action) => {
   switch (action.type) {
+
     case UPDATE_POSITION_VALUE:
-      return Object.assign({}, state, {
-        positions: Object.assign({}, state.positions, {
+      return {
+        ...state,
+        positions: {
+          ...state.positions,
           [action.positionId]: Position.fromString(action.positionValue)
-        }),
-        values: Object.assign({}, state.values, {
+        },
+        values: {
+          ...state.values,
           [action.positionId]: action.positionValue
-        })
-      });
+        }
+      };
+
     case UPDATE_HOVER:
-      return Object.assign({}, state, {
-        positions: Object.assign({}, state.positions, {
+      return {
+        ...state,
+        hover: {
+          ...state.hover,
           [action.positionId]: action.position
-        }),
-      });
+        },
+      };
+
+    case APPLY_HOVER_POSITION:
+      return {
+        ...state,
+        positions: {
+          ...state.positions,
+          [action.positionId]: action.position
+        },
+        values: {
+          ...state.values,
+          [action.positionId]: state.hover[action.positionId].toStringShort()
+        }
+      };
+
     case LOAD_POSITION:
-      return Object.assign({}, state, {
-        positions: Object.assign({}, state.positions, {
+      return {
+        ...state,
+        positions: {
+          ...state.positions,
           [action.positionId]: action.position
-        }),
-        values: Object.assign({}, state.values, {
+        },
+        values: {
+          ...state.values,
           [action.positionId]: action.position.toStringShort()
-        })
-      });
+        }
+      };
+
     case DELETE_SAVED_POSITION:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         saved: state.saved.filter((_,i) => i !== action.index)
-      });
+      };
+
     case SAVE_POSITION:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         saved: [
           {
             name: action.name !== undefined ? action.name : mnemonic(),
             position: state.positions[action.positionId]
           },
-          ...state.saved]
-      });
+          ...state.saved
+        ]
+      };
+
     case UPDATE_CORRECTION_VALUES:
-      return Object.assign({}, state, {
-        values: Object.assign({}, state.values, action.values)
-      });
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          ...action.values
+        }
+      };
+
     case APPLY_CORRECTION:
       let { n, s, e, w } = state.values;
 
@@ -83,15 +119,19 @@ const rootReducer = (state = {}, action) => {
         n = s = e = w = '';
       }
 
-      return Object.assign({}, state, {
-        positions: Object.assign({}, state.positions, {
+      return {
+        ...state,
+        positions: {
+          ...state.positions,
           [action.positionId]: position
-        }),
-        values: Object.assign({}, state.values, {
+        },
+        values: {
+          ...state.values,
           [action.positionId]: position.toStringShort(),
           n, s, e, w
-        })
-      });
+        }
+      };
+
     default:
       return state;
   }
