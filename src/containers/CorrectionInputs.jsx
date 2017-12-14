@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { MORTAR_ID, TARGET_ID } from '../const';
 
 import {
-  updateCorrectionStrings,
+  updateCorrectionValues,
   applyCorrection
 } from '../actions';
 
@@ -38,25 +38,25 @@ class CorrectionInput extends Component {
 
 class CorrectionInputs extends Component {
   render() {
-    const { dispatch, positions, strings } = this.props,
+    const { dispatch, positions, values } = this.props,
       hasMortar = !!positions[MORTAR_ID],
       hasTarget = !!positions[TARGET_ID]
     ;
 
     if (!hasMortar && !hasTarget) return null;
 
-    const { n, s, e, w } = strings;
+    const { n, s, e, w } = values;
 
     const isLocked = false,
       lockHandler = ev => ev
     ;
 
     const clearHandler = () => {
-      dispatch(updateCorrectionStrings({n: '', s: '', e: '', w: ''}));
+      dispatch(updateCorrectionValues({n: '', s: '', e: '', w: ''}));
     };
 
     const inputHandler = direction => (ev) => {
-      dispatch(updateCorrectionStrings({[direction]: (+ev.target.value)}));
+      dispatch(updateCorrectionValues({[direction]: (+ev.target.value)}));
     };
 
     const applyHandler = positionId => () => {

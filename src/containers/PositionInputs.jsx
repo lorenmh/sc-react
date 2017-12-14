@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { MORTAR_ID, TARGET_ID } from '../const';
 
 import {
-  updatePositionString,
+  updatePositionValue,
   savePosition
 } from '../actions';
 
@@ -47,16 +47,16 @@ class PositionInput extends Component {
 class PositionInputs extends Component {
   render() {
     const {
-      strings,
+      values,
       dispatch
     } = this.props;
 
     const inputHandler = positionId => (e) => {
-      dispatch(updatePositionString(positionId, e.target.value));
+      dispatch(updatePositionValue(positionId, e.target.value));
     };
 
     const clearHandler = positionId => (e) => {
-      dispatch(updatePositionString(positionId, ''));
+      dispatch(updatePositionValue(positionId, ''));
     };
 
     const saveHandler = positionId => (e) => {
@@ -67,7 +67,7 @@ class PositionInputs extends Component {
       <div className="position-inputs">
         <PositionInput
           subClass="mortar"
-          value={strings[MORTAR_ID]}
+          value={values[MORTAR_ID]}
           placeholder="Mortar: (ex: A11 11)"
           clearHandler={clearHandler(MORTAR_ID)}
           inputHandler={inputHandler(MORTAR_ID)}
@@ -75,7 +75,7 @@ class PositionInputs extends Component {
         />
         <PositionInput
           subClass="target"
-          value={strings[TARGET_ID]}
+          value={values[TARGET_ID]}
           placeholder="Target: (ex: B11 11)"
           clearHandler={clearHandler(TARGET_ID)}
           inputHandler={inputHandler(TARGET_ID)}

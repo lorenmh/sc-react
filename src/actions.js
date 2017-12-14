@@ -1,9 +1,9 @@
-export const UPDATE_POSITION_STRING = 'UPDATE_POSITION_STRING';
+export const UPDATE_POSITION_VALUE = 'UPDATE_POSITION_VALUE';
 export const LOAD_POSITION = 'LOAD_POSITION';
 export const SAVE_POSITION = 'SAVE_POSITION';
 export const DELETE_SAVED_POSITION = 'DELETE_SAVED_POSITION';
 
-export const UPDATE_CORRECTION_STRINGS = 'UPDATE_CORRECTION_STRINGS';
+export const UPDATE_CORRECTION_VALUES = 'UPDATE_CORRECTION_VALUES';
 export const APPLY_CORRECTION = 'APPLY_CORRECTION';
 
 export function applyCorrection(positionId) {
@@ -13,10 +13,10 @@ export function applyCorrection(positionId) {
   };
 }
 
-export function updateCorrectionStrings(strings) {
+export function updateCorrectionValues(values) {
   return {
-    type: UPDATE_CORRECTION_STRINGS,
-    strings
+    type: UPDATE_CORRECTION_VALUES,
+    values
   };
 }
 
@@ -34,11 +34,11 @@ export function savePosition(positionId) {
   };
 }
 
-export function updatePositionString(positionId, positionString) {
+export function updatePositionValue(positionId, positionValue) {
   return {
-    type: UPDATE_POSITION_STRING,
+    type: UPDATE_POSITION_VALUE,
     positionId,
-    positionString
+    positionValue
   };
 }
 

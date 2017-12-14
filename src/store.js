@@ -11,13 +11,14 @@ export default function configureStore() {
         mortar: null,
         target: null
       },
-      strings: {
+      values: {
         mortar: '',
         target: '',
         n: '',
         s: '',
         e: '',
-        w: ''
+        w: '',
+        locked: true,
       },
       saved: []
     },

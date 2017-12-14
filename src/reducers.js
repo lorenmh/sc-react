@@ -3,12 +3,12 @@ import { Position } from './models';
 import { mnemonic } from './helpers';
 
 import {
-  UPDATE_POSITION_STRING,
+  UPDATE_POSITION_VALUE,
   LOAD_POSITION,
   SAVE_POSITION,
   DELETE_SAVED_POSITION,
 
-  UPDATE_CORRECTION_STRINGS,
+  UPDATE_CORRECTION_VALUES,
   APPLY_CORRECTION
 } from './actions';
 
@@ -17,7 +17,7 @@ import {
 //     mortar: null,
 //     target: null,
 //   },
-//   strings: {
+//   values: {
 //     mortar: '',
 //     target: ''
 //     n: '',
@@ -29,13 +29,13 @@ import {
 // }
 const rootReducer = (state = {}, action) => {
   switch (action.type) {
-    case UPDATE_POSITION_STRING:
+    case UPDATE_POSITION_VALUE:
       return Object.assign({}, state, {
         positions: Object.assign({}, state.positions, {
-          [action.positionId]: Position.fromString(action.positionString)
+          [action.positionId]: Position.fromString(action.positionValue)
         }),
-        strings: Object.assign({}, state.strings, {
-          [action.positionId]: action.positionString
+        values: Object.assign({}, state.values, {
+          [action.positionId]: action.positionValue
         })
       });
     case LOAD_POSITION:
@@ -43,7 +43,7 @@ const rootReducer = (state = {}, action) => {
         positions: Object.assign({}, state.positions, {
           [action.positionId]: action.position
         }),
-        strings: Object.assign({}, state.strings, {
+        values: Object.assign({}, state.values, {
           [action.positionId]: action.position.toStringShort()
         })
       });
@@ -60,28 +60,27 @@ const rootReducer = (state = {}, action) => {
           },
           ...state.saved]
       });
-    case UPDATE_CORRECTION_STRINGS:
+    case UPDATE_CORRECTION_VALUES:
       return Object.assign({}, state, {
-        strings: Object.assign({}, state.strings, action.strings)
+        values: Object.assign({}, state.values, action.values)
       });
     case APPLY_CORRECTION:
-      let { n, s, e, w } = state.strings;
+      let { n, s, e, w } = state.values;
 
-      const k=[(+e) - (+w), (+s) - (+n)],
-        position = state.positions[action.positionId].translate(
+      const position = state.positions[action.positionId].translate(
           [(+e) - (+w), (+s) - (+n)]
-        )
+         )
       ;
 
-      window.p = state.positions[action.positionId];
-      window.t = k;
+      if (!state.values.locked) {
+        n = s = e = w = '';
+      }
 
-      n = s = e = w = '';
       return Object.assign({}, state, {
         positions: Object.assign({}, state.positions, {
           [action.positionId]: position
         }),
-        strings: Object.assign({}, state.strings, {
+        values: Object.assign({}, state.values, {
           [action.positionId]: position.toStringShort(),
           n, s, e, w
         })
