@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-const a=2;
-
 import { Position, Calculation } from '../models';
 import GridView from './GridView';
 import CalculationView from './CalculationView';
@@ -10,7 +8,6 @@ import PositionInputs from './PositionInputs';
 import CorrectionInputs from './CorrectionInputs';
 import Keypad from './Keypad';
 import Footer from './Footer';
-import Search from './Search';
 
 import LoadView from './LoadView';
 

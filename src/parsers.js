@@ -18,7 +18,6 @@ const KP_MAP = [
 export function parsePositionString(positionString) {
   return positionString.match(POSITION_STRING_RE).slice(1);
 }
-window.p = parsePositionString;
 
 export function parseX(xString) {
   return (parseInt(xString, 36) - 10);
@@ -40,7 +39,6 @@ export function parseKpa(kpString) {
 }
 
 export function kpaDelta(kpa) {
-  console.log(kpa);
   return (
     kpa
       .map(k => KP_MAP[k-1])

@@ -19,13 +19,22 @@ import {
   GRID_VIEW_HEIGHT
 } from '../const';
 
-const epsilonEquals = (a,b) => Math.abs(a-b) < EPSILON;
-const cludgeLt = (a,b) => parseFloat(a.toFixed(4)) < parseFloat(b.toFixed(4));
+import { epsilonEquals, cludgeLt } from '../helpers';
+
 const style = {
   width: GRID_SIZE
 };
 
-
+/* titleTextHtml:
+ *    returns an HTML element with classes for styling. HTML element is used
+ *    because it is a lot easier to work with than SVG text elements;
+ *    centering, styling, translations, etc., are much easier with HTML+CSS
+ *
+ *    params:
+ *      position: a position object
+ *      isSubKey: bool, whether or not this should be a subkey title,
+ *        ex: `A2-3-4` if isSubKey=false, `555` if isSubKey=true
+ */
 function titleTextHtml(position, isSubKey) {
   isSubKey = !!isSubKey;
 
@@ -63,9 +72,12 @@ function titleTextHtml(position, isSubKey) {
       kpa
         .slice(2)
         .map((kp,i) => (
-          <span 
+          <span
             key={kp.toString()+i.toString()+'m'}
-            className="title-text-item title-text-kp-minor">{kp}</span>
+            className="title-text-item title-text-kp-minor"
+          >
+            {kp}
+          </span>
         ))
     );
   }
@@ -79,6 +91,12 @@ function titleTextHtml(position, isSubKey) {
   );
 }
 
+/* keyTextHtml:
+ *    returns an HTML element for the key text (300m, 33m, etc).
+ *    params:
+ *      S: the error-size (the highlighted grid size; 300,100,33,11,3,1)
+ *      GS: the grid-size (300 or 33)
+ */
 function keyTextHtml(S,GS) {
   let styleTop = {
     transform: `translate(0, ${GRID_SIZE}px)`,
@@ -114,6 +132,13 @@ function keyTextHtml(S,GS) {
   );
 }
 
+/* keyLines:
+ *    returns SVG elements for the key at the bottom
+ *
+ *    params:
+ *      S: the error size (the colored-in grid)
+ *      isZoomed: whether or not this is the sub-key zoomed-in SVG box
+ */
 function keyLines(S, isZoomed) {
   let secondaryKeyLine;
 
@@ -223,10 +248,6 @@ class GridZoomed extends Component {
         />
       </g>
     );
-
-    let style = {
-      width: GRID_SIZE
-    };
 
     return (
       <div className="grid-wrap">
@@ -361,7 +382,7 @@ class Grid extends Component {
         {(() => titleTextHtml(position))()}
         <div className="grid" style={style}>
           <div className="grid-render">
-            {(() => keyTextHtml(S,GS))()}
+            {(() => keyTextHtml(Math.max(S,1/9),GS))()}
             <svg width={SVG_WIDTH} height={SVG_HEIGHT}>
               <g transform={`translate(${STROKE}, ${STROKE})`}>
                 <rect
@@ -374,7 +395,7 @@ class Grid extends Component {
                 { body }
               </g>
               <g transform={`translate(${STROKE}, ${GRID_SIZE + KEY_PADDING})`}>
-                {(() => keyLines(S))()}
+                {(() => keyLines(Math.max(S,1/9)))()}
               </g>
             </svg>
           </div>

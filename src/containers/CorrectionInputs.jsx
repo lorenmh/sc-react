@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { MORTAR_ID, TARGET_ID } from '../const';
 import {
@@ -56,6 +57,7 @@ class CorrectionInputs extends Component {
     if (!hasMortar && !hasTarget) return null;
 
     let isClearCorrection = corrections.clearCorrections;
+    let isLocked = !!corrections.isLocked;
 
     let clearer = (function() {
       let doneOnce = false;
@@ -78,6 +80,10 @@ class CorrectionInputs extends Component {
 
     let clearHandler = (e) => {
       dispatch(clearCorrection);
+    };
+
+    let lockHandler = (e) => {
+      dispatch('toggleLockStuff');
     };
 
     return (
@@ -126,6 +132,19 @@ class CorrectionInputs extends Component {
               Apply to Target
             </button>
           ) : null)()}
+          <button
+            className="correction-lock"
+            onClick={lockHandler}
+          >
+            {(() => isLocked ? 'Unlock ' : 'Lock ')()}
+            {(() => {
+              return isLocked ?
+                <span className="icon-unlock" />
+                :
+                <span className="icon-lock" />
+              ;
+            })()}
+          </button>
           <button
             className="correction-clear"
             onClick={clearHandler}

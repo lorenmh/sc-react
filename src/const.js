@@ -18,6 +18,7 @@ export const GRID_SIZE = SIZE + 2*STROKE;
 export const CIRCLE_RADIUS = SIZE/50;
 export const LARGE_GRID = 300;
 export const SMALL_GRID = 300/9;
+export const MIN_ERROR = 300/Math.pow(3,5);
 export const KEY_PADDING = 4;
 export const TEXT_SIZE = 8;
 export const KEY_HEIGHT = 11;
@@ -26,6 +27,17 @@ export const SVG_HEIGHT = GRID_SIZE + KEY_PADDING + KEY_HEIGHT;
 export const EPSILON = 0.001;
 export const TITLE_SIZE = 12;
 export const GRID_VIEW_HEIGHT = SIZE+40;
+
+export const PRECOMPUTE = (
+  [...Array(5).keys()]
+    .map(i => [300 / Math.pow(3, i), 300 / Math.pow(3, i+1)])
+);
+
+export const KPM = [
+  [7,8,9],
+  [4,5,6],
+  [1,2,3]
+];
 
 export const MORTAR_ID = 'mortar';
 export const TARGET_ID = 'target';

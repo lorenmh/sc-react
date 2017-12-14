@@ -29,43 +29,43 @@ function updatePositionLoad(positionId, position) {
   return obj;
 }
 
-function fdiv(a,b) { return Math.floor(a/b); }
-
-const kpm = [
-  [7,8,9],
-  [4,5,6],
-  [1,2,3]
-];
-
-// yeah I'm lazy
-function posToString(pos) {
-  let x = fdiv(pos[0],300),
-    y = fdiv(pos[1],300),
-    k1x = fdiv(pos[0]%300,100),
-    k1y = fdiv(pos[1]%300,100),
-    k2x = fdiv(pos[0]%100,100/3),
-    k2y = fdiv(pos[1]%100,100/3),
-    k3x = fdiv(pos[0]%(100/3),100/9),
-    k3y = fdiv(pos[1]%(100/3),100/9),
-    k4x = fdiv(pos[0]%(100/9),100/27),
-    k4y = fdiv(pos[1]%(100/9),100/27),
-    k5x = fdiv(pos[0]%(100/27),100/81),
-    k5y = fdiv(pos[1]%(100/27),100/81)
-  ;
-
-  let xstr = String.fromCharCode(65+x),
-    ystr = (y+1).toString(),
-    k1s = (kpm[k1y][k1x]).toString(),
-    k2s = (kpm[k2y][k2x]).toString(),
-    k3s = (kpm[k3y][k3x]).toString(),
-    k4s = (kpm[k4y][k4x]).toString(),
-    k5s = (kpm[k5y][k5x]).toString()
-  ;
-
-  ystr = y >= 9 ? ystr + ' ' : ystr;
-
-  return xstr+ystr+k1s+k2s+k3s+k4s+k5s;
-}
+// function fdiv(a,b) { return Math.floor(a/b); }
+// 
+// const kpm = [
+//   [7,8,9],
+//   [4,5,6],
+//   [1,2,3]
+// ];
+// 
+// // yeah I'm lazy
+// function posToString(pos) {
+//   let x = fdiv(pos[0],300),
+//     y = fdiv(pos[1],300),
+//     k1x = fdiv(pos[0]%300,100),
+//     k1y = fdiv(pos[1]%300,100),
+//     k2x = fdiv(pos[0]%100,100/3),
+//     k2y = fdiv(pos[1]%100,100/3),
+//     k3x = fdiv(pos[0]%(100/3),100/9),
+//     k3y = fdiv(pos[1]%(100/3),100/9),
+//     k4x = fdiv(pos[0]%(100/9),100/27),
+//     k4y = fdiv(pos[1]%(100/9),100/27),
+//     k5x = fdiv(pos[0]%(100/27),100/81),
+//     k5y = fdiv(pos[1]%(100/27),100/81)
+//   ;
+// 
+//   let xstr = String.fromCharCode(65+x),
+//     ystr = (y+1).toString(),
+//     k1s = (kpm[k1y][k1x]).toString(),
+//     k2s = (kpm[k2y][k2x]).toString(),
+//     k3s = (kpm[k3y][k3x]).toString(),
+//     k4s = (kpm[k4y][k4x]).toString(),
+//     k5s = (kpm[k5y][k5x]).toString()
+//   ;
+// 
+//   ystr = y >= 9 ? ystr + ' ' : ystr;
+// 
+//   return xstr+ystr+k1s+k2s+k3s+k4s+k5s;
+// }
 
 function applyPositionUpdate(state, action) {
   let position = state.positions[action.positionId]
@@ -74,22 +74,18 @@ function applyPositionUpdate(state, action) {
   if (!position) return null;
 
   let disp = state.corrections.displacement,
-    vec = [disp.E-disp.W, disp.S-disp.N],
-    // current vec
-    cvec = [position.x + position.error/2, position.y + position.error/2],
-    nvec = [Math.max(cvec[0] + vec[0],0), Math.max(cvec[1] + vec[1],0)],
-    positionString = posToString(nvec),
-    pos
+    vec = [disp.E - disp.W, disp.S - disp.N],
+    magnitude = Math.hypot(vec[0], vec[1])
   ;
 
-  try {
-    pos = Position.fromString(positionString);
-  } catch (e) { return; }
+  if (!magnitude) return null;
+
+  let newPosition = position.translate(vec);
 
   let posObj = {};
-  posObj[action.positionId] = pos;
+  posObj[action.positionId] = newPosition;
   posObj.newPositions = {};
-  posObj.newPositions[action.positionId] = pos;
+  posObj.newPositions[action.positionId] = newPosition;
 
   return Object.assign({}, state, {
     positions: Object.assign({}, state.positions, posObj),

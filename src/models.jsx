@@ -5,7 +5,10 @@ import {
   TOO_CLOSE,
   TOO_FAR,
   MIN_ELEVATION,
-  MAX_ELEVATION
+  MAX_ELEVATION,
+  MIN_ERROR,
+  PRECOMPUTE,
+  KPM
 } from './const';
 
 import { prettyXString, prettyYString, prettyKpsString } from './prettifiers';
@@ -24,6 +27,8 @@ import {
   distanceWorstCasePositions,
   bearingWorstCasePositions
 } from './calculator';
+
+import { epsilonEquals } from './helpers';
 
 const R2D = 180/Math.PI
 ;
@@ -52,27 +57,33 @@ export class Position {
       error = kpaToError(kpa) * LARGE_GRID
     ;
 
-    return new Position(x, y, error, kpa, gridX, gridY);
+    return new Position(x, y, error, kpa);
   }
 
-  // x = absolute X position in m (top-left)
-  // y = absolute Y position in m (top-left)
-  // kps = array of integer kps, max-len == 5
-  constructor(x, y, error, kpa, gridX, gridY) {
+  constructor(x, y, error, kpa) {
     this.x = x;
     this.y = y;
     this.error = error;
     this.kpa = kpa;
-    this.gridX = gridX;
-    this.gridY = gridY;
+
+    this.$x = x + error/2;
+    this.$y = y + error/2;
+  }
+
+  gridX() {
+    return Math.floor(this.x / LARGE_GRID);
+  }
+
+  gridY() {
+    return Math.floor(this.y / LARGE_GRID);
   }
 
   xString() {
-    return String.fromCharCode(65 + this.gridX);
+    return String.fromCharCode(65 + this.gridX());
   }
 
   yString() {
-    return (this.gridY + 1).toString();
+    return (this.gridY() + 1).toString();
   }
 
   kpaString() {
@@ -91,7 +102,7 @@ export class Position {
   }
 
   toStringShort() {
-    let space = this.gridY >= 9 ? ' ' : '';
+    let space = this.gridY() >= 9 ? ' ' : '';
     return this.xString() + this.yString() + space + this.kpa.join('');
   }
 
@@ -112,8 +123,8 @@ export class Position {
   }
 
   bearingTo(position) {
-    let dx = (position.x + position.error/2) - (this.x + this.error/2),
-      dy = (position.y + position.error/2) - (this.y + this.error/2),
+    let dx = position.$x - this.$x,
+      dy = position.$y - this.$y,
       magnitude = Math.hypot(dx, dy),
       ux = dx / magnitude,
       uy = dy / magnitude,
@@ -121,12 +132,11 @@ export class Position {
       deg = rad * R2D
     ;
 
-    if (magnitude === 0) return 0;
+    if (epsilonEquals(magnitude, 0)) return 0;
 
-    // no clue why it's this way, probably because origin is top left?
     if (ux === 0 && uy === 1) return 180;
 
-    if (this.x >= position.x && this.y > position.y) {
+    if (this.$x >= position.$x && this.$y > position.$y) {
       return ((180 - Math.abs(deg)) + 270) % 360;
     }
 
@@ -188,6 +198,33 @@ export class Position {
     );
   }
 
+  translate(vector) {
+    const [dx, dy] = vector,
+      error = MIN_ERROR
+    ;
+
+    let $x = this.$x + dx,
+      $y = this.$y + dy
+    ;
+
+    $x = Math.max(0, $x);
+    $y = Math.max(0, $y);
+
+    let x = Math.floor($x / LARGE_GRID),
+      y = Math.floor($y / LARGE_GRID),
+      kpa = (
+        PRECOMPUTE
+          .map(pc => [
+            Math.floor($y % pc[0] / pc[1]),
+            Math.floor($x % pc[0] / pc[1])
+          ])
+          .map(index => KPM[index[0]][index[1]])
+      )
+    ;
+
+    return new Position(x, y, MIN_ERROR, kpa);
+  }
+
   toElement() {
     let kpa = this.kpa,
       kpMajor,
@@ -214,7 +251,10 @@ export class Position {
           .map((kp,i) => (
             <span
               key={i.toString()+kp.toString()+'m'}
-              className="position-text-item position-text-kp-minor">{kp}</span>
+              className="position-text-item position-text-kp-minor"
+            >
+              {kp}
+            </span>
           ))
       );
     }
@@ -239,6 +279,8 @@ export class Position {
     );
   }
 }
+
+window.p = Position;
 
 export class Calculation {
   static fromPositions(mortarPosition, targetPosition) {

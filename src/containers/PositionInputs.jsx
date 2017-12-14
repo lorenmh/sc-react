@@ -37,7 +37,7 @@ class PositionInput extends Component {
 
     if (this.inputEl && newPosition) {
       this.inputEl.value = newPosition.toStringShort();
-      clearPosition();
+      setTimeout(() =>clearPosition(),0);
     }
 
     return (

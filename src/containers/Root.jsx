@@ -9,7 +9,6 @@ import { initialAction } from '../actions';
 // const store = configureStore({ message: 'initial' });
 
 const store = configureStore();
-window.store = store;
 
 export class Root extends Component {
   componentDidMount() {
