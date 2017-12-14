@@ -46,7 +46,7 @@ export default function configureStore() {
     },
     applyMiddleware(
       thunkMiddleware,
-      createLogger()
+      //createLogger()
     ),
   );
 }

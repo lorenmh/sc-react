@@ -26322,7 +26322,9 @@ function configureStore() {
 
     // saved positions
     saved: []
-  }, (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger.createLogger)()));
+  }, (0, _redux.applyMiddleware)(_reduxThunk2.default
+  //createLogger()
+  ));
 }
 
 /***/ }),
