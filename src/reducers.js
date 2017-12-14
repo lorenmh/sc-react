@@ -4,6 +4,7 @@ import { mnemonic } from './helpers';
 
 import {
   UPDATE_POSITION_VALUE,
+  UPDATE_HOVER,
   LOAD_POSITION,
   SAVE_POSITION,
   DELETE_SAVED_POSITION,
@@ -37,6 +38,12 @@ const rootReducer = (state = {}, action) => {
         values: Object.assign({}, state.values, {
           [action.positionId]: action.positionValue
         })
+      });
+    case UPDATE_HOVER:
+      return Object.assign({}, state, {
+        positions: Object.assign({}, state.positions, {
+          [action.positionId]: action.position
+        }),
       });
     case LOAD_POSITION:
       return Object.assign({}, state, {

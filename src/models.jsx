@@ -33,8 +33,25 @@ import { epsilonEquals } from './helpers';
 const R2D = 180/Math.PI
 ;
 
-/* Origin is top left!
+/*  NOTES:
+ *  ORIGIN IS TOP LEFT!
  *
+ *  Position:
+ *    The x and y values are the *top left coordinates of the grid*.
+ *    This is due to legacy reasons. A grid's width is the 'error' value.
+ *
+ *    The actual center position of a Position is given by $x and $y.
+ *
+ *    If you have an exact position, you should use `fromExactPosition`,
+ *    because this will convert the exact position into a valid position.
+ *
+ *    For ex:
+ *      Let's say I have an exact position of (150,150). The whole app assumes
+ *      that this is a grid somewhere on the map, if {x=150,y=150,error=0},
+ *      this might break things (because there is no 'position string' (like
+ *      `A1-5-5 xxx`) which would output {x=150,y=150,error=0}. Instead, $x=150
+ *      $y=150 should become x=149.38,y=149.38,error=1.23 which DOES have a
+ *      'position string' of `A1-5-5-5-5-5`.
  */
 export class Position {
   static fromString(positionString) {
@@ -64,18 +81,24 @@ export class Position {
     return new Position(x, y, error, kpa);
   }
 
-  static fromExactPosition($x, $y) {
+  static fromExactPosition($x, $y, prec) {
     $x = Math.max(0, $x);
     $y = Math.max(0, $y);
 
-    // max is 'Z'; 25*300
+    // max is 'Z'; 25*300, 26characters,index@0, so 25, grid-width=300
+    // otherwise people can move to Unicode character positions, like:
+    // ❦2-5-3 (it looks really weird, so max char is Z, Z2-5-3)
     $x = Math.min(7500, $x);
     $y = Math.min(7500, $y);
 
-    let x = Math.max(0, $x - MIN_ERROR/2),
-      y = Math.max(0, $y - MIN_ERROR/2),
+    prec = prec === undefined ? 5 : Math.max(0, Math.min(5, prec));
+
+    const error = prec === 0 ? LARGE_GRID : PRECOMPUTE[prec - 1][1],
+      x = Math.floor($x / error),
+      y = Math.floor($y / error),
       kpa = (
         PRECOMPUTE
+          .slice(0, prec)
           .map(pc => [
             Math.floor($y % pc[0] / pc[1]),
             Math.floor($x % pc[0] / pc[1])
@@ -84,7 +107,7 @@ export class Position {
       )
     ;
 
-    return new Position(x, y, MIN_ERROR, kpa);
+    return new Position(x, y, error, kpa);
   }
 
   constructor(x, y, error, kpa) {
