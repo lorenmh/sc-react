@@ -16,7 +16,7 @@ function valueString(value) {
 
 function rangeString(calculation, range) {
   if (calculation.isCollision) {
-    return `HIGH ERROR!`
+    return 'HIGH ERROR!';
   }
   return `[min: ${range[0].toFixed(1)}, max: ${range[1].toFixed(1)}]`;
 }
@@ -28,13 +28,7 @@ class CalculationView extends Component {
     const mortarPosition = positions[MORTAR_ID];
     const targetPosition = positions[TARGET_ID];
 
-    let calculation;
-
-    if (mortarPosition && targetPosition) {
-      calculation = Calculation.fromPositions(mortarPosition, targetPosition);
-    }
-
-    if (!calculation) {
+    if (!mortarPosition || !targetPosition) {
       return (
         <div className="calculation-wrap">
           <div className="calculation-empty-msg-wrap">
@@ -44,12 +38,14 @@ class CalculationView extends Component {
             </div>
           </div>
         </div>
-      )
+      );
     }
 
-    let elevation;
+    let calculation = Calculation.fromPositions(mortarPosition, targetPosition),
+      elevation
+    ;
 
-    if (calculation.elevation == TOO_FAR) {
+    if (calculation.elevation === TOO_FAR) {
       elevation = (
         <div className="elevation">
           <span className="bearing-title">Elevation: </span>
@@ -58,7 +54,7 @@ class CalculationView extends Component {
           </span>
         </div>
       );
-    } else if (calculation.elevation == TOO_CLOSE) {
+    } else if (calculation.elevation === TOO_CLOSE) {
       elevation = (
         <div className="elevation">
           <span className="bearing-title">Elevation: </span>

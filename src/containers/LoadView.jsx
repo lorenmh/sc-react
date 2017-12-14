@@ -4,26 +4,25 @@ import { connect } from 'react-redux';
 import { MORTAR_ID, TARGET_ID } from '../const';
 
 import {
-  updatePositionLoad,
-  deleteSavedPosition,
-  savePosition
+  loadPosition,
+  deleteSavedPosition
 } from '../actions';
 
 class SavedPosition extends Component {
   render() {
-    let {
+    const {
       savedPosition,
       loadMortarHandler,
       loadTargetHandler,
       deleteHandler
     } = this.props;
 
-    let { mnemonic, position } = savedPosition;
+    const { name, position } = savedPosition;
 
     return (
       <tr className="saved-item">
         <td className="saved-item-position">{position.toElement()}</td>
-        <td className="saved-item-mnemonic">{mnemonic}</td>
+        <td className="saved-item-mnemonic">{name}</td>
         <td className="saved-item-controls">
           <button
             className="load-mortar"
@@ -53,29 +52,29 @@ class SavedPosition extends Component {
 
 class LoadView extends Component {
   render() {
-    let { savedPositions, dispatch } = this.props;
+    const { saved, dispatch } = this.props;
 
-    if (!savedPositions.length) return null;
+    if (!saved.length) return null;
 
-    let handleLoadMortar = (position, index) => () => {
-      dispatch(updatePositionLoad(MORTAR_ID, position, index));
-    }
+    const handleLoadMortar = (position, index) => () => {
+      dispatch(loadPosition(MORTAR_ID, position));
+    };
 
-    let handleLoadTarget = (position, index) => () => {
-      dispatch(updatePositionLoad(TARGET_ID, position, index));
-    }
+    const handleLoadTarget = (position, index) => () => {
+      dispatch(loadPosition(TARGET_ID, position));
+    };
 
-    let handleDelete = (index) => () => {
+    const handleDelete = index => () => {
       dispatch(deleteSavedPosition(index));
-    }
+    };
 
-    let savedPositionComponents = (
-      savedPositions.map((saved, index) => (
+    const savedComponents = (
+      saved.map((s, index) => (
         <SavedPosition
-          key={saved.position.toString() + saved.mnemonic}
-          savedPosition={saved}
-          loadMortarHandler={handleLoadMortar(saved.position, index)}
-          loadTargetHandler={handleLoadTarget(saved.position, index)}
+          key={s.position.toString() + s.name}
+          savedPosition={s}
+          loadMortarHandler={handleLoadMortar(s.position, index)}
+          loadTargetHandler={handleLoadTarget(s.position, index)}
           deleteHandler={handleDelete(index)}
         />
       ))
@@ -90,7 +89,7 @@ class LoadView extends Component {
             <th>Load</th>
             <th></th>
           </tr>
-          {savedPositionComponents}
+          {savedComponents}
         </tbody>
       </table>
     );

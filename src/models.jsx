@@ -38,8 +38,12 @@ const R2D = 180/Math.PI
  */
 export class Position {
   static fromString(positionString) {
-    let [xString, yString, kpString] = parsePositionString(positionString);
-    return Position.fromStrings(xString, yString, kpString);
+    try {
+      let [xString, yString, kpString] = parsePositionString(positionString);
+      return Position.fromStrings(xString, yString, kpString);
+    } catch (e) {
+      return null;
+    }
   }
 
   static fromStrings(xString, yString, kpString) {
@@ -210,8 +214,8 @@ export class Position {
     $x = Math.max(0, $x);
     $y = Math.max(0, $y);
 
-    let x = Math.floor($x / LARGE_GRID),
-      y = Math.floor($y / LARGE_GRID),
+    let x = Math.max(0, $x - MIN_ERROR/2),
+      y = Math.max(0, $y - MIN_ERROR/2),
       kpa = (
         PRECOMPUTE
           .map(pc => [

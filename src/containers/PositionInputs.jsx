@@ -2,51 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { MORTAR_ID, TARGET_ID } from '../const';
+
 import {
-  updatePositionFromString,
-  clearNewPosition,
+  updatePositionString,
   savePosition
 } from '../actions';
 
 class PositionInput extends Component {
   render() {
     const {
-      newPosition,
-      clearPosition,
       placeholder,
-      isTarget,
-      isFocus,
+      subClass,
+      value,
+      clearHandler,
       inputHandler,
       saveHandler
     } = this.props;
-
-    const subClass = isTarget ? 'target' : 'mortar';
-
-    let inputEventHandler = (e) => {
-      inputHandler(e.target.value);
-    };
-
-    let clearHandler = (_) => {
-      this.inputEl.value = '';
-      inputHandler('');
-    };
-
-    let saveEventHandler = (_) => {
-      saveHandler(this.inputEl.value);
-    }
-
-    if (this.inputEl && newPosition) {
-      this.inputEl.value = newPosition.toStringShort();
-      setTimeout(() =>clearPosition(),0);
-    }
 
     return (
       <div className="position-input-wrap">
         <input
           className={`position-input position-input-${subClass}`}
-          ref={(e) => {this.inputEl = e; /*isFocus && e && e.focus();*/}}
+          value={value}
           placeholder={placeholder}
-          onInput={inputEventHandler}
+          onInput={inputHandler}
         />
         <button
           className="position-clear"
@@ -56,7 +35,7 @@ class PositionInput extends Component {
         </button>
         <button
           className="position-save"
-          onClick={saveEventHandler}
+          onClick={saveHandler}
         >
           Save
         </button>
@@ -68,49 +47,39 @@ class PositionInput extends Component {
 class PositionInputs extends Component {
   render() {
     const {
-      positions,
+      strings,
       dispatch
     } = this.props;
 
-    let inputHandler = positionId => (value) => {
-      dispatch(
-        updatePositionFromString(
-          positionId,
-          value
-        )
-      );
+    const inputHandler = positionId => (e) => {
+      dispatch(updatePositionString(positionId, e.target.value));
     };
 
-    let clearPosition = positionId => () => {
-      dispatch(clearNewPosition(positionId));
+    const clearHandler = positionId => (e) => {
+      dispatch(updatePositionString(positionId, ''));
     };
 
-    let saveHandler = (positionString) => {
-      dispatch(savePosition(positionString));
-    }
-
-    let newMortarPosition = positions.newPositions[MORTAR_ID],
-      newTargetPosition = positions.newPositions[TARGET_ID]
-    ;
+    const saveHandler = positionId => (e) => {
+      dispatch(savePosition(positionId));
+    };
 
     return (
       <div className="position-inputs">
         <PositionInput
           subClass="mortar"
+          value={strings[MORTAR_ID]}
           placeholder="Mortar: (ex: A11 11)"
-          newPosition={newMortarPosition}
-          clearPosition={clearPosition(MORTAR_ID)}
+          clearHandler={clearHandler(MORTAR_ID)}
           inputHandler={inputHandler(MORTAR_ID)}
-          saveHandler={saveHandler}
-          isFocus
+          saveHandler={saveHandler(MORTAR_ID)}
         />
         <PositionInput
-          subClass="mortar"
+          subClass="target"
+          value={strings[TARGET_ID]}
           placeholder="Target: (ex: B11 11)"
-          newPosition={newTargetPosition}
-          clearPosition={clearPosition(TARGET_ID)}
+          clearHandler={clearHandler(TARGET_ID)}
           inputHandler={inputHandler(TARGET_ID)}
-          saveHandler={saveHandler}
+          saveHandler={saveHandler(TARGET_ID)}
           isTarget
         />
       </div>
@@ -118,4 +87,4 @@ class PositionInputs extends Component {
   }
 }
 
-export default connect(s => s)(PositionInputs);
+export default connect(state => state)(PositionInputs);
