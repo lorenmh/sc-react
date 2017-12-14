@@ -25358,7 +25358,7 @@ var PositionInputs = function (_Component2) {
           clearHandler: clearHandler(_const.TARGET_ID),
           inputHandler: inputHandler(_const.TARGET_ID),
           saveHandler: saveHandler(_const.TARGET_ID),
-          keyUpHandler: keyUpHandler(_const.MORTAR_ID),
+          keyUpHandler: keyUpHandler(_const.TARGET_ID),
           isTarget: true
         })
       );

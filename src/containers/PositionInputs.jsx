@@ -164,7 +164,7 @@ class PositionInputs extends Component {
           clearHandler={clearHandler(TARGET_ID)}
           inputHandler={inputHandler(TARGET_ID)}
           saveHandler={saveHandler(TARGET_ID)}
-          keyUpHandler={keyUpHandler(MORTAR_ID)}
+          keyUpHandler={keyUpHandler(TARGET_ID)}
           isTarget
         />
       </div>
