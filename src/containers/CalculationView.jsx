@@ -33,8 +33,8 @@ class CalculationView extends Component {
         <div className="calculation-wrap">
           <div className="calculation-empty-msg-wrap">
             <div className="calculation-empty-msg">
-              No calculation!<br/>
-              To input a calculation, use the two inputs below.<br/>
+              No calculation! To get a calculation,<br/>
+              Enter a 🚀 Mortar and 🎯 Target position below.
             </div>
           </div>
         </div>

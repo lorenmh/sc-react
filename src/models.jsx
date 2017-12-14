@@ -64,6 +64,29 @@ export class Position {
     return new Position(x, y, error, kpa);
   }
 
+  static fromExactPosition($x, $y) {
+    $x = Math.max(0, $x);
+    $y = Math.max(0, $y);
+
+    // max is 'Z'; 25*300
+    $x = Math.min(7500, $x);
+    $y = Math.min(7500, $y);
+
+    let x = Math.max(0, $x - MIN_ERROR/2),
+      y = Math.max(0, $y - MIN_ERROR/2),
+      kpa = (
+        PRECOMPUTE
+          .map(pc => [
+            Math.floor($y % pc[0] / pc[1]),
+            Math.floor($x % pc[0] / pc[1])
+          ])
+          .map(index => KPM[index[0]][index[1]])
+      )
+    ;
+
+    return new Position(x, y, MIN_ERROR, kpa);
+  }
+
   constructor(x, y, error, kpa) {
     this.x = x;
     this.y = y;
@@ -203,30 +226,9 @@ export class Position {
   }
 
   translate(vector) {
-    const [dx, dy] = vector,
-      error = MIN_ERROR
-    ;
+    const [dx, dy] = vector;
 
-    let $x = this.$x + dx,
-      $y = this.$y + dy
-    ;
-
-    $x = Math.max(0, $x);
-    $y = Math.max(0, $y);
-
-    let x = Math.max(0, $x - MIN_ERROR/2),
-      y = Math.max(0, $y - MIN_ERROR/2),
-      kpa = (
-        PRECOMPUTE
-          .map(pc => [
-            Math.floor($y % pc[0] / pc[1]),
-            Math.floor($x % pc[0] / pc[1])
-          ])
-          .map(index => KPM[index[0]][index[1]])
-      )
-    ;
-
-    return new Position(x, y, MIN_ERROR, kpa);
+    return Position.fromExactPosition(this.$x + dx, this.$y + dy);
   }
 
   toElement() {

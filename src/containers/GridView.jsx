@@ -209,9 +209,29 @@ function keyLines(S, isZoomed) {
   );
 }
 
+const mouseEnterHandler = (positionId, scale) => (e) => {
+  console.log('enter', e);
+};
+
+const mouseLeaveHandler = (positionId, scale) => (e) => {
+  console.log('leave', e);
+};
+
+const mouseMoveHandler = (positionId, scale) => (e) => {
+  const offset = e.currentTarget.getBoundingClientRect(),
+    { scrollY, scrollX } = window,
+    top = offset.top + scrollY,
+    left = offset.left + scrollX,
+    { width, height } = offset,
+    x = Math.min(1, Math.max(0, (e.pageX-left) / width)),
+    y = Math.min(1, Math.max(0, (e.pageY-top) / height))
+  ;
+  console.log('move', x, y);
+};
+
 class GridZoomed extends Component {
   render() {
-    const { position, isTarget } = this.props;
+    const { id, position, isTarget } = this.props;
 
 
     let X = (position.x % SMALL_GRID) / SMALL_GRID,
@@ -255,8 +275,17 @@ class GridZoomed extends Component {
         <div className="grid" style={style}>
           <div className="grid-render">
             {(() => keyTextHtml(S,GS))()}
-            <svg width={SVG_WIDTH} height={SVG_HEIGHT}>
-              <g transform={`translate(${STROKE}, ${STROKE})`}>
+            <svg
+              width={SVG_WIDTH}
+              height={SVG_HEIGHT}
+            >
+              <g
+                className="mouse-active"
+                transform={`translate(${STROKE}, ${STROKE})`}
+                onMouseEnter={mouseEnterHandler(id, SMALL_GRID)}
+                onMouseLeave={mouseLeaveHandler(id, SMALL_GRID)}
+                onMouseMove={mouseMoveHandler(id, SMALL_GRID)}
+              >
                 <rect
                   x="0"
                   y="0"
@@ -279,7 +308,7 @@ class GridZoomed extends Component {
 
 class Grid extends Component {
   render() {
-    const { position, xLabel, yLabel, isTarget } = this.props;
+    const { id, position, xLabel, yLabel, isTarget } = this.props;
 
     let X = (position.x % LARGE_GRID) / LARGE_GRID,
       Y = (position.y % LARGE_GRID) / LARGE_GRID,
@@ -383,8 +412,17 @@ class Grid extends Component {
         <div className="grid" style={style}>
           <div className="grid-render">
             {(() => keyTextHtml(Math.max(S,1/9),GS))()}
-            <svg width={SVG_WIDTH} height={SVG_HEIGHT}>
-              <g transform={`translate(${STROKE}, ${STROKE})`}>
+            <svg
+              width={SVG_WIDTH}
+              height={SVG_HEIGHT}
+            >
+              <g
+                className="mouse-active"
+                transform={`translate(${STROKE}, ${STROKE})`}
+                onMouseEnter={mouseEnterHandler(id, LARGE_GRID)}
+                onMouseLeave={mouseLeaveHandler(id, LARGE_GRID)}
+                onMouseMove={mouseMoveHandler(id, LARGE_GRID)}
+              >
                 <rect
                   x="0"
                   y="0"
@@ -419,16 +457,16 @@ class GridView extends Component {
     ;
 
     if (mortarPosition) {
-      mortarGrid = <Grid position={mortarPosition} />;
+      mortarGrid = <Grid id={MORTAR_ID} position={mortarPosition} />;
       if (mortarPosition.kpa.length >= 2) {
-        mortarGridZoomed = <GridZoomed position={mortarPosition} />;
+        mortarGridZoomed = <GridZoomed id={MORTAR_ID} position={mortarPosition} />;
       }
     }
 
     if (targetPosition) {
-      targetGrid = <Grid position={targetPosition} isTarget />;
+      targetGrid = <Grid id={TARGET_ID} position={targetPosition} isTarget />;
       if (targetPosition.kpa.length >= 2) {
-        targetGridZoomed = <GridZoomed position={targetPosition} isTarget />;
+        targetGridZoomed = <GridZoomed id={TARGET_ID} position={targetPosition} isTarget />;
       }
     }
 

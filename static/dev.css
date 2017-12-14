@@ -62,6 +62,7 @@ button {
 
 svg {
   /*shape-rendering: crispEdges;*/
+  cursor: crosshair;
 }
 
 .grid-bg {
@@ -250,7 +251,10 @@ svg {
 }
 
 .position-input-wrap {
+  background-color: rgb(245,245,245);
+  border: 1px solid #909090;
   position: relative;
+  border-radius: 3px;
   width: 49%;
   padding-right: 100px;
 }
@@ -261,12 +265,10 @@ svg {
 }
 
 .position-input {
-  background-color: rgb(245,245,245);
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  background-color: transparent;
+  border-radius: 3px;
   /*border: 1px solid #a5a5a5;*/
-  border: 1px solid #909090;
-  border-right: none;
+  border: none;
   padding: 10px;
   width: 100%;
   height: 36px;
@@ -301,20 +303,17 @@ svg {
 
 .position-clear {
   background-color: white;
-  border: 1px solid #909090;
-  border-left: none;
-  border-right: none;
-  right: 50px;
+  border: none;
+  right: 0px;
   color: #6f6f6f;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 .position-save {
   /*border: 1px solid #a5a5a5;*/
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border: 1px solid #909090;
-  border-left: none;
+  border: none;
   background-color: #b8e0a3;
-  right: 0;
+  right: 50px;
   color: #696969;
 }
 

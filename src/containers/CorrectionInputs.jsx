@@ -47,7 +47,7 @@ class CorrectionInputs extends Component {
 
     const { n, s, e, w } = values;
 
-    const isLocked = false,
+    const isLocked = true,
       lockHandler = ev => ev
     ;
 
@@ -109,12 +109,12 @@ class CorrectionInputs extends Component {
             className="correction-lock"
             onClick={lockHandler}
           >
-            {(() => isLocked ? 'Unlock ' : 'Lock ')()}
+            {(() => isLocked ? 'Locked ' : 'Unlocked ')()}
             {(() => {
               return isLocked ?
-                <span className="icon-unlock" />
-                :
                 <span className="icon-lock" />
+                :
+                <span className="icon-unlock" />
               ;
             })()}
           </button>
