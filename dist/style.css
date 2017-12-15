@@ -361,11 +361,13 @@ svg {
 }
 
 .load-mortar, .correction-mortar {
-  background-color: #99B898;
+  color: #99B898;
+  background-color: #232c30;
 }
 
 .load-target, .correction-target {
-  background-color: #c4aae8;
+  color: #c4aae8;
+  background-color: #232c30;
 }
 
 .load-mortar {
