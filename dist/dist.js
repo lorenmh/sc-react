@@ -25378,9 +25378,11 @@ var PositionInput = function (_Component) {
         };
       };
 
+      var pendClass = isPendingSave ? 'pending-save' : '';
+
       return _react2.default.createElement(
         'div',
-        { className: 'position-input-wrap', style: style },
+        { className: 'position-input-wrap ' + pendClass, style: style },
         _react2.default.createElement('input', {
           className: 'position-input position-input-' + subClass,
           ref: function ref(el) {
@@ -25399,7 +25401,7 @@ var PositionInput = function (_Component) {
               onClick: refocus(saveHandler)
             },
             function () {
-              return isPendingSave ? '✓' : 'Save';
+              return isPendingSave ? 'Save' : 'Save';
             }()
           ) : null;
         }(),

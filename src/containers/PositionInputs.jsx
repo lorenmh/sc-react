@@ -40,8 +40,10 @@ class PositionInput extends Component {
       this.el && this.el.focus();
     };
 
+    const pendClass = isPendingSave ? 'pending-save' : '';
+
     return (
-      <div className="position-input-wrap" style={style}>
+      <div className={'position-input-wrap ' + pendClass} style={style}>
         <input
           className={`position-input position-input-${subClass}`}
           ref={el => this.el = el}
@@ -55,7 +57,7 @@ class PositionInput extends Component {
             className="position-save"
             onClick={refocus(saveHandler)}
           >
-            {(() => isPendingSave ? '✓' : 'Save')()}
+            {(() => isPendingSave ? 'Save' : 'Save')()}
           </button>
           :
           null

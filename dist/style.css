@@ -311,6 +311,15 @@ svg {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+
+.position-input-wrap.pending-save {
+  border: 1px solid #cbc8ff;
+}
+
+.pending-save .position-save {
+  background-color: #cbc8ff;
+}
+
 .position-save {
   /*border: 1px solid #a5a5a5;*/
   border: none;
