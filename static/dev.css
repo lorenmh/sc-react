@@ -14,8 +14,8 @@ body {
   background-color: #303b40;
 }
 
-a:active, a:hover, a:visited, a:focus {
-  color: #E84A5F !important;
+a, a:active, a:hover, a:visited, a:focus {
+  color: #E84A5F;
 }
 
 .info h2 {
