@@ -240,8 +240,9 @@ svg {
 }
 
 .app-title {
-  color: #13181a;
+  color: #101517;
   font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .calculation {
@@ -261,6 +262,7 @@ svg {
   font-size: 16px;
   line-height: 20px;
   height: 82px;
+  border-top: 5px solid rgb(29,38,42);
 }
 
 .grid-wrap:first-child {
