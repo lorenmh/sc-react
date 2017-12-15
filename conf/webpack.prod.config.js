@@ -14,15 +14,6 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    // FUCK webpack FUCKing piece of FUCKING shit
-    //new webpack.optimize.UglifyJsPlugin({
-    //  uglifyOptions: {
-    //    output: {
-    //      beautify: false,
-    //      ascii_only:true
-    //    },
-    //  }
-    //})
   ],
   module: {
     loaders: [
