@@ -439,8 +439,9 @@ svg {
   border-bottom-right-radius: 0;
   background-color: #303b3f;
   border: 2px solid #2a343a;
-  padding: 2px 6px;
-  font-size: 10px;
+  padding: 4px 6px;
+  font-size: 11px;
+  line-height: 11px;
 }
 
 .correction-buttons button {
