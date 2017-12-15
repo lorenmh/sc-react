@@ -265,6 +265,7 @@ svg {
 .position-inputs {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .position-input-mortar {
@@ -604,11 +605,16 @@ svg {
 
 @media (max-width: 500px) {
   .position-input {
-     width: 100%;
+    background-color: #2a343a;
+    width: 100%;
   }
   
   .position-input-wrap {
     padding-right: 0 !important;
+  }
+
+  .position-input-wrap {
+    background-color: transparent;
   }
 
   .position-clear, .position-save {
@@ -620,13 +626,8 @@ svg {
 
   .position-clear {
     float: right;
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 0;
   }
 
-  .position-save {
-    border-bottom-left-radius: 3px;
-  }
 }
 
 @media (min-width: 320px) and (max-width: 400px) {
