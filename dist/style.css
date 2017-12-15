@@ -15,7 +15,7 @@ body {
 }
 
 a:active, a:hover, a:visited, a:focus {
-  color: #E84A5F;
+  color: #E84A5F !important;
 }
 
 .info h2 {
