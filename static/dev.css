@@ -7,9 +7,11 @@ html {
 
 body {
   font-family: Helvetica, Verdana, sans-serif;
-  color: #262626;
+  color: #101010;
+  color: #9c9c9c;
   padding: 10px;
   padding-top: 2px;
+  background-color: #303b40;
 }
 
 button {
@@ -65,45 +67,45 @@ svg {
   cursor: crosshair;
 }
 
-.grid-bg {
-  fill: #f7f7f7;
+.grid-target-circle {
+  fill: white;
+}
+
+.grid-mortar-circle {
+  fill: white;
+}
+
+.grid-mortar{
+  fill: rgba(232, 74, 94, 0.7);
+}
+
+.grid-target {
+  fill: rgba(232, 74, 94, 0.7);
 }
 
 .grid-bg {
-  stroke: #cac8c8;
+  fill: #303b3f;
+}
+
+.grid-bg {
+  stroke: #182023;
   stroke-width: 1px;
 }
 
 .grid-lm {
-  stroke: #8a8a8a;
+  stroke: #182023;
   stroke-width: 1px;
 }
 
 .grid-ls {
   stroke-dasharray: 2 1;
-  stroke: #999;
+  stroke: #182023;
   stroke-width: 1px;
 }
 
 .grid-target, .grid-mortar {
   /*stroke-width: 2px;
   stroke: black;*/
-}
-
-.grid-target-circle {
-  fill: rgb(181, 78, 48);
-}
-
-.grid-mortar-circle {
-  fill: rgb(53, 121, 130);
-}
-
-.grid-target {
-  fill: rgba(255,105,75,0.6);
-}
-
-.grid-mortar{
-  fill: rgba(0,190,210,0.6);
 }
 
 .key-line {
@@ -122,7 +124,7 @@ svg {
 .key-text {
   display: inline-block;
   padding: 0 1px;
-  background-color: white;
+  background-color: #2b363b;
   font-family: monospace;
 }
 
@@ -166,23 +168,23 @@ svg {
 }
 
 .title-text-x, .position-text-x {
-  color: rgb(255,105,75);
+  color: #E84A5F;
 }
 
 .title-text-y, .position-text-y {
-  color: rgb(75,105,255);
+  color: #71a5ad;
 }
 
 .title-text-kp-major, .position-text-kp-major {
-  color: rgb(36, 181, 36);
+  color: #FECEA8;
 }
 
 .title-text-kp-minor, .position-text-kp-minor {
-  color: rgb(226,97,198);
+  color: #FF847C;
 }
 
 .title-text-dash, .position-text-dash {
-  color: #666;
+  color: #989898;
 }
 
 .calculation {
@@ -209,12 +211,12 @@ svg {
 }
 
 .bearing-major {
-  color: #cc0000;
+  color: #E84A5F;
   padding-left: 6px;
 }
 
 .elevation-major {
-  color: #006ecc;
+  color: #71a5ad;
 }
 
 .bearing-minor, .elevation-minor, .distance-minor {
@@ -226,6 +228,7 @@ svg {
 }
 
 .app-title {
+  color: #13181a;
   font-size: 14px;
 }
 
@@ -240,7 +243,7 @@ svg {
   /*border: 1px dashed rgb(180,50,50);*/
   padding: 10px;
   /*background-color: rgba(0,0,0,.05);*/
-  background-color: #f7f7f7;
+  background-color: rgb(42, 52, 58);
   margin-top: 0;
   margin-bottom: 15px;
   font-size: 16px;
@@ -253,10 +256,8 @@ svg {
 }
 
 .position-input-wrap {
-  background-color: rgb(245,245,245);
-  border: 1px solid #909090;
+  background-color: rgb(42, 52, 58);
   position: relative;
-  border-radius: 3px;
   width: 49%;
   padding-right: 100px;
 }
@@ -266,9 +267,16 @@ svg {
   justify-content: space-between;
 }
 
+.position-input-mortar {
+  color: #99B898;
+}
+
+.position-input-target {
+  color: #c4aae8;
+}
+
 .position-input {
   background-color: transparent;
-  border-radius: 3px;
   /*border: 1px solid #a5a5a5;*/
   border: none;
   padding: 10px;
@@ -279,19 +287,19 @@ svg {
 }
 
 .position-input:focus, .position-input:active, .position-input:hover {
-  background-color: rgb(240,240,240);
+  background-color: rgb(29,38,42);
 }
 
 .position-clear:focus,
 .position-clear:active,
 .position-clear:hover {
-  background-color: #e8e8e8;
+  background-color: rgb(29,38,42);
 }
 
 .position-save:focus,
 .position-save:active,
 .position-save:hover {
-  background-color: #acd497;
+  background-color: rgb(29,38,42);
 }
 
 .position-clear, .position-save {
@@ -301,10 +309,10 @@ svg {
   border: none;
   border-radius: 0;
   outline: none !important;
+  background-color: #242f34;
 }
 
 .position-clear {
-  background-color: white;
   border: none;
   right: 0px;
   color: #6f6f6f;
@@ -313,17 +321,19 @@ svg {
 }
 
 .position-input-wrap.pending-save {
-  border: 1px solid #cbc8ff;
+  border: 1px solid #e84a5e;
+}
+
+.position-input-wrap {
+  border: 1px solid #303b3f;
 }
 
 .pending-save .position-save {
-  background-color: #cbc8ff;
 }
 
 .position-save {
   /*border: 1px solid #a5a5a5;*/
   border: none;
-  background-color: #b8e0a3;
   right: 50px;
   color: #696969;
 }
@@ -332,7 +342,8 @@ svg {
   width: 100%;
   margin: auto;
   margin-top: 10px;
-  background-color: #f7f7f7;
+  background-color: #2a343a;
+  border-radius: 2px;
   padding: 10px;
 }
 
@@ -346,13 +357,20 @@ svg {
   font-style: italic;
 }
 
-.load-mortar {
-  margin-right: 8px;
-  background-color: #82d6e1;
+.correction-lock, .correction-clear, .saved-item-delete {
+  background-color: #535c61;
 }
 
-.load-target {
-  background-color: #ffa392;
+.load-mortar, .correction-mortar {
+  background-color: #99B898;
+}
+
+.load-target, .correction-target {
+  background-color: #c4aae8;
+}
+
+.load-mortar {
+  margin-right: 8px;
 }
 
 .saved-items th {
@@ -362,6 +380,7 @@ svg {
 }
 
 .saved-items td {
+  color: #d4d4d4;
   padding: 3px 10px;
 }
 
@@ -378,12 +397,12 @@ svg {
 
 .calculation-empty-msg {
   font-style: italic;
-  color: darkgrey;
 }
 
 .correction-wrap {
+  border-radius: 2px;
   padding: 10px;
-  background-color: #f7f7f7;
+  background-color: #2a343a;
 }
 
 .add-sub, .correction-inputs, .correction-buttons {
@@ -395,13 +414,13 @@ svg {
 .type-toggle {
   outline: none;
   position: absolute;
-  top:0;
-  right:0;
+  top: 1px;
+  right: 1px;
   border-radius: 2px;
   border-top-left-radius: 0;
   border-bottom-right-radius: 0;
-  background-color: #e8efff;
-  border: none;
+  background-color: #303b3f;
+  border: 1px solid #2a343a;
   padding: 5px 10px;
 }
 
@@ -409,14 +428,6 @@ svg {
   border: none;
   padding: 5px 10px;
   border-radius: 2px;
-}
-
-.correction-mortar {
-  background-color: #82d6e1;
-}
-
-.correction-target {
-  background-color: #ffa392;
 }
 
 .correction-buttons>button {
@@ -431,6 +442,15 @@ svg {
   width: 60px;
   text-align: right;
   padding: 4px 5px;
+  background-color: #222b2f;
+  border: none;
+  color: #9c9c9c;
+  padding: 6px;
+  outline: none;
+}
+
+.correction-input:focus, .correction-input:hover, .correction-input:active {
+  background-color: #1e2528;
 }
 
 .correction-buttons {
@@ -438,9 +458,10 @@ svg {
 }
 
 .correction-title {
-    margin: 0 0 8px 0;
-    color: #848484;
-    text-align: center;
+  font-size: 14px;
+  margin: 0 0 8px 0;
+  color: #848484;
+  text-align: center;
 }
 
 @media (min-width: 1000px) {

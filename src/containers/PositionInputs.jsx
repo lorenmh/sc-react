@@ -48,7 +48,7 @@ class PositionInput extends Component {
           className={`position-input position-input-${subClass}`}
           ref={el => this.el = el}
           value={value}
-          placeholder={isPendingSave ? 'Enter Name' : placeholder}
+          placeholder={isPendingSave ? 'Saving, Enter Name' : placeholder}
           onKeyUp={keyUpHandler}
           onInput={inputHandler}
         />
