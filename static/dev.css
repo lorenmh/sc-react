@@ -76,7 +76,12 @@ button {
 
 svg {
   /*shape-rendering: crispEdges;*/
-  cursor: crosshair;
+  /*cursor: crosshair;*/
+}
+
+/*should fix ios bug */
+.mouse-active {
+  cursor: pointer;
 }
 
 .grid-target-circle {
