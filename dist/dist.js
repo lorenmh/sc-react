@@ -25389,7 +25389,7 @@ var PositionInput = function (_Component) {
             return _this2.el = el;
           },
           value: value,
-          placeholder: isPendingSave ? 'Enter Name' : placeholder,
+          placeholder: isPendingSave ? 'Saving, Enter Name' : placeholder,
           onKeyUp: keyUpHandler,
           onInput: inputHandler
         }),

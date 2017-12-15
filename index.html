@@ -2,16 +2,16 @@
   <head>
     <!-- well hullo there :D -->
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/dev.css?v=4" type="text/css" />
+    <link rel="stylesheet" href="/static/dev.css?v=100" type="text/css" />
     <link rel="stylesheet" href="/static/icons.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Squad Game Calculator (Bearing, Elevation [Milliradians], Distance)</title>
+    <title>Squad Game Artillery Calculator (Bearing, Elevation [Milliradians], Distance)</title>
     <meta charset="utf-8">
-    <meta name="description" content="Calculate the distance, millradians and compass bearing between two points for the game Squad. Never miss a mortar shot again! Now you can save and load positions, lowering the time needed to make calculations!">
+    <meta name="description" content="Artillery calculator for the game Squad. Use this calculator to calculate the distance, millradians and compass bearing between two points. Never miss a mortar or rocket artillery shot again!">
   </head>
   <body>
     <div id="app"></div>
-    <script type="text/javascript" src="static/dev.min.js?v=4"></script>
+    <script type="text/javascript" src="static/dev.min.js?v=100"></script>
     <!--<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>-->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -22,6 +22,68 @@
       ga('create', 'UA-41513131-2', 'auto');
       ga('send', 'pageview');
     </script>
+    <div class="info" style="max-width:800px;margin:auto;font-size:18px">
+      <h2>Information</h2>
+      <h3>What Is This?</h3>
+      <p><em>SquadCalc is an artillery calculator for the game Squad.</em></p>
+      <p>The game Squad currently has two types of artillery; mortar and rocket artillery. Hitting targets with these artillery pieces is difficult. To do so, one must calculate the distance between the artillery piece and the target, one must calculate the correct bearing, and one must calculate the angle with respect to the horizon (elevation) so the artillery shells go the correct distance. To add to this difficulty, the elevation is based on the distance, and one needs to look up a table to get the correct elevation and guestimate if doing the calculations by hand.</p>
+      <p>This calculator solves all of these difficulties by making it very easy to perform these calculations.</p>
+
+      <h3>How Do I Use This?</h3>
+      <p>In the game Squad, you will need a mortar or rocket truck. It helps if you have a spotter, as different terrain elevations may affect the mortar trajectory.</p>
+      <ol>
+        <li>Open the spawn menu (enter), locate your artillery piece and hover your mouse over it. In the bottom right of the map is a location, for example, <code>C2-8-1</code>.</li>
+        <li>Enter this location into the 'Mortar' input box in the calculator.</li>
+        <li>Find the position of the target using the spawn menu and hover your mouse over it.</li>
+        <li>Input the location of the target from the bottom right of the map, for example, <code>B3-5-4</code>.</li>
+        <li>To make the calculation more precise, you should enter more sub-keys by either manually inputting them into the input box, or, by clicking on the animated grid beneath the input box. To learn more about sub-keys, read the section below.</li>
+      </ol>
+      <p>Once these steps have been completed, the artillery calculation will be at the top of the calculator in the calculation box. Use the bearing to align the mortar first, then right click to enter the mortar's sight and adjust the dial to the correct elevation.</p>
+
+      <h3>What Are Sub-Keys And Why Are They Important?</h3>
+      <p>In the olden days of first-person-shooter video games there were maps with very large grids. Let's say these grids were 300 x 300 meters. If you saw an enemy in this grid it was difficult to convey to your teammates where the enemy was within the grid (because it's 90,000 square meters!). Simply telling your teammates that there was an enemy in 'C5' wasn't enough.</p>
+      <p>To remedy this, people used the closest reference they had on hand; <em>the numberpad on the keyboard they were using while playing the game</em>. For more accuracy when referencing the map they subdivided that large 300m x 300m grid into 9 smaller grids, each one corresponding to a key on the numberpad on a keyboard (and now only 100m x 100m). <code>1</code> is in the bottom left corner, <code>2</code> is in the bottom center, <code>3</code> is in the bottom right, <code>4</code> is in the center left, <code>5</code> is in the center, <code>6</code> is in the center right, <code>7</code> is in the top left, <code>8</code> is in the top center, and <code>9</code> is in the top right.<p>
+      <pre style="text-align:center">
+7  8  9
+4  5  6
+1  2  3
+      </pre>
+      <p>Organically people began to use this system. The aforementioned location of <code>C5</code> would be called out as something like 'C5 keypad 1', meaning there was something in the bottom left of C5. Sometimes people would subdivide the grid even further, by subdividing the keypad value. They would call this a 'sub-key'.</p>
+      <p>That's what the location is on the Squad map. For example, <code>C5-1-7</code> is the grid <code>C5</code> subdivided twice. People call out the location <code>C5-1-7</code> as 'C5 keypad 1 keypad 7'.</p>
+      <p>Unfortunately, <em>for even semi-accurate artillery fire just two grid subdivisions is not good enough</em>. You can be anywhere within that grid, and although you've taken a 300m x 300m grid and have turned it into a 33m x 33m area, there can still be a lot of error (the calculator does not know where you are within that 33m x 33m area! You could be anywhere!) To remedy this, <em>you should always enter more sub-keys!</em> This possible error is what you see highlighted in the animated grid. It's also what you see in the min/max values of the calculation.</p>
+      <p><em>How do I enter more sub-keys?</em></p>
+      <p>Just keep subdividing the grid! You do this by eye-balling it (just take a good rough estimate of where you think the artillery or target is within that grid).</p>
+
+      <h3>What's With The Animated Grid?</h3>
+      <p>The animated grid beneath the inputs shows what location you've entered via the sub-keys.</p>
+      <p>The first grid is the Squad provided location. The whole grid is 300m x 300m, and is subdivided twice by the first two sub-keys.</p>
+      <p>The second grid is the grid you have to estimate and is 33m x 33m. This sub-key information isn't given by the Squad map, so this grid is a good reference to what your sub-keys are actually doing. You can only subdivide this grid 3 times. If you subdivide it 3 times, the maximum error is ~1.5m, so the mortar calculation should be very accurate</p>
+      <p><em>You can use your mouse, or, you can tap on these grids to input locations quickly.</em></p>
+      <h3>What Does Save Do?</h3>
+      <p>You can now save and load positions. Once you press save (or you hit 'enter'), the input prompts you for a name for this position. If you leave out a name (by hitting 'enter', or by pressing 'save' again) then it will give you a random name for this position. If you press escape it will cancel the save. If you press escape while not saving, your location information will be cleared from that input.</p>
+      <p>After saving, there is a table with all of your saved positions below the corrections box. You can load the saved positions there.</p>
+
+      <p><em>This app's data is all in memory, meaning nothing is saved to localStorage. If you refresh the page your saved positions will disappear.</em></p>
+
+      <h3>What's With The Correction Section?</h3>
+      <p>If you want to manually nudge or move one of the positions by some number of meters, use the corrections box. For example, if you want to move the target 20m North and 10m West, simply input '20' into the box labeled 'N' and '10' in the box labeled 'W'. Then, press 'Apply to Target'.</p>
+      <p>You can also correct the elevation value by using the 'Add' or 'Sub' inputs. This is helpful if you place your artillery on a high mountain. If you do this, your mortars will almost overshoot by some amount. If, for example, they always overshoot by 20 meters, you would input '20' into the 'Sub' box. If, for example, they always undershoot by 50 meters, you would input '50' into the 'Add' box.</p>
+      <p><em>What does the 'Locked' mean?</em><p>
+      <p>It just means that when you 'Apply to Mortar' or 'Apply to Target' it won't reset the correction values. Right now this is set to Locked and can't be changed. In the future I may change it so that people can toggle this.</p>
+
+      <h3>How Do I Use This For Rocket Artillery?</h3>
+      <p>Simply press the button in the top right of the calculation box, labeled 'Set to Rocket'. This will then convert the elevation to 'W-key-taps' for the rocket artillery truck. You tap the W-key as lightly as possible that number of times to get the correct elevation.</p>
+
+      <h3>Who Made This And How?</h3>
+      <p>Made by <a href="http://lorenhoward.com/">Loren Howard</a>, known as 'Loff' in Squad.</p>
+      <p>The old SquadCalc site was made with vanilla JavaScript. For fun I rewrote it all to use React/Redux. I've decided to open-source the code, which is visible on github at <a href="https://github.com/lorenmh/sc-react">https://github.com/lorenmh/sc-react</a>. There aren't many comments (sorry!), but pull-requests are welcome.
+      </p>
+
+      <h3>Changelog</h3>
+      <ul>
+        <li>Updated to v2.</li>
+      </ul>
+    </div>
     <div class="beta" style="max-width:800px;margin:auto;">
     <h3>If you have any feedback, see any bugs, something doesnt work, or, you want something added, submit a comment below</h3>
     <!-- begin wwww.htmlcommentbox.com -->
