@@ -317,8 +317,6 @@ svg {
   border: none;
   right: 0px;
   color: #6f6f6f;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
 }
 
 .position-input-wrap.pending-save {
