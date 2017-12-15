@@ -274,14 +274,7 @@ class GridZoomed extends Component {
               width={SVG_WIDTH}
               height={SVG_HEIGHT}
             >
-              <g
-                className="mouse-active"
-                transform={`translate(${STROKE}, ${STROKE})`}
-                onMouseEnter={mouseEnterHandler}
-                onMouseLeave={mouseLeaveHandler}
-                onMouseMove={mouseMoveHandler}
-                onClick={clickHandler}
-              >
+              <g transform={`translate(${STROKE}, ${STROKE})`}>
                 <rect
                   x="0"
                   y="0"
@@ -293,6 +286,24 @@ class GridZoomed extends Component {
               </g>
               <g transform={`translate(${STROKE}, ${GRID_SIZE + KEY_PADDING})`}>
                 {(() => keyLines(S, true))()}
+              </g>
+              <g transform={`translate(${STROKE}, ${STROKE})`}>
+                {/* getting errors with iOS, apparently it needs to be an svg el
+                  (not g) and it needs to have cursor:pointer or 'onclick'
+                  attribute set, but this is react so who knows whats actually
+                  happening. This should work though*/}
+                <rect
+                  x="0"
+                  y="0"
+                  width={SIZE}
+                  height={SIZE}
+                  style={{fill: 'transparent', stroke: 'none', cursor: 'pointer'}}
+                  className="mouse-active"
+                  onMouseEnter={mouseEnterHandler}
+                  onMouseLeave={mouseLeaveHandler}
+                  onMouseMove={mouseMoveHandler}
+                  onClick={clickHandler}
+                />
               </g>
             </svg>
           </div>
@@ -425,14 +436,7 @@ class Grid extends Component {
               width={SVG_WIDTH}
               height={SVG_HEIGHT}
             >
-              <g
-                className="mouse-active"
-                transform={`translate(${STROKE}, ${STROKE})`}
-                onMouseEnter={mouseEnterHandler}
-                onMouseLeave={mouseLeaveHandler}
-                onMouseMove={mouseMoveHandler}
-                onClick={clickHandler}
-              >
+              <g transform={`translate(${STROKE}, ${STROKE})`}>
                 <rect
                   x="0"
                   y="0"
@@ -444,6 +448,20 @@ class Grid extends Component {
               </g>
               <g transform={`translate(${STROKE}, ${GRID_SIZE + KEY_PADDING})`}>
                 {(() => keyLines(Math.max(S,1/9)))()}
+              </g>
+              <g transform={`translate(${STROKE}, ${STROKE})`}>
+                <rect
+                  x="0"
+                  y="0"
+                  width={SIZE}
+                  height={SIZE}
+                  style={{fill: 'transparent', stroke: 'none', cursor: 'pointer'}}
+                  className="mouse-active"
+                  onMouseEnter={mouseEnterHandler}
+                  onMouseLeave={mouseLeaveHandler}
+                  onMouseMove={mouseMoveHandler}
+                  onClick={clickHandler}
+                />
               </g>
             </svg>
           </div>

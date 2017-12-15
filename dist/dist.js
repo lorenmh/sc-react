@@ -24602,14 +24602,7 @@ var GridZoomed = function (_Component) {
               },
               _react2.default.createElement(
                 'g',
-                {
-                  className: 'mouse-active',
-                  transform: 'translate(' + _const.STROKE + ', ' + _const.STROKE + ')',
-                  onMouseEnter: mouseEnterHandler,
-                  onMouseLeave: mouseLeaveHandler,
-                  onMouseMove: mouseMoveHandler,
-                  onClick: clickHandler
-                },
+                { transform: 'translate(' + _const.STROKE + ', ' + _const.STROKE + ')' },
                 _react2.default.createElement('rect', {
                   x: '0',
                   y: '0',
@@ -24625,6 +24618,22 @@ var GridZoomed = function (_Component) {
                 function () {
                   return keyLines(S, true);
                 }()
+              ),
+              _react2.default.createElement(
+                'g',
+                { transform: 'translate(' + _const.STROKE + ', ' + _const.STROKE + ')' },
+                _react2.default.createElement('rect', {
+                  x: '0',
+                  y: '0',
+                  width: _const.SIZE,
+                  height: _const.SIZE,
+                  style: { fill: 'transparent', stroke: 'none', cursor: 'pointer' },
+                  className: 'mouse-active',
+                  onMouseEnter: mouseEnterHandler,
+                  onMouseLeave: mouseLeaveHandler,
+                  onMouseMove: mouseMoveHandler,
+                  onClick: clickHandler
+                })
               )
             )
           )
@@ -24765,14 +24774,7 @@ var Grid = function (_Component2) {
               },
               _react2.default.createElement(
                 'g',
-                {
-                  className: 'mouse-active',
-                  transform: 'translate(' + _const.STROKE + ', ' + _const.STROKE + ')',
-                  onMouseEnter: mouseEnterHandler,
-                  onMouseLeave: mouseLeaveHandler,
-                  onMouseMove: mouseMoveHandler,
-                  onClick: clickHandler
-                },
+                { transform: 'translate(' + _const.STROKE + ', ' + _const.STROKE + ')' },
                 _react2.default.createElement('rect', {
                   x: '0',
                   y: '0',
@@ -24788,6 +24790,22 @@ var Grid = function (_Component2) {
                 function () {
                   return keyLines(Math.max(S, 1 / 9));
                 }()
+              ),
+              _react2.default.createElement(
+                'g',
+                { transform: 'translate(' + _const.STROKE + ', ' + _const.STROKE + ')' },
+                _react2.default.createElement('rect', {
+                  x: '0',
+                  y: '0',
+                  width: _const.SIZE,
+                  height: _const.SIZE,
+                  style: { fill: 'transparent', stroke: 'none', cursor: 'pointer' },
+                  className: 'mouse-active',
+                  onMouseEnter: mouseEnterHandler,
+                  onMouseLeave: mouseLeaveHandler,
+                  onMouseMove: mouseMoveHandler,
+                  onClick: clickHandler
+                })
               )
             )
           )
