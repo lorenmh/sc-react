@@ -45,7 +45,9 @@ class CorrectionInputs extends Component {
 
     if (!hasMortar && !hasTarget) return null;
 
-    const { add, sub, n, s, e, w } = values;
+    const { add, sub, n, s, e, w, isRocket } = values;
+
+    const artyName = isRocket ? 'Rocket' : 'Mortar';
 
     const isLocked = true,
       lockHandler = ev => ev
@@ -106,7 +108,7 @@ class CorrectionInputs extends Component {
               className="correction-mortar"
               onClick={applyHandler(MORTAR_ID)}
             >
-              Apply to Mortar
+              {`Apply to ${artyName}`}
             </button>
           ) : null)()}
           {(() => hasTarget ? (

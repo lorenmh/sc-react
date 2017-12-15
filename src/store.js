@@ -38,6 +38,7 @@ export default function configureStore() {
         s: '',
         e: '',
         w: '',
+        isRocket: false,
         locked: true,
       },
 

@@ -234,6 +234,8 @@ svg {
 }
 
 .calculation-wrap {
+  border-radius: 2px;
+  position: relative;
   text-align: center;
   /*border: 1px dashed rgb(180,50,50);*/
   padding: 10px;
@@ -381,6 +383,19 @@ svg {
   justify-content: center;
 }
 
+.type-toggle {
+  outline: none;
+  position: absolute;
+  top:0;
+  right:0;
+  border-radius: 2px;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #e8efff;
+  border: none;
+  padding: 5px 10px;
+}
+
 .correction-buttons button {
   border: none;
   padding: 5px 10px;
@@ -462,6 +477,11 @@ svg {
 }
 
 @media (max-width: 550px) {
+  .calculation-wrap {
+    padding-top: 26px;
+    height: 92px;
+  }
+
   .saved-items, .position-text, .saved-items th {
     font-size: 12px;
   }

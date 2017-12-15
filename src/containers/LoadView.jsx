@@ -14,8 +14,11 @@ class SavedPosition extends Component {
       savedPosition,
       loadMortarHandler,
       loadTargetHandler,
-      deleteHandler
+      deleteHandler,
+      isRocket
     } = this.props;
+
+    const artyName = isRocket ? 'Rocket' : 'Mortar';
 
     const { name, position } = savedPosition;
 
@@ -28,7 +31,7 @@ class SavedPosition extends Component {
             className="load-mortar"
             onClick={loadMortarHandler}
           >
-            Mortar
+            {artyName}
           </button>
           <button
             className="load-target"
@@ -52,7 +55,7 @@ class SavedPosition extends Component {
 
 class LoadView extends Component {
   render() {
-    const { saved, dispatch } = this.props;
+    const { saved, values, dispatch } = this.props;
 
     if (!saved.length) return null;
 
@@ -72,6 +75,7 @@ class LoadView extends Component {
       saved.map((s, index) => (
         <SavedPosition
           key={s.position.toString() + s.name}
+          isRocket={values.isRocket}
           savedPosition={s}
           loadMortarHandler={handleLoadMortar(s.position, index)}
           loadTargetHandler={handleLoadTarget(s.position, index)}

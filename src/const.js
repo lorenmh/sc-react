@@ -71,11 +71,40 @@ export const MORTAR_TABLE = [
   ]
 ;
 
+export const ROCKET_TABLE = [
+  [60, 1],
+  [170, 2],
+  [230, 3],
+  [285, 4],
+  [300, 5],
+  [340, 6],
+  [390, 7],
+  [435, 8],
+  [490, 9],
+  [540, 10],
+  [560, 11],
+  [585, 12],
+  [630, 13],
+  [650, 14],
+  [680, 15],
+  [700, 16],
+  [740, 17],
+  [745, 18],
+  [775, 19],
+  [815, 21]
+];
+
 export const MIN_DISTANCE = MORTAR_TABLE[0][0];
 export const MAX_DISTANCE = MORTAR_TABLE[MORTAR_TABLE.length-1][0];
 
+export const MIN_ROCKET_DISTANCE = ROCKET_TABLE[0][0];
+export const MAX_ROCKET_DISTANCE = ROCKET_TABLE[ROCKET_TABLE.length-1][0];
+
 export const MIN_ELEVATION = MORTAR_TABLE[0][1];
 export const MAX_ELEVATION = MORTAR_TABLE[MORTAR_TABLE.length-1][1];
+
+export const MIN_ROCKET_ELEVATION = ROCKET_TABLE[0][1];
+export const MAX_ROCKET_ELEVATION = ROCKET_TABLE[ROCKET_TABLE.length-1][1];
 
 export const TOO_FAR = 'TOO_FAR';
 export const TOO_CLOSE = 'TOO_CLOSE';

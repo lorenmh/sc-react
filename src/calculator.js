@@ -1,5 +1,9 @@
 import {
   MORTAR_TABLE,
+  ROCKET_TABLE,
+
+  MIN_ROCKET_DISTANCE,
+  MAX_ROCKET_DISTANCE,
 
   MIN_DISTANCE,
   MAX_DISTANCE,
@@ -32,6 +36,33 @@ export function interpolateElevation(distance) {
 
     // rounded to nearest .1
     return Math.round((slope * deltaX + currentY) * 10) / 10;
+  }
+}
+
+export function interpolateTaps(distance) {
+  if (distance < MIN_ROCKET_DISTANCE) return 0;
+  if (distance > MAX_ROCKET_DISTANCE) return TOO_FAR;
+
+  for (let i = 0; i < ROCKET_TABLE.length; i++) {
+    let currentTableEntry = ROCKET_TABLE[i],
+      nextTableEntry = ROCKET_TABLE[i+1],
+      currentX = currentTableEntry[0],
+      currentY = currentTableEntry[1]
+    ;
+
+    if (distance === currentX) return currentY;
+
+    let nextX = nextTableEntry[0];
+
+    if (distance >= nextX) continue;
+
+    let nextY = nextTableEntry[1],
+      slope = (nextY - currentY) / (nextX - currentX),
+      deltaX = distance - currentX
+    ;
+
+    // rounded to nearest .1
+    return Math.round(slope * deltaX + currentY);
   }
 }
 

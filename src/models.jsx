@@ -6,6 +6,8 @@ import {
   TOO_FAR,
   MIN_ELEVATION,
   MAX_ELEVATION,
+  MIN_ROCKET_ELEVATION,
+  MAX_ROCKET_ELEVATION,
   MIN_ERROR,
   PRECOMPUTE,
   KPM
@@ -24,6 +26,7 @@ import {
 
 import {
   interpolateElevation,
+  interpolateTaps,
   distanceWorstCasePositions,
   bearingWorstCasePositions
 } from './calculator';
@@ -309,16 +312,23 @@ export class Position {
   }
 }
 
-window.p = Position;
-
 export class Calculation {
-  static fromPositions(mortarPosition, targetPosition, delta) {
+  static fromPositions(mortarPosition, targetPosition, delta, isRocket) {
     delta = delta !== undefined ? delta : 0;
+    isRocket = !!isRocket;
 
     let distance = mortarPosition.distanceTo(targetPosition),
       correctedDistance = distance + delta,
-      elevation = interpolateElevation(correctedDistance),
-      bearing = mortarPosition.bearingTo(targetPosition),
+      elevation
+    ;
+
+    if (isRocket) {
+      elevation = interpolateTaps(correctedDistance);
+    } else {
+      elevation = interpolateElevation(correctedDistance);
+    }
+
+    let bearing = mortarPosition.bearingTo(targetPosition),
 
       distanceWCP = distanceWorstCasePositions(mortarPosition, targetPosition),
       bearingWCP = bearingWorstCasePositions(mortarPosition, targetPosition),
@@ -327,36 +337,57 @@ export class Calculation {
         distanceWCP[0][0].distanceTo(distanceWCP[0][1]),
         distanceWCP[1][0].distanceTo(distanceWCP[1][1])
       ],
+      elevationRange
+    ;
+
+    if (isRocket) {
+      elevationRange = [
+        interpolateTaps(distanceRange[1] + delta),
+        interpolateTaps(distanceRange[0] + delta)
+      ];
+
+      elevationRange = (
+        elevationRange
+          .map((e) => {
+            if (e === TOO_CLOSE) return MIN_ROCKET_ELEVATION;
+            if (e === TOO_FAR) return MAX_ROCKET_ELEVATION;
+            return e;
+          })
+      );
+    } else {
       elevationRange = [
         interpolateElevation(distanceRange[1] + delta),
         interpolateElevation(distanceRange[0] + delta)
-      ],
-      bearingRange = [
+      ];
+
+      elevationRange = (
+        elevationRange
+          .map((e) => {
+            if (e === TOO_CLOSE) return MIN_ELEVATION;
+            if (e === TOO_FAR) return MAX_ELEVATION;
+            return e;
+          })
+      );
+    }
+    
+    let bearingRange = [
         bearingWCP[0][0].bearingTo(bearingWCP[0][1]),
         bearingWCP[1][0].bearingTo(bearingWCP[1][1])
       ],
       isCollision = mortarPosition.collides(targetPosition)
     ;
 
-    elevationRange = (
-      elevationRange
-        .map((e) => {
-          if (e === TOO_CLOSE) return MIN_ELEVATION;
-          if (e === TOO_FAR) return MAX_ELEVATION;
-          return e;
-        })
-    );
 
     return new Calculation(
       distance, elevation, bearing,
       distanceRange, elevationRange, bearingRange,
-      isCollision
+      isCollision, isRocket
     );
   }
 
   constructor(distance, elevation, bearing,
               distanceRange, elevationRange, bearingRange,
-              isCollision) {
+              isCollision, isRocket) {
     this.distance = distance;
     this.elevation = elevation;
     this.bearing = bearing;
@@ -366,5 +397,6 @@ export class Calculation {
     this.bearingRange = bearingRange;
 
     this.isCollision = !!isCollision;
+    this.isRocket = !!isRocket;
   }
 }

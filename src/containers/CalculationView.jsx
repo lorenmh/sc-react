@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Calculation } from '../models';
+import TypeToggle from './TypeToggle';
+
+import { Calculation, Rocket } from '../models';
 
 import {
   TOO_FAR,
@@ -10,14 +12,20 @@ import {
   TARGET_ID
 } from '../const';
 
-function valueString(value) {
+function valueString(value, isRocket) {
+  if (isRocket) return value.toFixed(0);
   return value.toFixed(1);
 }
 
-function rangeString(calculation, range) {
+function rangeString(calculation, range, isTaps) {
   if (calculation.isCollision) {
     return 'HIGH ERROR!';
   }
+
+  if (isTaps) {
+    return `[min: ${range[1].toFixed(0)}, max: ${range[0].toFixed(0)}]`;
+  }
+
   return `[min: ${range[0].toFixed(1)}, max: ${range[1].toFixed(1)}]`;
 }
 
@@ -25,16 +33,21 @@ class CalculationView extends Component {
   render() {
     const { values, positions } = this.props;
 
+    const { isRocket } = values;
+
     const mortarPosition = positions[MORTAR_ID];
     const targetPosition = positions[TARGET_ID];
+
+    const artyName = isRocket ? 'Rocket' : 'Mortar';
 
     if (!mortarPosition || !targetPosition) {
       return (
         <div className="calculation-wrap">
+          <TypeToggle />
           <div className="calculation-empty-msg-wrap">
             <div className="calculation-empty-msg">
               No calculation! To get a calculation,<br/>
-              Enter a 🚀 Mortar and 🎯 Target position below.
+              {`Enter a 🚀 ${artyName} and 🎯 Target position below.`}
             </div>
           </div>
         </div>
@@ -42,11 +55,13 @@ class CalculationView extends Component {
     }
 
     let delta = (+values.add) - (+values.sub),
-      calculation = Calculation.fromPositions(
-        mortarPosition, targetPosition, delta
-      ),
+      calculation,
       elevation
     ;
+
+    calculation = Calculation.fromPositions(
+      mortarPosition, targetPosition, delta, isRocket
+    );
 
     if (calculation.elevation === TOO_FAR) {
       elevation = (
@@ -66,6 +81,18 @@ class CalculationView extends Component {
           </span>
         </div>
       );
+    } else if (isRocket) {
+      elevation = (
+        <div className="elevation">
+          <span className="bearing-title">W-Taps: </span>
+          <span className="elevation-major">
+            { valueString(calculation.elevation, true) }
+          </span>
+          <span className="elevation-minor">
+            { rangeString(calculation, calculation.elevationRange, true) }
+          </span>
+        </div>
+      );
     } else {
       elevation = (
         <div className="elevation">
@@ -82,6 +109,7 @@ class CalculationView extends Component {
 
     return (
       <div className="calculation-wrap">
+        <TypeToggle />
         <div className="calculation">
           <div className="bearing">
             <span className="bearing-title">Bearing: </span>

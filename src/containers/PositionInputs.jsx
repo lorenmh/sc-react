@@ -134,6 +134,8 @@ class PositionInputs extends Component {
       }
     };
 
+    const artyName = values.isRocket ? 'Rocket' : 'Mortar';
+
     const mortarValue = pendingSave[MORTAR_ID] ?
       values[`${MORTAR_ID}SaveName`] : values[MORTAR_ID]
     ;
@@ -149,7 +151,7 @@ class PositionInputs extends Component {
           value={mortarValue}
           isValid={!!positions[MORTAR_ID]}
           isPendingSave={pendingSave[MORTAR_ID]}
-          placeholder="🚀 Mortar: (ex: A11 11)"
+          placeholder={`🚀 ${artyName}: (ex: A11 11)`}
           clearHandler={clearHandler(MORTAR_ID)}
           inputHandler={inputHandler(MORTAR_ID)}
           saveHandler={saveHandler(MORTAR_ID)}

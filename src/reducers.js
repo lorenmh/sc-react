@@ -4,6 +4,7 @@ import { mnemonic } from './helpers';
 
 import {
   UPDATE_POSITION_VALUE,
+  TOGGLE_TYPE,
   UPDATE_HOVER,
   LOAD_POSITION,
   SAVE_POSITION,
@@ -32,6 +33,15 @@ import {
 // }
 const rootReducer = (state = {}, action) => {
   switch (action.type) {
+
+    case TOGGLE_TYPE:
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          isRocket: !state.values.isRocket
+        }
+      };
 
     case SET_PENDING_SAVE:
       return {
