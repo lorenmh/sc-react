@@ -25234,7 +25234,7 @@ var TypeToggle = function (_Component) {
           className: 'type-toggle',
           onClick: toggleHandler
         },
-        values.isRocket ? 'Set to Mortar' : 'Set to Rocket'
+        !values.isRocket ? 'Mortar' : 'Rocket'
       );
     }
   }]);

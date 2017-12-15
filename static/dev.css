@@ -251,7 +251,6 @@ svg {
 
 .calculation-wrap {
   border-radius: 2px;
-  position: relative;
   text-align: center;
   /*border: 1px dashed rgb(180,50,50);*/
   padding: 10px;
@@ -426,6 +425,10 @@ svg {
   justify-content: center;
 }
 
+.content {
+  position: relative;
+}
+
 .type-toggle {
   outline: none;
   position: absolute;
@@ -435,8 +438,8 @@ svg {
   border-top-left-radius: 0;
   border-bottom-right-radius: 0;
   background-color: #303b3f;
-  border: 1px solid #2a343a;
-  padding: 5px 10px;
+  border: 2px solid #2a343a;
+  padding: 2px 6px;
 }
 
 .correction-buttons button {
@@ -523,7 +526,6 @@ svg {
 
 @media (max-width: 550px) {
   .calculation-wrap {
-    padding-top: 26px;
     height: 92px;
   }
 
