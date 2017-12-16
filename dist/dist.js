@@ -24879,20 +24879,20 @@ var GridView = function (_Component3) {
         return function (e) {
           var eventPosition = gridPosition(e, position, isZoomed);
 
+          var el = document.createElement('div');
           // ios fix?
           if (_const.IS_A_STUPID_BROWSER) {
-            var _el = document.createElement('div');
-            _el.innerText = 'OPTION A';
-            document.body.appendChild(_el);
-            dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
+            try {
+              dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
+              el.innerText = 'A';
+            } catch (error) {
+              el.innerHTML = error.stack.replace(/\n|\r\n/g, '<br>');
+            }
           } else {
-            var _el2 = document.createElement('div');
-            _el2.innerText = 'OPTION B';
-            document.body.appendChild(_el2);
+            el.innerText = 'B';
             dispatch((0, _actions.updateHover)(positionId, eventPosition));
           }
-          var el = document.createElement('div');
-          el.innerText = 'C';
+          el.innerHTML += '<br>C';
           document.body.appendChild(el);
         };
       };

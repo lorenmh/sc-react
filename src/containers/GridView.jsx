@@ -519,21 +519,21 @@ class GridView extends Component {
     const mouseMoveHandler = (positionId, position, isZoomed) => (e) => {
       const eventPosition = gridPosition(e, position, isZoomed);
 
+      let el = document.createElement('div');
       // ios fix?
       if (IS_A_STUPID_BROWSER) {
-        let el = document.createElement('div');
-        el.innerText = 'OPTION A';
-        document.body.appendChild(el);
-        dispatch(applyHoverPosition(positionId, eventPosition));
+        try {
+          dispatch(applyHoverPosition(positionId, eventPosition));
+          el.innerText = 'A';
+        } catch (error) {
+          el.innerHTML = error.stack.replace(/\n|\r\n/g,'<br>');
+        }
       } else {
-        let el = document.createElement('div');
-        el.innerText = 'OPTION B';
-        document.body.appendChild(el);
+        el.innerText = 'B';
         dispatch(updateHover(positionId, eventPosition));
       }
-        let el = document.createElement('div');
-        el.innerText = 'C';
-        document.body.appendChild(el);
+      el.innerHTML += '<br>C';
+      document.body.appendChild(el);
     };
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {
