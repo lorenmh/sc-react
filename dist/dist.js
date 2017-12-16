@@ -24884,11 +24884,11 @@ var GridView = function (_Component3) {
           var eventPosition = gridPosition(e, position, isZoomed);
 
           // ios fix?
-          //if (IS_A_STUPID_BROWSER) {
-          //dispatch(applyHoverPosition(positionId, eventPosition));
-          //} else {
-          dispatch((0, _actions.updateHover)(positionId, eventPosition));
-          //}
+          if (_const.IS_A_STUPID_BROWSER) {
+            dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
+          } else {
+            dispatch((0, _actions.updateHover)(positionId, eventPosition));
+          }
         };
       };
 

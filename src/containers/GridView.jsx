@@ -525,11 +525,11 @@ class GridView extends Component {
       const eventPosition = gridPosition(e, position, isZoomed);
 
       // ios fix?
-      //if (IS_A_STUPID_BROWSER) {
-      //dispatch(applyHoverPosition(positionId, eventPosition));
-      //} else {
+      if (IS_A_STUPID_BROWSER) {
+        dispatch(applyHoverPosition(positionId, eventPosition));
+      } else {
         dispatch(updateHover(positionId, eventPosition));
-      //}
+      }
     };
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {
