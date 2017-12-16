@@ -10,7 +10,6 @@ import {
   SIZE,
   STROKE,
   GRID_SIZE,
-  IS_MOBILE,
   CIRCLE_RADIUS,
   LARGE_GRID,
   SMALL_GRID,
@@ -23,8 +22,8 @@ import {
   MORTAR_ID,
   TARGET_ID,
   GRID_VIEW_HEIGHT,
-
-  PRECOMPUTE
+  PRECOMPUTE,
+  IS_A_STUPID_BROWSER
 } from '../const';
 
 import { Position } from '../models';
@@ -303,7 +302,6 @@ class GridZoomed extends Component {
                   onMouseEnter={mouseEnterHandler}
                   onMouseLeave={mouseLeaveHandler}
                   onMouseMove={mouseMoveHandler}
-                  onTouchMove={clickHandler}
                   onClick={clickHandler}
                 />
               </g>
@@ -462,7 +460,6 @@ class Grid extends Component {
                   onMouseEnter={mouseEnterHandler}
                   onMouseLeave={mouseLeaveHandler}
                   onMouseMove={mouseMoveHandler}
-                  onTouchMove={clickHandler}
                   onClick={clickHandler}
                 />
               </g>
@@ -523,25 +520,16 @@ class GridView extends Component {
       const eventPosition = gridPosition(e, position, isZoomed);
 
       // ios fix?
-      //if (IS_MOBILE) {
-      //  dispatch(applyHoverPosition(positionId, eventPosition));
-      //} else {
+      if (IS_A_STUPID_BROWSER) {
+        dispatch(applyHoverPosition(positionId, eventPosition));
+      } else {
         dispatch(updateHover(positionId, eventPosition));
-      //}
-      //
-      if (e.changedTouches) {
-      let el = document.createElement('div');
-      el.innerText = 'move';
-        document.body.appendChild(el);
       }
     };
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {
       const eventPosition = gridPosition(e, position, isZoomed);
       dispatch(applyHoverPosition(positionId, eventPosition));
-      let el = document.createElement('div');
-      el.innerText = 'click ' + navigator.userAgent;
-      document.body.appendChild(el);
     };
 
     const mortarPosition = positions[MORTAR_ID];
