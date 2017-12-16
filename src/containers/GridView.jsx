@@ -486,6 +486,7 @@ class GridView extends Component {
     const gridPosition = (e, position, isZoomed) => {
       // ok this is probably the issue for ios
       e.preventDefault();
+      //let target = e.currentTarget ? e.currentTarget : e.target;
 
       const offset = e.currentTarget.getBoundingClientRect(),
         { scrollY, scrollX } = window,
@@ -523,12 +524,12 @@ class GridView extends Component {
       // ios fix?
       if (IS_A_STUPID_BROWSER) {
         try {
-          dispatch(applyHoverPosition(positionId, eventPosition));
-        } catch (error) {
-          let o = e.currentTarget.getBoundingClientRect();
           el.innerHTML = eventPosition + '<br>';
           el.innerHTML += e.pageY + ',' + e.pageX + '<br>';
+          let o = e.currentTarget.getBoundingClientRect();
           el.innerHTML += '{' + o.top + ',' + o.left + ',' + window.scrollY + ',' + window.scrollX + '}<br>';
+          dispatch(applyHoverPosition(positionId, eventPosition));
+        } catch (error) {
           el.innerHTML += error.message();
         }
       } else {

@@ -24852,6 +24852,7 @@ var GridView = function (_Component3) {
       var gridPosition = function gridPosition(e, position, isZoomed) {
         // ok this is probably the issue for ios
         e.preventDefault();
+        //let target = e.currentTarget ? e.currentTarget : e.target;
 
         var offset = e.currentTarget.getBoundingClientRect(),
             _window = window,
@@ -24883,12 +24884,12 @@ var GridView = function (_Component3) {
           // ios fix?
           if (_const.IS_A_STUPID_BROWSER) {
             try {
-              dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
-            } catch (error) {
-              var o = e.currentTarget.getBoundingClientRect();
               el.innerHTML = eventPosition + '<br>';
               el.innerHTML += e.pageY + ',' + e.pageX + '<br>';
+              var o = e.currentTarget.getBoundingClientRect();
               el.innerHTML += '{' + o.top + ',' + o.left + ',' + window.scrollY + ',' + window.scrollX + '}<br>';
+              dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
+            } catch (error) {
               el.innerHTML += error.message();
             }
           } else {
