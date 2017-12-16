@@ -24634,7 +24634,8 @@ var GridZoomed = function (_Component) {
                   onMouseEnter: mouseEnterHandler,
                   onMouseLeave: mouseLeaveHandler,
                   onMouseMove: mouseMoveHandler,
-                  onClick: clickHandler
+                  onClick: clickHandler,
+                  onTouchEnd: clickHandler
                 })
               )
             )
@@ -24806,7 +24807,8 @@ var Grid = function (_Component2) {
                   onMouseEnter: mouseEnterHandler,
                   onMouseLeave: mouseLeaveHandler,
                   onMouseMove: mouseMoveHandler,
-                  onClick: clickHandler
+                  onClick: clickHandler,
+                  onTouchEnd: clickHandler
                 })
               )
             )
@@ -24884,11 +24886,11 @@ var GridView = function (_Component3) {
           var eventPosition = gridPosition(e, position, isZoomed);
 
           // ios fix?
-          if (_const.IS_A_STUPID_BROWSER) {
-            dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
-          } else {
-            dispatch((0, _actions.updateHover)(positionId, eventPosition));
-          }
+          //if (IS_A_STUPID_BROWSER) {
+          //  dispatch(applyHoverPosition(positionId, eventPosition));
+          //} else {
+          dispatch((0, _actions.updateHover)(positionId, eventPosition));
+          //}
         };
       };
 
