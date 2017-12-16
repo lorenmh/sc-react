@@ -303,7 +303,6 @@ class GridZoomed extends Component {
                   onMouseLeave={mouseLeaveHandler}
                   onMouseMove={mouseMoveHandler}
                   onClick={clickHandler}
-                  onTouchMove={clickHandler}
                 />
               </g>
             </svg>
@@ -462,7 +461,6 @@ class Grid extends Component {
                   onMouseLeave={mouseLeaveHandler}
                   onMouseMove={mouseMoveHandler}
                   onClick={clickHandler}
-                  onTouchMove={clickHandler}
                 />
               </g>
             </svg>
@@ -527,11 +525,11 @@ class GridView extends Component {
       const eventPosition = gridPosition(e, position, isZoomed);
 
       // ios fix?
-      //if (IS_A_STUPID_BROWSER) {
-      //  dispatch(applyHoverPosition(positionId, eventPosition));
-      //} else {
+      if (IS_A_STUPID_BROWSER) {
+        dispatch(applyHoverPosition(positionId, eventPosition));
+      } else {
         dispatch(updateHover(positionId, eventPosition));
-      //}
+      }
     };
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {
