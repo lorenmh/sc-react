@@ -24904,7 +24904,7 @@ var GridView = function (_Component3) {
           var eventPosition = gridPosition(e, position, isZoomed);
           dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
           var el = document.createElement('div');
-          el.innerText = 'click';
+          el.innerText = 'click ' + navigator.userAgent;
           document.body.appendChild(el);
         };
       };

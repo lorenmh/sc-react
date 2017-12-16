@@ -540,7 +540,7 @@ class GridView extends Component {
       const eventPosition = gridPosition(e, position, isZoomed);
       dispatch(applyHoverPosition(positionId, eventPosition));
       let el = document.createElement('div');
-      el.innerText = 'click';
+      el.innerText = 'click ' + navigator.userAgent;
       document.body.appendChild(el);
     };
 
