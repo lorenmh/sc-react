@@ -303,7 +303,7 @@ class GridZoomed extends Component {
                   onMouseLeave={mouseLeaveHandler}
                   onMouseMove={mouseMoveHandler}
                   onClick={clickHandler}
-                  onTouchEnd={clickHandler}
+                  onTouchMove={clickHandler}
                 />
               </g>
             </svg>
@@ -462,7 +462,7 @@ class Grid extends Component {
                   onMouseLeave={mouseLeaveHandler}
                   onMouseMove={mouseMoveHandler}
                   onClick={clickHandler}
-                  onTouchEnd={clickHandler}
+                  onTouchMove={clickHandler}
                 />
               </g>
             </svg>

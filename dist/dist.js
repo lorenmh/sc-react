@@ -24635,7 +24635,7 @@ var GridZoomed = function (_Component) {
                   onMouseLeave: mouseLeaveHandler,
                   onMouseMove: mouseMoveHandler,
                   onClick: clickHandler,
-                  onTouchEnd: clickHandler
+                  onTouchMove: clickHandler
                 })
               )
             )
@@ -24808,7 +24808,7 @@ var Grid = function (_Component2) {
                   onMouseLeave: mouseLeaveHandler,
                   onMouseMove: mouseMoveHandler,
                   onClick: clickHandler,
-                  onTouchEnd: clickHandler
+                  onTouchMove: clickHandler
                 })
               )
             )
