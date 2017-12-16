@@ -528,6 +528,9 @@ class GridView extends Component {
       //} else {
         dispatch(updateHover(positionId, eventPosition));
       //}
+      let el = document.createElement('div');
+      el.innerText = 'move';
+      document.body.appendChild(el);
     };
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {

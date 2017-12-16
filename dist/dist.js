@@ -24890,6 +24890,9 @@ var GridView = function (_Component3) {
           //} else {
           dispatch((0, _actions.updateHover)(positionId, eventPosition));
           //}
+          var el = document.createElement('div');
+          el.innerText = 'move';
+          document.body.appendChild(el);
         };
       };
 
