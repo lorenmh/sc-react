@@ -24637,6 +24637,7 @@ var GridZoomed = function (_Component) {
                   onMouseEnter: mouseEnterHandler,
                   onMouseLeave: mouseLeaveHandler,
                   onMouseMove: mouseMoveHandler,
+                  onTouchStart: clickHandler,
                   onClick: clickHandler
                 })
               )
@@ -24809,6 +24810,7 @@ var Grid = function (_Component2) {
                   onMouseEnter: mouseEnterHandler,
                   onMouseLeave: mouseLeaveHandler,
                   onMouseMove: mouseMoveHandler,
+                  onTouchStart: clickHandler,
                   onClick: clickHandler
                 })
               )
@@ -24853,6 +24855,9 @@ var GridView = function (_Component3) {
       };
 
       var gridPosition = function gridPosition(e, position, isZoomed) {
+        // ok this is probably the issue for ios
+        e.preventDefault();
+
         var offset = e.currentTarget.getBoundingClientRect(),
             _window = window,
             scrollY = _window.scrollY,
@@ -24880,11 +24885,11 @@ var GridView = function (_Component3) {
           var eventPosition = gridPosition(e, position, isZoomed);
 
           // ios fix?
-          if (_const.IS_MOBILE) {
-            dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
-          } else {
-            dispatch((0, _actions.updateHover)(positionId, eventPosition));
-          }
+          //if (IS_MOBILE) {
+          //  dispatch(applyHoverPosition(positionId, eventPosition));
+          //} else {
+          dispatch((0, _actions.updateHover)(positionId, eventPosition));
+          //}
         };
       };
 

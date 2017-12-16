@@ -303,6 +303,7 @@ class GridZoomed extends Component {
                   onMouseEnter={mouseEnterHandler}
                   onMouseLeave={mouseLeaveHandler}
                   onMouseMove={mouseMoveHandler}
+                  onTouchStart={clickHandler}
                   onClick={clickHandler}
                 />
               </g>
@@ -461,6 +462,7 @@ class Grid extends Component {
                   onMouseEnter={mouseEnterHandler}
                   onMouseLeave={mouseLeaveHandler}
                   onMouseMove={mouseMoveHandler}
+                  onTouchStart={clickHandler}
                   onClick={clickHandler}
                 />
               </g>
@@ -485,6 +487,9 @@ class GridView extends Component {
     };
 
     const gridPosition = (e, position, isZoomed) => {
+      // ok this is probably the issue for ios
+      e.preventDefault();
+
       const offset = e.currentTarget.getBoundingClientRect(),
         { scrollY, scrollX } = window,
         top = offset.top + scrollY,
@@ -518,11 +523,11 @@ class GridView extends Component {
       const eventPosition = gridPosition(e, position, isZoomed);
 
       // ios fix?
-      if (IS_MOBILE) {
-        dispatch(applyHoverPosition(positionId, eventPosition));
-      } else {
+      //if (IS_MOBILE) {
+      //  dispatch(applyHoverPosition(positionId, eventPosition));
+      //} else {
         dispatch(updateHover(positionId, eventPosition));
-      }
+      //}
     };
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {
