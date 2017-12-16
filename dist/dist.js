@@ -24896,9 +24896,10 @@ var GridView = function (_Component3) {
       var clickHandler = function clickHandler(positionId, position, isZoomed) {
         return function (e) {
           var eventPosition = gridPosition(e, position, isZoomed);
-          setTimeout(function () {
-            return dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
-          }, 0);
+          dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
+          var el = document.createElement('div');
+          el.innerText = 'click';
+          document.body.appendChild(el);
         };
       };
 
