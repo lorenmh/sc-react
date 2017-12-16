@@ -532,8 +532,7 @@ class GridView extends Component {
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {
       const eventPosition = gridPosition(e, position, isZoomed);
-
-      dispatch(applyHoverPosition(positionId, eventPosition));
+      setTimeout(() => dispatch(applyHoverPosition(positionId, eventPosition)), 0);
     };
 
     const mortarPosition = positions[MORTAR_ID];
