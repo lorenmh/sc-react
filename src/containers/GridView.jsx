@@ -521,10 +521,19 @@ class GridView extends Component {
 
       // ios fix?
       if (IS_A_STUPID_BROWSER) {
+        let el = document.createElement('div');
+        el.innerText = 'OPTION A';
+        document.body.appendChild(el);
         dispatch(applyHoverPosition(positionId, eventPosition));
       } else {
+        let el = document.createElement('div');
+        el.innerText = 'OPTION B';
+        document.body.appendChild(el);
         dispatch(updateHover(positionId, eventPosition));
       }
+        let el = document.createElement('div');
+        el.innerText = 'C';
+        document.body.appendChild(el);
     };
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {

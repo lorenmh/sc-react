@@ -24881,10 +24881,19 @@ var GridView = function (_Component3) {
 
           // ios fix?
           if (_const.IS_A_STUPID_BROWSER) {
+            var _el = document.createElement('div');
+            _el.innerText = 'OPTION A';
+            document.body.appendChild(_el);
             dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
           } else {
+            var _el2 = document.createElement('div');
+            _el2.innerText = 'OPTION B';
+            document.body.appendChild(_el2);
             dispatch((0, _actions.updateHover)(positionId, eventPosition));
           }
+          var el = document.createElement('div');
+          el.innerText = 'C';
+          document.body.appendChild(el);
         };
       };
 
