@@ -24853,7 +24853,7 @@ var GridView = function (_Component3) {
         // ok this is probably the issue for ios
         e.preventDefault();
 
-        var log = document.createElement('div');
+        //let log = document.createElement('div');
 
         var offset = e.currentTarget.getBoundingClientRect(),
             _window = window,
@@ -24873,9 +24873,8 @@ var GridView = function (_Component3) {
             y = Math.floor(position.$y / error) * error,
             eventPosition = _models.Position.fromExactPosition(x + dx, y + dy, precision);
 
-
-        log.innerHTML = '{' + scrollY + ', ' + scrollX + ', ' + top + ', ' + left + ', ' + width + ', ' + height + ', ' + e.pageX + ', ' + e.pageY + ', ' + dx + ', ' + dy + ', ' + eventPosition + '}<br>';
-        document.body.appendChild(log);
+        //log.innerHTML = `{${scrollY}, ${scrollX}, ${top}, ${left}, ${width}, ${height}, ${e.pageX}, ${e.pageY}, ${dx}, ${dy}, ${eventPosition}}<br>`;
+        //document.body.appendChild(log);
 
         return eventPosition;
       };
@@ -24885,11 +24884,11 @@ var GridView = function (_Component3) {
           var eventPosition = gridPosition(e, position, isZoomed);
 
           // ios fix?
-          if (_const.IS_A_STUPID_BROWSER) {
-            dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
-          } else {
-            dispatch((0, _actions.updateHover)(positionId, eventPosition));
-          }
+          //if (IS_A_STUPID_BROWSER) {
+          //dispatch(applyHoverPosition(positionId, eventPosition));
+          //} else {
+          dispatch((0, _actions.updateHover)(positionId, eventPosition));
+          //}
         };
       };
 
@@ -26943,7 +26942,7 @@ var rootReducer = function rootReducer() {
     case _actions.APPLY_HOVER_POSITION:
       return _extends({}, state, {
         positions: _extends({}, state.positions, _defineProperty({}, action.positionId, action.position)),
-        values: _extends({}, state.values, _defineProperty({}, action.positionId, state.hover[action.positionId].toStringShort()))
+        values: _extends({}, state.values, _defineProperty({}, action.positionId, action.position.toStringShort()))
       });
 
     case _actions.LOAD_POSITION:

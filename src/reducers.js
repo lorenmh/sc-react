@@ -96,7 +96,7 @@ const rootReducer = (state = {}, action) => {
         },
         values: {
           ...state.values,
-          [action.positionId]: state.hover[action.positionId].toStringShort()
+          [action.positionId]: action.position.toStringShort()
         }
       };
 

@@ -487,7 +487,7 @@ class GridView extends Component {
       // ok this is probably the issue for ios
       e.preventDefault();
 
-      let log = document.createElement('div');
+      //let log = document.createElement('div');
 
       const offset = e.currentTarget.getBoundingClientRect(),
         { scrollY, scrollX } = window,
@@ -515,8 +515,8 @@ class GridView extends Component {
         )
       ;
 
-      log.innerHTML = `{${scrollY}, ${scrollX}, ${top}, ${left}, ${width}, ${height}, ${e.pageX}, ${e.pageY}, ${dx}, ${dy}, ${eventPosition}}<br>`;
-      document.body.appendChild(log);
+      //log.innerHTML = `{${scrollY}, ${scrollX}, ${top}, ${left}, ${width}, ${height}, ${e.pageX}, ${e.pageY}, ${dx}, ${dy}, ${eventPosition}}<br>`;
+      //document.body.appendChild(log);
 
       return eventPosition;
     };
@@ -525,11 +525,11 @@ class GridView extends Component {
       const eventPosition = gridPosition(e, position, isZoomed);
 
       // ios fix?
-      if (IS_A_STUPID_BROWSER) {
-        dispatch(applyHoverPosition(positionId, eventPosition));
-      } else {
+      //if (IS_A_STUPID_BROWSER) {
+      //dispatch(applyHoverPosition(positionId, eventPosition));
+      //} else {
         dispatch(updateHover(positionId, eventPosition));
-      }
+      //}
     };
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {
