@@ -524,15 +524,16 @@ class GridView extends Component {
       if (IS_A_STUPID_BROWSER) {
         try {
           dispatch(applyHoverPosition(positionId, eventPosition));
-          el.innerText = 'A';
         } catch (error) {
-          el.innerHTML = error.stack.replace(/\n|\r\n/g,'<br>');
+          let o = e.currentTarget.getBoundingClientRect();
+          el.innerHTML = eventPosition + '<br>';
+          el.innerHTML += e.pageY + ',' + e.pageX + '<br>';
+          el.innerHTML += '{' + o.top + ',' + o.left + ',' + window.scrollY + ',' + window.scrollX + '}<br>';
+          el.innerHTML += error.message();
         }
       } else {
-        el.innerText = 'B';
         dispatch(updateHover(positionId, eventPosition));
       }
-      el.innerHTML += '<br>C';
       document.body.appendChild(el);
     };
 

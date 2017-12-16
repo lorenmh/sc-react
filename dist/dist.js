@@ -24884,15 +24884,16 @@ var GridView = function (_Component3) {
           if (_const.IS_A_STUPID_BROWSER) {
             try {
               dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
-              el.innerText = 'A';
             } catch (error) {
-              el.innerHTML = error.stack.replace(/\n|\r\n/g, '<br>');
+              var o = e.currentTarget.getBoundingClientRect();
+              el.innerHTML = eventPosition + '<br>';
+              el.innerHTML += e.pageY + ',' + e.pageX + '<br>';
+              el.innerHTML += '{' + o.top + ',' + o.left + ',' + window.scrollY + ',' + window.scrollX + '}<br>';
+              el.innerHTML += error.message();
             }
           } else {
-            el.innerText = 'B';
             dispatch((0, _actions.updateHover)(positionId, eventPosition));
           }
-          el.innerHTML += '<br>C';
           document.body.appendChild(el);
         };
       };
