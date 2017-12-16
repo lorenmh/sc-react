@@ -10,6 +10,7 @@ import {
   SIZE,
   STROKE,
   GRID_SIZE,
+  IS_MOBILE,
   CIRCLE_RADIUS,
   LARGE_GRID,
   SMALL_GRID,
@@ -516,7 +517,12 @@ class GridView extends Component {
     const mouseMoveHandler = (positionId, position, isZoomed) => (e) => {
       const eventPosition = gridPosition(e, position, isZoomed);
 
-      dispatch(updateHover(positionId, eventPosition));
+      // ios fix?
+      if (IS_MOBILE) {
+        dispatch(applyHoverPosition(positionId, eventPosition));
+      } else {
+        dispatch(updateHover(positionId, eventPosition));
+      }
     };
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {
