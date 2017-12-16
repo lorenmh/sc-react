@@ -486,7 +486,8 @@ class GridView extends Component {
     const gridPosition = (e, position, isZoomed) => {
       // ok this is probably the issue for ios
       e.preventDefault();
-      //let target = e.currentTarget ? e.currentTarget : e.target;
+
+      let log = document.createElement('div');
 
       const offset = e.currentTarget.getBoundingClientRect(),
         { scrollY, scrollX } = window,
@@ -514,28 +515,21 @@ class GridView extends Component {
         )
       ;
 
+      log.innerHTML = `{${scrollY}, ${scrollX}, ${top}, ${left}, ${width}, ${height}, ${e.pageX}, ${e.pageY}, ${dx}, ${dy}, ${eventPosition}}<br>`;
+      document.body.appendChild(log);
+
       return eventPosition;
     };
 
     const mouseMoveHandler = (positionId, position, isZoomed) => (e) => {
       const eventPosition = gridPosition(e, position, isZoomed);
 
-      let el = document.createElement('div');
       // ios fix?
       if (IS_A_STUPID_BROWSER) {
-        try {
-          el.innerHTML = eventPosition + '<br>';
-          el.innerHTML += e.pageY + ',' + e.pageX + '<br>';
-          let o = e.currentTarget.getBoundingClientRect();
-          el.innerHTML += '{' + o.top + ',' + o.left + ',' + window.scrollY + ',' + window.scrollX + '}<br>';
-          dispatch(applyHoverPosition(positionId, eventPosition));
-        } catch (error) {
-          el.innerHTML += error.message();
-        }
+        dispatch(applyHoverPosition(positionId, eventPosition));
       } else {
         dispatch(updateHover(positionId, eventPosition));
       }
-      document.body.appendChild(el);
     };
 
     const clickHandler = (positionId, position, isZoomed) => (e) => {

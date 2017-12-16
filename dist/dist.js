@@ -24852,7 +24852,8 @@ var GridView = function (_Component3) {
       var gridPosition = function gridPosition(e, position, isZoomed) {
         // ok this is probably the issue for ios
         e.preventDefault();
-        //let target = e.currentTarget ? e.currentTarget : e.target;
+
+        var log = document.createElement('div');
 
         var offset = e.currentTarget.getBoundingClientRect(),
             _window = window,
@@ -24873,6 +24874,9 @@ var GridView = function (_Component3) {
             eventPosition = _models.Position.fromExactPosition(x + dx, y + dy, precision);
 
 
+        log.innerHTML = '{' + scrollY + ', ' + scrollX + ', ' + top + ', ' + left + ', ' + width + ', ' + height + ', ' + e.pageX + ', ' + e.pageY + ', ' + dx + ', ' + dy + ', ' + eventPosition + '}<br>';
+        document.body.appendChild(log);
+
         return eventPosition;
       };
 
@@ -24880,22 +24884,12 @@ var GridView = function (_Component3) {
         return function (e) {
           var eventPosition = gridPosition(e, position, isZoomed);
 
-          var el = document.createElement('div');
           // ios fix?
           if (_const.IS_A_STUPID_BROWSER) {
-            try {
-              el.innerHTML = eventPosition + '<br>';
-              el.innerHTML += e.pageY + ',' + e.pageX + '<br>';
-              var o = e.currentTarget.getBoundingClientRect();
-              el.innerHTML += '{' + o.top + ',' + o.left + ',' + window.scrollY + ',' + window.scrollX + '}<br>';
-              dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
-            } catch (error) {
-              el.innerHTML += error.message();
-            }
+            dispatch((0, _actions.applyHoverPosition)(positionId, eventPosition));
           } else {
             dispatch((0, _actions.updateHover)(positionId, eventPosition));
           }
-          document.body.appendChild(el);
         };
       };
 
