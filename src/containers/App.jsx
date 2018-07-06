@@ -15,7 +15,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="content">
-        <h1 className="app-title">Squad Game Calculator</h1>
+        <h1 className="app-title">SquadCalc</h1>
         <CalculationView />
         <PositionInputs />
         <GridView />

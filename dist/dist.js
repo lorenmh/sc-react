@@ -24116,7 +24116,7 @@ var App = function (_Component) {
         _react2.default.createElement(
           'h1',
           { className: 'app-title' },
-          'Squad Game Calculator'
+          'SquadCalc'
         ),
         _react2.default.createElement(_CalculationView2.default, null),
         _react2.default.createElement(_PositionInputs2.default, null),
