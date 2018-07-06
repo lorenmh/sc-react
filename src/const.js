@@ -61,33 +61,32 @@ export const MORTAR_ID = 'mortar';
 export const TARGET_ID = 'target';
 
 export const MORTAR_TABLE = [
-    [50, 1579],
-    [100, 1558],
-    [150, 1538],
-    [200, 1517],
-    [250, 1496],
-    [300, 1475],
-    [350, 1453],
-    [400, 1431],
-    [450, 1409],
-    [500, 1387],
-    [550, 1364],
-    [600, 1341],
-    [650, 1317],
-    [700, 1292],
-    [750, 1267],
-    [800, 1240],
-    [850, 1212],
-    [900, 1183],
-    [950, 1152],
-    [1000, 1118],
-    [1050, 1081],
-    [1100, 1039],
-    [1150, 988],
-    [1200, 918],
-    [1250, 800]
-  ]
-;
+  [50, 1579],
+  [100, 1558],
+  [150, 1538],
+  [200, 1517],
+  [250, 1496],
+  [300, 1475],
+  [350, 1453],
+  [400, 1431],
+  [450, 1409],
+  [500, 1387],
+  [550, 1364],
+  [600, 1341],
+  [650, 1317],
+  [700, 1292],
+  [750, 1267],
+  [800, 1240],
+  [850, 1212],
+  [900, 1183],
+  [950, 1152],
+  [1000, 1118],
+  [1050, 1081],
+  [1100, 1039],
+  [1150, 988],
+  [1200, 918],
+  [1250, 800]
+];
 
 export const ROCKET_TABLE = [
   [60, 1],
@@ -112,18 +111,113 @@ export const ROCKET_TABLE = [
   [815, 21]
 ];
 
-export const MIN_DISTANCE = MORTAR_TABLE[0][0];
-export const MAX_DISTANCE = MORTAR_TABLE[MORTAR_TABLE.length-1][0];
+export const MORTAR_BR_3_TABLE = [
+  [50, 1582],
+  [100, 1565],
+  [150, 1548],
+  [200, 1530],
+  [250, 1513],
+  [300, 1495],
+  [350, 1477],
+  [400, 1459],
+  [450, 1441],
+  [500, 1423],
+  [550, 1404],
+  [600, 1385],
+  [650, 1366],
+  [700, 1346],
+  [750, 1327],
+  [800, 1306],
+  [850, 1285],
+  [900, 1264],
+  [950, 1241],
+  [1000, 1218],
+  [1050, 1194],
+  [1100, 1168],
+  [1150, 1141],
+  [1200, 1112],
+  [1250, 1081]
+]
 
-export const MIN_ROCKET_DISTANCE = ROCKET_TABLE[0][0];
-export const MAX_ROCKET_DISTANCE = ROCKET_TABLE[ROCKET_TABLE.length-1][0];
+export const MORTAR_BR_4_TABLE = [
+  [50, 1590],
+  [100, 1580],
+  [150, 1570],
+  [200, 1561],
+  [250, 1551],
+  [300, 1541],
+  [350, 1531],
+  [400, 1521],
+  [450, 1511],
+  [500, 1501],
+  [550, 1492],
+  [600, 1482],
+  [650, 1471],
+  [700, 1461],
+  [750, 1451],
+  [800, 1441],
+  [850, 1431],
+  [900, 1420],
+  [950, 1410],
+  [1000, 1399],
+  [1050, 1389],
+  [1100, 1378],
+  [1150, 1367],
+  [1200, 1356],
+  [1250, 1345]
+]
 
-export const MIN_ELEVATION = MORTAR_TABLE[0][1];
-export const MAX_ELEVATION = MORTAR_TABLE[MORTAR_TABLE.length-1][1];
+export const MORTAR_DE_TABLE = [
+  [50, 1578],
+  [100, 1557],
+  [150, 1536],
+  [200, 1514],
+  [250, 1493],
+  [300, 1471],
+  [350, 1449],
+  [400, 1427],
+  [450, 1404],
+  [500, 1381],
+  [550, 1357],
+  [600, 1333],
+  [650, 1308],
+  [700, 1282],
+  [750, 1256],
+  [800, 1228],
+  [850, 1199],
+  [900, 1168],
+  [950, 1134],
+  [1000, 1098],
+  [1050, 1057],
+  [1100, 1009],
+  [1150, 947],
+  [1200, 803]
+]
 
-export const MIN_ROCKET_ELEVATION = ROCKET_TABLE[0][1];
-export const MAX_ROCKET_ELEVATION = ROCKET_TABLE[ROCKET_TABLE.length-1][1];
+export const TABLES = {
+  [MORTAR]: MORTAR_TABLE,
+  [ROCKET]: ROCKET_TABLE,
+  [MORTAR_BR_3]: MORTAR_BR_3_TABLE,
+  [MORTAR_BR_4]: MORTAR_BR_4_TABLE,
+  [MORTAR_DE]: MORTAR_DE_TABLE,
+}
+
+export const BOUNDS = (
+  Object.entries(TABLES)
+    .map((id, table) => ({
+      id,
+      distance: [table[0][0], table[table.length-1][0]],
+      elevation: [table[0][1], table[table.length-1][1]],
+    }))
+    .reduce((mapping, bounds) => {
+      const { id, distance, elevation } = bounds;
+      mapping[id] = {
+        distance,
+        elevation,
+      };
+      return mapping
+    }, {})
+);
 
 export const TOO_FAR = 'TOO_FAR';
 export const TOO_CLOSE = 'TOO_CLOSE';
-

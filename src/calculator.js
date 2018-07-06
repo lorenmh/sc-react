@@ -1,68 +1,39 @@
 import {
-  MORTAR_TABLE,
-  ROCKET_TABLE,
-
-  MIN_ROCKET_DISTANCE,
-  MAX_ROCKET_DISTANCE,
-
-  MIN_DISTANCE,
-  MAX_DISTANCE,
+  TABLES,
+  ROUNDING,
 
   TOO_CLOSE,
   TOO_FAR
 } from './const';
 
-export function interpolateElevation(distance) {
-  if (distance < MIN_DISTANCE) return TOO_CLOSE;
-  if (distance > MAX_DISTANCE) return TOO_FAR;
+export function interpolate(type, distance) {
+  const table = TABLES[type];
+  const rounding = ROUNDING[type];
 
-  for (let i = 0; i < MORTAR_TABLE.length; i++) {
-    let currentTableEntry = MORTAR_TABLE[i],
-      nextTableEntry = MORTAR_TABLE[i+1],
-      currentX = currentTableEntry[0],
-      currentY = currentTableEntry[1]
+  const minDistance = table[0][0];
+  const maxDistance = table[table.length-1][0];
+
+  if (distance < minDistance) return TOO_CLOSE;
+  if (distance > maxDistance) return TOO_FAR;
+
+  for (let i = 0; i < table.length; i++) {
+    let currentTableEntry = table[i],
+      nextTableEntry = table[i+1],
+      [currentX, currentY] = currentTableEntry
     ;
 
     if (distance === currentX) return currentY;
 
-    let nextX = nextTableEntry[0];
+    let [nextX, nextY] = nextTableEntry;
 
     if (distance >= nextX) continue;
 
-    let nextY = nextTableEntry[1],
-      slope = (nextY - currentY) / (nextX - currentX),
+    let slope = (nextY - currentY) / (nextX - currentX),
       deltaX = distance - currentX
     ;
 
     // rounded to nearest .1
-    return Math.round((slope * deltaX + currentY) * 10) / 10;
-  }
-}
-
-export function interpolateTaps(distance) {
-  if (distance < MIN_ROCKET_DISTANCE) return 0;
-  if (distance > MAX_ROCKET_DISTANCE) return TOO_FAR;
-
-  for (let i = 0; i < ROCKET_TABLE.length; i++) {
-    let currentTableEntry = ROCKET_TABLE[i],
-      nextTableEntry = ROCKET_TABLE[i+1],
-      currentX = currentTableEntry[0],
-      currentY = currentTableEntry[1]
-    ;
-
-    if (distance === currentX) return currentY;
-
-    let nextX = nextTableEntry[0];
-
-    if (distance >= nextX) continue;
-
-    let nextY = nextTableEntry[1],
-      slope = (nextY - currentY) / (nextX - currentX),
-      deltaX = distance - currentX
-    ;
-
-    // rounded to nearest .1
-    return Math.round(slope * deltaX + currentY);
+    return Math.round((slope * deltaX + currentY) * rounding) / rounding;
   }
 }
 

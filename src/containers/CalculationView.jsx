@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import GameToggle from './GameToggle';
 import TypeToggle from './TypeToggle';
 
-import { Calculation, Rocket } from '../models';
+import { Calculation } from '../models';
 
 import {
   TOO_FAR,
@@ -65,7 +65,7 @@ class CalculationView extends Component {
     ;
 
     calculation = Calculation.fromPositions(
-      mortarPosition, targetPosition, delta, isRocket
+      mortarPosition, targetPosition, delta, type
     );
 
     if (calculation.elevation === TOO_FAR) {
