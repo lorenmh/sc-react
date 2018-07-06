@@ -4,6 +4,7 @@ import { mnemonic } from './helpers';
 
 import {
   UPDATE_POSITION_VALUE,
+  TOGGLE_GAME,
   TOGGLE_TYPE,
   UPDATE_HOVER,
   LOAD_POSITION,
@@ -16,30 +17,39 @@ import {
   APPLY_CORRECTION
 } from './actions';
 
-// {
-//   positions: {
-//     mortar: null,
-//     target: null,
-//   },
-//   values: {
-//     mortar: '',
-//     target: ''
-//     n: '',
-//     s: '',
-//     e: '',
-//     w: ''
-//   },
-//   saved: []
-// }
+import {
+  GAME_SQUAD,
+  MORTAR,
+  MORTAR_BR_3,
+} from './const';
+
 const rootReducer = (state = {}, action) => {
+  console.log(state);
   switch (action.type) {
+
+    case TOGGLE_GAME:
+      let type;
+      if (action.game === GAME_SQUAD) {
+        type = MORTAR;
+      } else {
+        type = MORTAR_BR_3;
+      }
+
+      return {
+        ...state,
+        meta: {
+          ...state.meta,
+          game: action.game,
+          type
+        }
+      };
 
     case TOGGLE_TYPE:
       return {
         ...state,
-        values: {
-          ...state.values,
-          isRocket: !state.values.isRocket
+        meta: {
+          ...state.meta,
+          type: action.mortarType,
         }
       };
 

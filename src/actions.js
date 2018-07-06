@@ -5,6 +5,7 @@ export const LOAD_POSITION = 'LOAD_POSITION';
 export const SAVE_POSITION = 'SAVE_POSITION';
 export const DELETE_SAVED_POSITION = 'DELETE_SAVED_POSITION';
 
+export const TOGGLE_GAME = 'TOGGLE_GAME';
 export const TOGGLE_TYPE = 'TOGGLE_TYPE';
 
 export const SET_PENDING_SAVE = 'SET_PENDING_SAVE';
@@ -13,9 +14,17 @@ export const UPDATE_SAVE_NAME = 'UPDATE_SAVE_NAME';
 export const UPDATE_CORRECTION_VALUES = 'UPDATE_CORRECTION_VALUES';
 export const APPLY_CORRECTION = 'APPLY_CORRECTION';
 
-export function toggleType() {
+export function toggleGame(game) {
   return {
-    type: TOGGLE_TYPE
+    type: TOGGLE_GAME,
+    game
+  };
+}
+
+export function toggleType(type) {
+  return {
+    type: TOGGLE_TYPE,
+    mortarType: type,
   };
 }
 

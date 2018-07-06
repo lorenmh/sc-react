@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import GameToggle from './GameToggle';
 import TypeToggle from './TypeToggle';
 
 import { Calculation, Rocket } from '../models';
@@ -9,7 +10,8 @@ import {
   TOO_FAR,
   TOO_CLOSE,
   MORTAR_ID,
-  TARGET_ID
+  TARGET_ID,
+  ROCKET,
 } from '../const';
 
 function valueString(value, isRocket) {
@@ -31,9 +33,11 @@ function rangeString(calculation, range, isTaps) {
 
 class CalculationView extends Component {
   render() {
-    const { values, positions } = this.props;
+    const { values, positions, meta } = this.props;
 
-    const { isRocket } = values;
+    const { type } = meta;
+
+    const isRocket = type === ROCKET;
 
     const mortarPosition = positions[MORTAR_ID];
     const targetPosition = positions[TARGET_ID];
@@ -43,6 +47,7 @@ class CalculationView extends Component {
     if (!mortarPosition || !targetPosition) {
       return (
         <div className="calculation-wrap">
+          <GameToggle />
           <TypeToggle />
           <div className="calculation-empty-msg-wrap">
             <div className="calculation-empty-msg">
@@ -109,6 +114,7 @@ class CalculationView extends Component {
 
     return (
       <div className="calculation-wrap">
+        <GameToggle />
         <TypeToggle />
         <div className="calculation">
           <div className="bearing">

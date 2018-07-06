@@ -3,10 +3,20 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import rootReducer from './reducers';
 
+import {
+  GAME_SQUAD,
+  MORTAR
+} from './const';
+
 export default function configureStore() {
   return createStore(
     rootReducer,
     {
+      meta: {
+        game: GAME_SQUAD,
+        type: MORTAR
+      },
+
       // user inputed values
       positions: {
         mortar: null,

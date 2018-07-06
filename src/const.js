@@ -30,6 +30,22 @@ export const EPSILON = 0.001;
 export const TITLE_SIZE = 12;
 export const GRID_VIEW_HEIGHT = SIZE+40;
 
+export const GAME_SQUAD = 'squad';
+export const GAME_PS = 'ps';
+
+export const ROCKET = 'rocket';
+export const MORTAR = 'mortar';
+
+export const MORTAR_BR_3 = 'br3';
+export const MORTAR_BR_4 = 'br4';
+export const MORTAR_DE = 'de';
+
+export const MORTAR_TEXTS = {
+  [MORTAR_BR_3]: 'British - 3in',
+  [MORTAR_BR_4]: 'British - 4in',
+  [MORTAR_DE]: 'German'
+};
+
 export const PRECOMPUTE = (
   [...Array(5).keys()]
     .map(i => [300 / Math.pow(3, i), 300 / Math.pow(3, i+1)])
