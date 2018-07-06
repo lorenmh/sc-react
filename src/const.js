@@ -43,7 +43,7 @@ export const MORTAR_DE = 'de';
 export const MORTAR_TEXTS = {
   [MORTAR_BR_3]: 'British - 3in',
   [MORTAR_BR_4]: 'British - 4in',
-  [MORTAR_DE]: 'German'
+  [MORTAR_DE]: 'German - 8cm'
 };
 
 export const PRECOMPUTE = (
@@ -211,7 +211,8 @@ export const ROUNDING = {
 };
 
 export const BOUNDS = (
-  Object.entries(TABLES)
+  Object.keys(TABLES)
+    .map(k => [k, TABLES[k]])
     .map(([id, table]) => ({
       id,
       distance: [table[0][0], table[table.length-1][0]],

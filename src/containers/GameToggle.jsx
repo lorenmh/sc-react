@@ -32,7 +32,7 @@ class GameToggle extends Component {
         className="game-toggle"
         onClick={toggleHandler}
       >
-        {isSquad ? 'Squad' : 'Post Scriptum'}
+        {isSquad ? 'Game: Squad' : 'Game: Post Scriptum'}
       </button>
     );
   }
