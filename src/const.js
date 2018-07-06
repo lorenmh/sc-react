@@ -192,7 +192,7 @@ export const MORTAR_DE_TABLE = [
   [1100, 1009],
   [1150, 947],
   [1200, 803]
-]
+];
 
 export const TABLES = {
   [MORTAR]: MORTAR_TABLE,
@@ -200,11 +200,19 @@ export const TABLES = {
   [MORTAR_BR_3]: MORTAR_BR_3_TABLE,
   [MORTAR_BR_4]: MORTAR_BR_4_TABLE,
   [MORTAR_DE]: MORTAR_DE_TABLE,
-}
+};
+
+export const ROUNDING = {
+  [MORTAR]: 10,
+  [ROCKET]: 1,
+  [MORTAR_BR_3]: 10,
+  [MORTAR_BR_4]: 10,
+  [MORTAR_DE]: 10,
+};
 
 export const BOUNDS = (
   Object.entries(TABLES)
-    .map((id, table) => ({
+    .map(([id, table]) => ({
       id,
       distance: [table[0][0], table[table.length-1][0]],
       elevation: [table[0][1], table[table.length-1][1]],

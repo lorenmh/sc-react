@@ -1,6 +1,7 @@
 import {
   TABLES,
   ROUNDING,
+  BOUNDS,
 
   TOO_CLOSE,
   TOO_FAR
@@ -9,9 +10,9 @@ import {
 export function interpolate(type, distance) {
   const table = TABLES[type];
   const rounding = ROUNDING[type];
+  const bounds = BOUNDS[type];
 
-  const minDistance = table[0][0];
-  const maxDistance = table[table.length-1][0];
+  const [minDistance, maxDistance] = bounds.distance;
 
   if (distance < minDistance) return TOO_CLOSE;
   if (distance > maxDistance) return TOO_FAR;
