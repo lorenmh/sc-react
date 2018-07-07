@@ -2,7 +2,7 @@
   <head>
     <!-- well hullo there :D -->
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/dev.css?v=202" type="text/css" />
+    <link rel="stylesheet" href="/static/dev.css?v=203" type="text/css" />
     <link rel="stylesheet" href="/static/icons.css" type="text/css" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <title>Squad Game Artillery Calculator (Bearing, Elevation [Milliradians], Distance). Now with support for Post Scriptum</title>
@@ -30,7 +30,7 @@
       <p>This calculator solves all of these difficulties by making it very easy to perform these calculations.</p>
 
       <h3>How Do I Use This?</h3>
-      <img class="info" src="https://i.imgur.com/3qp6wXM.png" />
+      <img class="info" src="https://i.imgur.com/NmYiPgV.png" />
       <p>In the game Squad, you will need a mortar or rocket truck. It helps if you have a spotter, as different terrain elevations may affect the mortar trajectory.</p>
       <ol>
         <li>Open the spawn menu (enter), locate your artillery piece and hover your mouse over it. In the bottom right of the map is a location, for example, <code>C2-8-1</code>.</li>
@@ -50,11 +50,22 @@
       <h3>What Are Sub-Keys And Why Are They Important?</h3>
       <p>In the olden days of first-person-shooter video games there were maps with very large grids. Let's say these grids were 300 x 300 meters. If you saw an enemy in this grid it was difficult to convey to your teammates where the enemy was within the grid (because it's 90,000 square meters!). Simply telling your teammates that there was an enemy in 'C5' wasn't enough.</p>
       <p>To remedy this, people used the closest reference they had on hand; <em>the numberpad on the keyboard they were using while playing the game</em>. For more accuracy when referencing the map they subdivided that large 300m x 300m grid into 9 smaller grids, each one corresponding to a key on the numberpad on a keyboard (and now only 100m x 100m). <code>1</code> is in the bottom left corner, <code>2</code> is in the bottom center, <code>3</code> is in the bottom right, <code>4</code> is in the center left, <code>5</code> is in the center, <code>6</code> is in the center right, <code>7</code> is in the top left, <code>8</code> is in the top center, and <code>9</code> is in the top right.<p>
-      <pre style="text-align:center">
-7  8  9
-4  5  6
-1  2  3
-      </pre>
+      <svg class="keypad-info" width="100" height="100">
+        <rect width="96" height="96" x="2" y="2" />
+        <line x1="34" y1="2" x2="34" y2="98" />
+        <line x1="66" y1="2" x2="66" y2="98" />
+        <line x1="2" y1="34" x2="98" y2="34" />
+        <line x1="2" y1="66" x2="98" y2="66" />
+        <text x="18" y="18" class="k7">7</text>
+        <text x="50" y="18" class="k8">8</text>
+        <text x="82" y="18" class="k9">9</text>
+        <text x="18" y="50" class="k4">4</text>
+        <text x="50" y="50" class="k5">5</text>
+        <text x="82" y="50" class="k6">6</text>
+        <text x="18" y="82" class="k1">1</text>
+        <text x="50" y="82" class="k2">2</text>
+        <text x="82" y="82" class="k3">3</text>
+      </svg>
       <p>Organically people began to use this system. The aforementioned location of <code>C5</code> would be called out as something like 'C5 keypad 1', meaning there was something in the bottom left of C5. Sometimes people would subdivide the grid even further, by subdividing the keypad value. They would call this a 'sub-key'.</p>
       <p>That's what the location is on the Squad map. For example, <code>C5-1-7</code> is the grid <code>C5</code> subdivided twice. People call out the location <code>C5-1-7</code> as 'C5 keypad 1 keypad 7'.</p>
       <p>Unfortunately, <em>for even semi-accurate artillery fire just two grid subdivisions is not good enough</em>. You can be anywhere within that grid, and although you've taken a 300m x 300m grid and have turned it into a 33m x 33m area, there can still be a lot of error (the calculator does not know where you are within that 33m x 33m area! You could be anywhere!) To remedy this, <em>you should always enter more sub-keys!</em> This possible error is what you see highlighted in the animated grid. It's also what you see in the min/max values of the calculation.</p>

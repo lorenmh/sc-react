@@ -9,9 +9,11 @@ body {
   font-family: Helvetica, Verdana, sans-serif;
   color: #101010;
   color: #9c9c9c;
+  color: #ababab;
   padding: 10px;
   padding-top: 2px;
   background-color: #303b40;
+  font-weight: 300;
 }
 
 a, a:active, a:hover, a:visited, a:focus {
@@ -20,6 +22,7 @@ a, a:active, a:hover, a:visited, a:focus {
 
 .info h2 {
   color: #71a5ad;
+  margin-top: 4rem;
 }
 
 .info h3 {
@@ -518,10 +521,51 @@ svg {
   right: 0;
 }
 
+.keypad-info {
+  display: block;
+  margin: auto;
+}
+
+.keypad-info rect, .keypad-info line {
+  stroke: #171e21;
+  stroke-width: 2;
+}
+
+.keypad-info rect {
+  fill: #374144;
+}
+
+.keypad-info text {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-family: monospace;
+  fill: rgba(232, 74, 94, 1);
+}
+
+.info code {
+  background-color: #3b4548;
+  padding: 0px 4px;
+  border-radius: 2px;
+}
+/*
+.k5 {
+  fill: rgba(206, 206, 206, 1);
+}
+
+.k2, .k4, .k6, .k8 {
+  fill: rgba(206, 206, 206, 0.95);
+}
+
+.k1, .k3, .k7, .k9 {
+  fill: rgba(206, 206, 206, 0.9);
+}
+*/
+
 img.info {
   width: 100%;
   border: 1px solid rgb(30, 39, 43);
-  box-shadow: 0px 3px 4px rgba(0,0,0,0.8);
+  /*box-shadow: 0px 3px 4px rgba(0,0,0,0.8);*/
+  box-shadow: 0px 2px 3px rgba(0,0,0,0.8);
 }
 
 @media (min-width: 1000px) {
