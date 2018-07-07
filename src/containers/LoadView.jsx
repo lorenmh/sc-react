@@ -8,6 +8,10 @@ import {
   deleteSavedPosition
 } from '../actions';
 
+import {
+  ROCKET
+} from '../const';
+
 class SavedPosition extends Component {
   render() {
     const {
@@ -55,7 +59,8 @@ class SavedPosition extends Component {
 
 class LoadView extends Component {
   render() {
-    const { saved, values, dispatch } = this.props;
+    const { saved, values, dispatch, meta } = this.props;
+    const { type } = meta;
 
     if (!saved.length) return null;
 
@@ -71,11 +76,13 @@ class LoadView extends Component {
       dispatch(deleteSavedPosition(index));
     };
 
+    const isRocket = type === ROCKET;
+
     const savedComponents = (
       saved.map((s, index) => (
         <SavedPosition
           key={s.position.toString() + s.name}
-          isRocket={values.isRocket}
+          isRocket={isRocket}
           savedPosition={s}
           loadMortarHandler={handleLoadMortar(s.position, index)}
           loadTargetHandler={handleLoadTarget(s.position, index)}

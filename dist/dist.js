@@ -25888,6 +25888,7 @@ var CorrectionInputs = function (_Component2) {
           dispatch = _props2.dispatch,
           positions = _props2.positions,
           values = _props2.values,
+          meta = _props2.meta,
           hasMortar = !!positions[_const.MORTAR_ID],
           hasTarget = !!positions[_const.TARGET_ID];
 
@@ -25899,10 +25900,11 @@ var CorrectionInputs = function (_Component2) {
           n = values.n,
           s = values.s,
           e = values.e,
-          w = values.w,
-          isRocket = values.isRocket;
+          w = values.w;
+      var type = meta.type;
 
 
+      var isRocket = type === _const.ROCKET;
       var artyName = isRocket ? 'Rocket' : 'Mortar';
 
       var isLocked = true,
@@ -26607,7 +26609,9 @@ var LoadView = function (_Component2) {
       var _props2 = this.props,
           saved = _props2.saved,
           values = _props2.values,
-          dispatch = _props2.dispatch;
+          dispatch = _props2.dispatch,
+          meta = _props2.meta;
+      var type = meta.type;
 
 
       if (!saved.length) return null;
@@ -26630,10 +26634,12 @@ var LoadView = function (_Component2) {
         };
       };
 
+      var isRocket = type === _const.ROCKET;
+
       var savedComponents = saved.map(function (s, index) {
         return _react2.default.createElement(SavedPosition, {
           key: s.position.toString() + s.name,
-          isRocket: values.isRocket,
+          isRocket: isRocket,
           savedPosition: s,
           loadMortarHandler: handleLoadMortar(s.position, index),
           loadTargetHandler: handleLoadTarget(s.position, index),

@@ -8,6 +8,10 @@ import {
   applyCorrection
 } from '../actions';
 
+import {
+  ROCKET
+} from '../const';
+
 class CorrectionInput extends Component {
   render() {
     let {
@@ -38,15 +42,17 @@ class CorrectionInput extends Component {
 
 class CorrectionInputs extends Component {
   render() {
-    const { dispatch, positions, values } = this.props,
+    const { dispatch, positions, values, meta } = this.props,
       hasMortar = !!positions[MORTAR_ID],
       hasTarget = !!positions[TARGET_ID]
     ;
 
     if (!hasMortar && !hasTarget) return null;
 
-    const { add, sub, n, s, e, w, isRocket } = values;
+    const { add, sub, n, s, e, w, } = values;
+    const { type } = meta;
 
+    const isRocket = type === ROCKET;
     const artyName = isRocket ? 'Rocket' : 'Mortar';
 
     const isLocked = true,

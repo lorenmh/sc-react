@@ -24,7 +24,6 @@ import {
 } from './const';
 
 const rootReducer = (state = {}, action) => {
-  console.log(state);
   switch (action.type) {
 
     case TOGGLE_GAME:
