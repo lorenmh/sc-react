@@ -24,6 +24,11 @@ a, a:active, a:hover, a:visited, a:focus {
 
 .info h3 {
   color: #99B898;
+  margin-top: 4rem;
+}
+
+.info h2+h3{
+  margin-top: initial;
 }
 
 button {
@@ -511,6 +516,12 @@ svg {
   position: absolute;
   top: 2px;
   right: 0;
+}
+
+img.info {
+  width: 100%;
+  border: 1px solid rgb(30, 39, 43);
+  box-shadow: 0px 3px 4px rgba(0,0,0,0.8);
 }
 
 @media (min-width: 1000px) {
