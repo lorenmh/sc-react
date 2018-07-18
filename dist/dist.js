@@ -24180,7 +24180,7 @@ exports.parseError = parseError;
 var _const = __webpack_require__(7);
 
 var KP_MAP = [[0, 2], [1, 2], [2, 2], [0, 1], [1, 1], [2, 1], [0, 0], [1, 0], [2, 0]],
-    POSITION_STRING_RE = new RegExp('^([a-z])([12][0-9](?=(?:[k\\s-]))|[1-9])((?:(?:\\s+|-)?(?:kp?)?[1-9])*)' + '(?:\\s|-)?(?:kp?)?$', 'i'),
+    POSITION_STRING_RE = new RegExp('^\\s?([a-z])([12][0-9](?=(?:[k\\s-]))|[1-9])((?:(?:\\s+|-)?(?:kp?)?[1-9])*)' + '(?:\\s|-)?(?:kp?)?$', 'i'),
     REPLACE_RE = /[^1-9]/g;
 
 function parsePositionString(positionString) {
@@ -27118,7 +27118,6 @@ var rootReducer = function rootReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
-  console.log(state);
   switch (action.type) {
 
     case _actions.TOGGLE_GAME:
